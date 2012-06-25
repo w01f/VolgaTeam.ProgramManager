@@ -5,6 +5,13 @@ using System.Xml;
 
 namespace ProgramManager.ConfigurationClasses
 {
+    public enum BrowseType
+    {
+        Day = 0,
+        Week,
+        Month
+    }
+
     class SettingsManager
     {
         private static SettingsManager _instance = new SettingsManager();
@@ -17,6 +24,7 @@ namespace ProgramManager.ConfigurationClasses
 
         #region Local Settings
         public string SelectedStation { get; set; }
+        public BrowseType BrowseType { get; set; }
         #endregion
 
         public static SettingsManager Instance
@@ -40,6 +48,7 @@ namespace ProgramManager.ConfigurationClasses
 
         private void LoadApplicationSettings()
         {
+            int tempInt;
             this.SelectedStation = string.Empty;
 
             string settingsFilePath = _applicationSettingsFile;
@@ -54,6 +63,13 @@ namespace ProgramManager.ConfigurationClasses
                 {
                     this.SelectedStation = node.InnerText;
                 }
+
+                node = document.SelectSingleNode(@"/LocalSettings/BrowseType");
+                if (node != null)
+                {
+                    if (int.TryParse(node.InnerText, out tempInt))
+                        this.BrowseType = (BrowseType)tempInt;
+                }
             }
         }
 
@@ -62,6 +78,7 @@ namespace ProgramManager.ConfigurationClasses
             StringBuilder xml = new StringBuilder();
             xml.AppendLine("<LocalSettings>");
             xml.AppendLine(@"<SelectedStation>" + this.SelectedStation.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedStation>");
+            xml.AppendLine(@"<BrowseType>" + ((int)this.BrowseType).ToString() + @"</BrowseType>");
             xml.AppendLine(@"</LocalSettings>");
 
             using (StreamWriter sw = new StreamWriter(_applicationSettingsFile, false))

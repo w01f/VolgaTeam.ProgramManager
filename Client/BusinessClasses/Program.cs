@@ -12,6 +12,10 @@ namespace ProgramManager.BusinessClasses
         public DateTime Date { get; set; }
         public string Type { get; set; }
         public string FCC { get; set; }
+        public string MovieTitle { get; set; }
+        public string Distributor { get; set; }
+        public string ContractLength { get; set; }
+        public string CustomNote { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
@@ -37,6 +41,10 @@ namespace ProgramManager.BusinessClasses
             this.Name = string.Empty;
             this.Type = string.Empty;
             this.FCC = string.Empty;
+            this.MovieTitle = string.Empty;
+            this.Distributor = string.Empty;
+            this.ContractLength = string.Empty;
+            this.CustomNote = string.Empty;
         }
 
         public string Serialize()
@@ -47,6 +55,10 @@ namespace ProgramManager.BusinessClasses
             result.AppendLine(@"<Date>" + this.Date.ToString() + @"</Date>");
             result.AppendLine(@"<Type>" + this.Type.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Type>");
             result.AppendLine(@"<FCC>" + this.FCC.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FCC>");
+            result.AppendLine(@"<MovieTitle>" + this.MovieTitle.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</MovieTitle>");
+            result.AppendLine(@"<Distributor>" + this.Distributor.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Distributor>");
+            result.AppendLine(@"<ContractLength>" + this.ContractLength.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</ContractLength>");
+            result.AppendLine(@"<CustomNote>" + this.CustomNote.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</CustomNote>");
             result.AppendLine(@"<StartTime>" + this.StartTime.ToString() + @"</StartTime>");
             result.AppendLine(@"<EndTime>" + this.EndTime.ToString() + @"</EndTime>");
 
@@ -90,6 +102,18 @@ namespace ProgramManager.BusinessClasses
                         break;
                     case "FCC":
                         this.FCC = childNode.InnerText;
+                        break;
+                    case "MovieTitle":
+                        this.MovieTitle = childNode.InnerText;
+                        break;
+                    case "Distributor":
+                        this.Distributor = childNode.InnerText;
+                        break;
+                    case "ContractLength":
+                        this.ContractLength = childNode.InnerText;
+                        break;
+                    case "CustomNote":
+                        this.CustomNote = childNode.InnerText;
                         break;
                     case "StartTime":
                         if (DateTime.TryParse(childNode.InnerText, out tempDate))
@@ -161,9 +185,9 @@ namespace ProgramManager.BusinessClasses
 
             DateTime lastTime = DateTime.MinValue;
             if (this.NoEndRecurence)
-                lastTime = new DateTime(endDate.Year, endDate.Month, endDate.Day, this.EndTime.Hour, this.EndTime.Minute, this.EndTime.Second);
+                lastTime = new DateTime(endDate.Year, endDate.Month, endDate.Day, 5, 0, 0).AddDays(1);
             else if (this.LimitedByEndDate)
-                lastTime = new DateTime(this.EndDate.Year, this.EndDate.Month, this.EndDate.Day, this.EndTime.Hour, this.EndTime.Minute, this.EndTime.Second);
+                lastTime = new DateTime(this.EndDate.Year, this.EndDate.Month, endDate.Day, 5, 0, 0).AddDays(1);
             else if (this.LimitedByRecurenceNumber)
                 lastTime = DateTime.MaxValue;
 
@@ -222,7 +246,7 @@ namespace ProgramManager.BusinessClasses
                     }
                     occurenceCount++;
                 }
-               
+
                 startTime = startTime.AddDays(1);
                 if (startTime.DayOfWeek == DayOfWeek.Monday)
                     weeksCount++;

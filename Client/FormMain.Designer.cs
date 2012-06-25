@@ -52,6 +52,14 @@
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
+            this.ribbonBarScheduleBrowse = new DevComponents.DotNetBar.RibbonBar();
+            this.itemContainerScheduleBrowseType = new DevComponents.DotNetBar.ItemContainer();
+            this.itemContainerScheduleBrowseButtons = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemScheduleBrowseDay = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemScheduleBrowseWeek = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemScheduleBrowseMonth = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemScheduleBrowseForward = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemScheduleBrowseBackward = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItemScheduleExit = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItemScheduleAddProgram = new DevComponents.DotNetBar.ButtonItem();
             this.labelItemScheduleSationLogo = new DevComponents.DotNetBar.LabelItem();
@@ -111,6 +119,7 @@
             // 
             this.ribbonPanelSchedule.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonPanelSchedule.Controls.Add(this.ribbonBarScheduleExit);
+            this.ribbonPanelSchedule.Controls.Add(this.ribbonBarScheduleBrowse);
             this.ribbonPanelSchedule.Controls.Add(this.ribbonBarScheduleAddProgram);
             this.ribbonPanelSchedule.Controls.Add(this.ribbonBarScheduleStation);
             this.ribbonPanelSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -148,7 +157,7 @@
             this.ribbonBarScheduleExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemScheduleExit});
             this.ribbonBarScheduleExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarScheduleExit.Location = new System.Drawing.Point(406, 0);
+            this.ribbonBarScheduleExit.Location = new System.Drawing.Point(500, 0);
             this.ribbonBarScheduleExit.Name = "ribbonBarScheduleExit";
             this.ribbonBarScheduleExit.Size = new System.Drawing.Size(82, 111);
             this.ribbonBarScheduleExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -385,6 +394,93 @@
             this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
             this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
             // 
+            // ribbonBarScheduleBrowse
+            // 
+            this.ribbonBarScheduleBrowse.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarScheduleBrowse.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarScheduleBrowse.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarScheduleBrowse.ContainerControlProcessDialogKey = true;
+            this.ribbonBarScheduleBrowse.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarScheduleBrowse.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerScheduleBrowseType,
+            this.itemContainerScheduleBrowseButtons});
+            this.ribbonBarScheduleBrowse.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarScheduleBrowse.Location = new System.Drawing.Point(406, 0);
+            this.ribbonBarScheduleBrowse.Name = "ribbonBarScheduleBrowse";
+            this.ribbonBarScheduleBrowse.Size = new System.Drawing.Size(94, 111);
+            this.ribbonBarScheduleBrowse.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarScheduleBrowse.TabIndex = 25;
+            this.ribbonBarScheduleBrowse.Text = "Browse";
+            // 
+            // 
+            // 
+            this.ribbonBarScheduleBrowse.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarScheduleBrowse.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // itemContainerScheduleBrowseType
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerScheduleBrowseType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerScheduleBrowseType.ItemSpacing = 10;
+            this.itemContainerScheduleBrowseType.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerScheduleBrowseType.Name = "itemContainerScheduleBrowseType";
+            this.itemContainerScheduleBrowseType.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemScheduleBrowseDay,
+            this.buttonItemScheduleBrowseWeek,
+            this.buttonItemScheduleBrowseMonth});
+            this.itemContainerScheduleBrowseType.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+            // 
+            // itemContainerScheduleBrowseButtons
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerScheduleBrowseButtons.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerScheduleBrowseButtons.BeginGroup = true;
+            this.itemContainerScheduleBrowseButtons.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerScheduleBrowseButtons.Name = "itemContainerScheduleBrowseButtons";
+            this.itemContainerScheduleBrowseButtons.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemScheduleBrowseForward,
+            this.buttonItemScheduleBrowseBackward});
+            // 
+            // buttonItemScheduleBrowseDay
+            // 
+            this.buttonItemScheduleBrowseDay.Name = "buttonItemScheduleBrowseDay";
+            this.buttonItemScheduleBrowseDay.Text = "Day";
+            // 
+            // buttonItemScheduleBrowseWeek
+            // 
+            this.buttonItemScheduleBrowseWeek.Name = "buttonItemScheduleBrowseWeek";
+            this.buttonItemScheduleBrowseWeek.Text = "Week";
+            // 
+            // buttonItemScheduleBrowseMonth
+            // 
+            this.buttonItemScheduleBrowseMonth.Name = "buttonItemScheduleBrowseMonth";
+            this.buttonItemScheduleBrowseMonth.Text = "Month";
+            // 
+            // buttonItemScheduleBrowseForward
+            // 
+            this.buttonItemScheduleBrowseForward.Image = global::ProgramManager.Properties.Resources.BrowseForward;
+            this.buttonItemScheduleBrowseForward.Name = "buttonItemScheduleBrowseForward";
+            this.buttonItemScheduleBrowseForward.Text = "buttonItem1";
+            // 
+            // buttonItemScheduleBrowseBackward
+            // 
+            this.buttonItemScheduleBrowseBackward.Image = global::ProgramManager.Properties.Resources.BrowseBackward;
+            this.buttonItemScheduleBrowseBackward.Name = "buttonItemScheduleBrowseBackward";
+            this.buttonItemScheduleBrowseBackward.Text = "buttonItem1";
+            // 
             // buttonItemScheduleExit
             // 
             this.buttonItemScheduleExit.Image = global::ProgramManager.Properties.Resources.Exit;
@@ -461,6 +557,14 @@
         public DevExpress.XtraEditors.DateEdit dateEditScheduleDay;
         public DevComponents.DotNetBar.LabelItem labelItemScheduleSationLogo;
         public DevComponents.DotNetBar.RibbonBar ribbonBarScheduleStation;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarScheduleBrowse;
+        private DevComponents.DotNetBar.ItemContainer itemContainerScheduleBrowseType;
+        private DevComponents.DotNetBar.ItemContainer itemContainerScheduleBrowseButtons;
+        public DevComponents.DotNetBar.ButtonItem buttonItemScheduleBrowseDay;
+        public DevComponents.DotNetBar.ButtonItem buttonItemScheduleBrowseWeek;
+        public DevComponents.DotNetBar.ButtonItem buttonItemScheduleBrowseMonth;
+        public DevComponents.DotNetBar.ButtonItem buttonItemScheduleBrowseForward;
+        public DevComponents.DotNetBar.ButtonItem buttonItemScheduleBrowseBackward;
     }
 }
 

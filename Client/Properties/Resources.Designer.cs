@@ -67,6 +67,20 @@ namespace ProgramManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap BrowseBackward {
+            get {
+                object obj = ResourceManager.GetObject("BrowseBackward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap BrowseForward {
+            get {
+                object obj = ResourceManager.GetObject("BrowseForward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Calendar {
             get {
                 object obj = ResourceManager.GetObject("Calendar", resourceCulture);

@@ -45,9 +45,12 @@
             this.repositoryItemTextEditProgram = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gridColumnEpisode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemComboBoxType = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.gridColumnFCC = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemComboBoxFCC = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.gridColumnLastModified = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemDateEditFullDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+            this.gridColumnHouseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemTextEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlPrograms)).BeginInit();
@@ -59,6 +62,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditTime.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEditProgram)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBoxType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBoxFCC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditFullDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditFullDate.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit)).BeginInit();
@@ -100,7 +105,9 @@
             this.repositoryItemDateEditTime,
             this.repositoryItemDateEditFullDate,
             this.repositoryItemTextEditProgram,
-            this.repositoryItemTextEdit});
+            this.repositoryItemTextEdit,
+            this.repositoryItemComboBoxFCC,
+            this.repositoryItemComboBoxType});
             this.gridControlPrograms.Size = new System.Drawing.Size(714, 366);
             this.gridControlPrograms.TabIndex = 0;
             this.gridControlPrograms.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -118,6 +125,8 @@
             this.gridViewPrograms.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewPrograms.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gridViewPrograms.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridViewPrograms.Appearance.Preview.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.gridViewPrograms.Appearance.Preview.Options.UseFont = true;
             this.gridViewPrograms.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
             this.gridViewPrograms.Appearance.Row.Options.UseFont = true;
             this.gridViewPrograms.Appearance.Row.Options.UseTextOptions = true;
@@ -133,7 +142,8 @@
             this.gridColumnEpisode,
             this.gridColumnType,
             this.gridColumnFCC,
-            this.gridColumnLastModified});
+            this.gridColumnLastModified,
+            this.gridColumnHouseNumber});
             this.gridViewPrograms.GridControl = this.gridControlPrograms;
             this.gridViewPrograms.Name = "gridViewPrograms";
             this.gridViewPrograms.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -142,12 +152,16 @@
             this.gridViewPrograms.OptionsCustomization.AllowFilter = false;
             this.gridViewPrograms.OptionsCustomization.AllowGroup = false;
             this.gridViewPrograms.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gridViewPrograms.OptionsView.AutoCalcPreviewLineCount = true;
             this.gridViewPrograms.OptionsView.ColumnAutoWidth = false;
             this.gridViewPrograms.OptionsView.ShowDetailButtons = false;
             this.gridViewPrograms.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridViewPrograms.OptionsView.ShowGroupPanel = false;
             this.gridViewPrograms.OptionsView.ShowIndicator = false;
+            this.gridViewPrograms.OptionsView.ShowPreview = true;
+            this.gridViewPrograms.PreviewFieldName = "DetailedInfo";
             this.gridViewPrograms.RowHeight = 30;
+            this.gridViewPrograms.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridViewPrograms_RowClick);
             this.gridViewPrograms.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewPrograms_RowCellStyle);
             this.gridViewPrograms.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridViewPrograms_CellValueChanged);
             // 
@@ -163,7 +177,7 @@
             this.gridColumnDate.OptionsColumn.ReadOnly = true;
             this.gridColumnDate.Visible = true;
             this.gridColumnDate.VisibleIndex = 0;
-            this.gridColumnDate.Width = 119;
+            this.gridColumnDate.Width = 82;
             // 
             // repositoryItemDateEditDate
             // 
@@ -229,7 +243,7 @@
             this.gridColumnDay.OptionsColumn.ReadOnly = true;
             this.gridColumnDay.Visible = true;
             this.gridColumnDay.VisibleIndex = 1;
-            this.gridColumnDay.Width = 120;
+            this.gridColumnDay.Width = 65;
             // 
             // repositoryItemDateEditWeekDay
             // 
@@ -295,7 +309,7 @@
             this.gridColumnTime.OptionsColumn.ReadOnly = true;
             this.gridColumnTime.Visible = true;
             this.gridColumnTime.VisibleIndex = 2;
-            this.gridColumnTime.Width = 105;
+            this.gridColumnTime.Width = 64;
             // 
             // repositoryItemDateEditTime
             // 
@@ -360,7 +374,7 @@
             this.gridColumnStation.OptionsColumn.ReadOnly = true;
             this.gridColumnStation.Visible = true;
             this.gridColumnStation.VisibleIndex = 3;
-            this.gridColumnStation.Width = 90;
+            this.gridColumnStation.Width = 62;
             // 
             // gridColumnProgram
             // 
@@ -403,28 +417,66 @@
             this.gridColumnEpisode.FieldName = "Episode";
             this.gridColumnEpisode.Name = "gridColumnEpisode";
             this.gridColumnEpisode.Visible = true;
-            this.gridColumnEpisode.VisibleIndex = 5;
+            this.gridColumnEpisode.VisibleIndex = 6;
             this.gridColumnEpisode.Width = 107;
             // 
             // gridColumnType
             // 
             this.gridColumnType.Caption = "Type";
-            this.gridColumnType.ColumnEdit = this.repositoryItemTextEditProgram;
+            this.gridColumnType.ColumnEdit = this.repositoryItemComboBoxType;
             this.gridColumnType.FieldName = "Type";
             this.gridColumnType.Name = "gridColumnType";
             this.gridColumnType.Visible = true;
-            this.gridColumnType.VisibleIndex = 6;
+            this.gridColumnType.VisibleIndex = 7;
             this.gridColumnType.Width = 79;
+            // 
+            // repositoryItemComboBoxType
+            // 
+            this.repositoryItemComboBoxType.Appearance.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxType.Appearance.Options.UseFont = true;
+            this.repositoryItemComboBoxType.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxType.AppearanceDisabled.Options.UseFont = true;
+            this.repositoryItemComboBoxType.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxType.AppearanceDropDown.Options.UseFont = true;
+            this.repositoryItemComboBoxType.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxType.AppearanceFocused.Options.UseFont = true;
+            this.repositoryItemComboBoxType.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxType.AppearanceReadOnly.Options.UseFont = true;
+            this.repositoryItemComboBoxType.AutoHeight = false;
+            this.repositoryItemComboBoxType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBoxType.Name = "repositoryItemComboBoxType";
+            this.repositoryItemComboBoxType.NullText = "Select...";
+            this.repositoryItemComboBoxType.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
             // gridColumnFCC
             // 
-            this.gridColumnFCC.Caption = "FCC";
-            this.gridColumnFCC.ColumnEdit = this.repositoryItemTextEditProgram;
+            this.gridColumnFCC.Caption = "E/I";
+            this.gridColumnFCC.ColumnEdit = this.repositoryItemComboBoxFCC;
             this.gridColumnFCC.FieldName = "FCC";
             this.gridColumnFCC.Name = "gridColumnFCC";
             this.gridColumnFCC.Visible = true;
-            this.gridColumnFCC.VisibleIndex = 7;
-            this.gridColumnFCC.Width = 77;
+            this.gridColumnFCC.VisibleIndex = 8;
+            this.gridColumnFCC.Width = 136;
+            // 
+            // repositoryItemComboBoxFCC
+            // 
+            this.repositoryItemComboBoxFCC.Appearance.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxFCC.Appearance.Options.UseFont = true;
+            this.repositoryItemComboBoxFCC.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxFCC.AppearanceDisabled.Options.UseFont = true;
+            this.repositoryItemComboBoxFCC.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxFCC.AppearanceDropDown.Options.UseFont = true;
+            this.repositoryItemComboBoxFCC.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxFCC.AppearanceFocused.Options.UseFont = true;
+            this.repositoryItemComboBoxFCC.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.repositoryItemComboBoxFCC.AppearanceReadOnly.Options.UseFont = true;
+            this.repositoryItemComboBoxFCC.AutoHeight = false;
+            this.repositoryItemComboBoxFCC.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBoxFCC.Name = "repositoryItemComboBoxFCC";
+            this.repositoryItemComboBoxFCC.NullText = "Select...";
+            this.repositoryItemComboBoxFCC.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
             // gridColumnLastModified
             // 
@@ -437,7 +489,7 @@
             this.gridColumnLastModified.OptionsColumn.AllowEdit = false;
             this.gridColumnLastModified.OptionsColumn.ReadOnly = true;
             this.gridColumnLastModified.Visible = true;
-            this.gridColumnLastModified.VisibleIndex = 8;
+            this.gridColumnLastModified.VisibleIndex = 9;
             this.gridColumnLastModified.Width = 181;
             // 
             // repositoryItemDateEditFullDate
@@ -492,6 +544,16 @@
             this.repositoryItemDateEditFullDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             // 
+            // gridColumnHouseNumber
+            // 
+            this.gridColumnHouseNumber.Caption = "House #";
+            this.gridColumnHouseNumber.ColumnEdit = this.repositoryItemTextEditProgram;
+            this.gridColumnHouseNumber.FieldName = "HouseNumber";
+            this.gridColumnHouseNumber.Name = "gridColumnHouseNumber";
+            this.gridColumnHouseNumber.Visible = true;
+            this.gridColumnHouseNumber.VisibleIndex = 5;
+            this.gridColumnHouseNumber.Width = 107;
+            // 
             // repositoryItemTextEdit
             // 
             this.repositoryItemTextEdit.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -524,6 +586,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditTime.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEditProgram)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBoxType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBoxFCC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditFullDate.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditFullDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit)).EndInit();
@@ -553,5 +617,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEditFullDate;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditProgram;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxType;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxFCC;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnHouseNumber;
     }
 }

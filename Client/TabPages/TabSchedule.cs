@@ -25,8 +25,12 @@ namespace ProgramManager.TabPages
             repositoryItemTextEditProgram.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
             repositoryItemTextEditProgram.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
             repositoryItemTextEditProgram.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
+            repositoryItemTextEdit.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
+            repositoryItemTextEdit.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
+            repositoryItemTextEdit.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
         }
 
+        #region Common Methods
         public bool AllowToLeaveControl
         {
             get
@@ -67,7 +71,7 @@ namespace ProgramManager.TabPages
             {
                 _allowToSave = false;
                 this.SelectedDay = this.SelectedStation.GetDay(FormMain.Instance.dateEditScheduleDay.DateTime);
-                gridControlPrograms.DataSource = new BindingList<BusinessClasses.Spot>(this.SelectedDay.GetSpots());
+                gridControlPrograms.DataSource = new BindingList<BusinessClasses.Spot>(this.SelectedDay.Spots);
                 _allowToSave = true;
             }
         }
@@ -91,6 +95,25 @@ namespace ProgramManager.TabPages
                 DateTime nowDate = DateTime.Now;
                 FormMain.Instance.dateEditScheduleDay.DateTime = new DateTime(nowDate.Year, nowDate.Month, nowDate.Day);
             }
+
+            switch (ConfigurationClasses.SettingsManager.Instance.BrowseType)
+            {
+                case ConfigurationClasses.BrowseType.Day:
+                    buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemScheduleBrowseDay, null);
+                    break;
+                case ConfigurationClasses.BrowseType.Week:
+                    buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemScheduleBrowseWeek, null);
+                    break;
+                case ConfigurationClasses.BrowseType.Month:
+                    buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemScheduleBrowseMonth, null);
+                    break;
+            }
+
+            repositoryItemComboBoxType.Items.Clear();
+            repositoryItemComboBoxType.Items.AddRange(BusinessClasses.ListManager.Instance.Type);
+            repositoryItemComboBoxFCC.Items.Clear();
+            repositoryItemComboBoxFCC.Items.AddRange(BusinessClasses.ListManager.Instance.FCC);
+
             _allowToSave = true;
 
             LoadStation();
@@ -103,7 +126,9 @@ namespace ProgramManager.TabPages
             if (this.SelectedDay != null)
                 this.SelectedDay.Save();
         }
+        #endregion
 
+        #region Navigation Event Handlers
         public void dateEditScheduleDay_EditValueChanged(object sender, EventArgs e)
         {
             if (_allowToSave)
@@ -119,6 +144,64 @@ namespace ProgramManager.TabPages
             }
         }
 
+        #region Browse Event Handlers
+        public void buttonItemScheduleBrowseType_Click(object sender, EventArgs e)
+        {
+            DevComponents.DotNetBar.ButtonItem button = sender as DevComponents.DotNetBar.ButtonItem;
+            if (button != null && !button.Checked)
+            {
+                FormMain.Instance.buttonItemScheduleBrowseDay.Checked = false;
+                FormMain.Instance.buttonItemScheduleBrowseWeek.Checked = false;
+                FormMain.Instance.buttonItemScheduleBrowseMonth.Checked = false;
+                button.Checked = true;
+            }
+        }
+
+        public void buttonItemScheduleBrowseType_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_allowToSave)
+            {
+                if (FormMain.Instance.buttonItemScheduleBrowseDay.Checked)
+                    ConfigurationClasses.SettingsManager.Instance.BrowseType = ConfigurationClasses.BrowseType.Day;
+                else if (FormMain.Instance.buttonItemScheduleBrowseWeek.Checked)
+                    ConfigurationClasses.SettingsManager.Instance.BrowseType = ConfigurationClasses.BrowseType.Week;
+                else if (FormMain.Instance.buttonItemScheduleBrowseMonth.Checked)
+                    ConfigurationClasses.SettingsManager.Instance.BrowseType = ConfigurationClasses.BrowseType.Month;
+                ConfigurationClasses.SettingsManager.Instance.SaveApplicationSettings();
+            }
+        }
+
+        public void buttonItemScheduleBrowseButton_Click(object sender, EventArgs e)
+        {
+            DateTime selectedDate = FormMain.Instance.dateEditScheduleDay.DateTime;
+
+            DevComponents.DotNetBar.ButtonItem button = sender as DevComponents.DotNetBar.ButtonItem;
+
+            int directionFactor = 0;
+            if (button == FormMain.Instance.buttonItemScheduleBrowseForward)
+                directionFactor = 1;
+            else if (button == FormMain.Instance.buttonItemScheduleBrowseBackward)
+                directionFactor = -1;
+
+            switch (ConfigurationClasses.SettingsManager.Instance.BrowseType)
+            {
+                case ConfigurationClasses.BrowseType.Day:
+                    selectedDate = selectedDate.AddDays(1 * directionFactor);
+                    break;
+                case ConfigurationClasses.BrowseType.Week:
+                    selectedDate = selectedDate.AddDays(7 * directionFactor);
+                    break;
+                case ConfigurationClasses.BrowseType.Month:
+                    selectedDate = selectedDate.AddMonths(1 * directionFactor);
+                    break;
+            }
+
+            FormMain.Instance.dateEditScheduleDay.DateTime = selectedDate;
+        }
+        #endregion
+        #endregion
+
+        #region Ribbon Buttons Clicks
         public void buttonItemScheduleAddProgram_Click(object sender, EventArgs e)
         {
             using (ToolForms.FormAddProgram form = new ToolForms.FormAddProgram())
@@ -132,7 +215,9 @@ namespace ProgramManager.TabPages
                 }
             }
         }
+        #endregion
 
+        #region Grid Event Handlers
         private void gridViewPrograms_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (_allowToSave)
@@ -146,5 +231,22 @@ namespace ProgramManager.TabPages
             if (view != null && !selectedRowHandles.Contains(e.RowHandle) && e.CellValue == null)
                 e.Appearance.ForeColor = Color.Gray;
         }
+
+        private void gridViewPrograms_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            if (e.Clicks == 2)
+            {
+                BusinessClasses.Spot spot = this.SelectedDay.Spots[gridViewPrograms.GetDataSourceRowIndex(e.RowHandle)];
+                using (ToolForms.FormEditSpot form = new ToolForms.FormEditSpot(spot))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        gridViewPrograms.RefreshData();
+                        this.DataNotSaved = true;
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

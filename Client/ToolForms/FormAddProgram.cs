@@ -5,7 +5,7 @@ namespace ProgramManager.ToolForms
 {
     public partial class FormAddProgram : Form
     {
-        private bool _aloowToSave = false;
+        private bool _allowToSave = false;
 
         public BusinessClasses.Program Program
         {
@@ -14,8 +14,12 @@ namespace ProgramManager.ToolForms
                 BusinessClasses.Program program = new BusinessClasses.Program();
                 program.Name = textEditName.EditValue != null ? textEditName.EditValue.ToString() : string.Empty;
                 program.Date = dateEditDate.DateTime;
-                program.Type = textEditType.EditValue != null ? textEditType.EditValue.ToString() : string.Empty;
-                program.FCC = textEditFCC.EditValue != null ? textEditFCC.EditValue.ToString() : string.Empty;
+                program.Type = comboBoxEditType.EditValue != null ? comboBoxEditType.EditValue.ToString() : string.Empty;
+                program.FCC = comboBoxEditFCC.EditValue != null ? comboBoxEditFCC.EditValue.ToString() : string.Empty;
+                program.MovieTitle = textEditMovieTitle.EditValue != null ? textEditMovieTitle.EditValue.ToString() : string.Empty;
+                program.Distributor = textEditDistributor.EditValue != null ? textEditDistributor.EditValue.ToString() : string.Empty;
+                program.ContractLength = textEditContractLength.EditValue != null ? textEditContractLength.EditValue.ToString() : string.Empty;
+                program.CustomNote = memoEditCustomNote.EditValue != null ? memoEditCustomNote.EditValue.ToString() : string.Empty;
                 program.StartTime = timeEditStart.Time;
                 while (program.StartTime.Minute != 0 && program.StartTime.Minute != 30)
                     program.StartTime = program.StartTime.AddMinutes(-1);
@@ -47,15 +51,21 @@ namespace ProgramManager.ToolForms
         {
             InitializeComponent();
 
-            textEditFCC.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-            textEditFCC.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
-            textEditFCC.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
+            textEditMovieTitle.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
+            textEditMovieTitle.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
+            textEditMovieTitle.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
             textEditName.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
             textEditName.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
             textEditName.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-            textEditType.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-            textEditType.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
-            textEditType.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
+            textEditDistributor.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
+            textEditDistributor.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
+            textEditDistributor.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
+            textEditContractLength.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
+            textEditContractLength.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
+            textEditContractLength.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
+            memoEditCustomNote.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
+            memoEditCustomNote.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
+            memoEditCustomNote.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
             timeEditStart.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
             timeEditStart.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
             timeEditStart.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
@@ -74,7 +84,11 @@ namespace ProgramManager.ToolForms
 
         private void FormAddProgram_Load(object sender, EventArgs e)
         {
-            _aloowToSave = false;
+            _allowToSave = false;
+            comboBoxEditFCC.Properties.Items.Clear();
+            comboBoxEditFCC.Properties.Items.AddRange(BusinessClasses.ListManager.Instance.FCC);
+            comboBoxEditType.Properties.Items.Clear();
+            comboBoxEditType.Properties.Items.AddRange(BusinessClasses.ListManager.Instance.Type);
             DateTime now = DateTime.Now;
             while (now.Minute != 0 && now.Minute != 30)
                 now = now.AddMinutes(1);
@@ -83,7 +97,7 @@ namespace ProgramManager.ToolForms
             dateEditDate.DateTime = now;
             timeEditStart.Time = now;
             switch (now.DayOfWeek)
-            { 
+            {
                 case DayOfWeek.Monday:
                     checkEditMonday.Checked = true;
                     break;
@@ -106,7 +120,7 @@ namespace ProgramManager.ToolForms
                     checkEditSunday.Checked = true;
                     break;
             }
-            _aloowToSave = true;
+            _allowToSave = true;
         }
 
         private void dateEditDate_EditValueChanged(object sender, EventArgs e)
@@ -139,7 +153,7 @@ namespace ProgramManager.ToolForms
         private void timeEditEnd_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {
             DateTime newEndTime = (DateTime)e.NewValue;
-            if (newEndTime < timeEditStart.Time && _aloowToSave)
+            if (newEndTime < timeEditStart.Time && _allowToSave)
             {
                 AppManager.Instance.ShowWarning("End time should later then start time");
                 e.Cancel = true;
@@ -149,7 +163,7 @@ namespace ProgramManager.ToolForms
         private void dateEditEndDate_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {
             DateTime newEndDate = (DateTime)e.NewValue;
-            if (newEndDate < dateEditDate.DateTime && _aloowToSave)
+            if (newEndDate < dateEditDate.DateTime && _allowToSave)
             {
                 AppManager.Instance.ShowWarning("End date should later then start date");
                 e.Cancel = true;
@@ -165,6 +179,36 @@ namespace ProgramManager.ToolForms
         private void checkEditLimitedDate_CheckedChanged(object sender, EventArgs e)
         {
             dateEditEndDate.Enabled = checkEditLimitedDate.Checked;
+        }
+
+        private void checkEditFCC_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBoxEditFCC.Enabled = checkEditFCC.Checked;
+            comboBoxEditFCC.EditValue = checkEditFCC.Checked ? comboBoxEditFCC.EditValue : null;
+        }
+
+        private void checkEditMovietitle_CheckedChanged(object sender, EventArgs e)
+        {
+            textEditMovieTitle.Enabled = checkEditMovieTitle.Checked;
+            textEditMovieTitle.EditValue = checkEditMovieTitle.Checked ? textEditMovieTitle.EditValue : null;
+        }
+
+        private void checkEditDistributor_CheckedChanged(object sender, EventArgs e)
+        {
+            textEditDistributor.Enabled = checkEditDistributor.Checked;
+            textEditDistributor.EditValue = checkEditDistributor.Checked ? textEditDistributor.EditValue : null;
+        }
+
+        private void checkEditContractLength_CheckedChanged(object sender, EventArgs e)
+        {
+            textEditContractLength.Enabled = checkEditContractLength.Checked;
+            textEditContractLength.EditValue = checkEditContractLength.Checked ? textEditContractLength.EditValue : null;
+        }
+
+        private void checkEditCustomNote_CheckedChanged(object sender, EventArgs e)
+        {
+            memoEditCustomNote.Enabled = checkEditCustomNote.Checked;
+            memoEditCustomNote.EditValue = checkEditCustomNote.Checked ? memoEditCustomNote.EditValue : null;
         }
     }
 }

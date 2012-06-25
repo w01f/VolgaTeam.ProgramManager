@@ -68,6 +68,14 @@ namespace ProgramManager
             comboBoxEditScheduleStation.EditValueChanged += new EventHandler(this.TabSchedule.comboBoxEditScheduleStation_EditValueChanged);
             dateEditScheduleDay.EditValueChanged += new EventHandler(this.TabSchedule.dateEditScheduleDay_EditValueChanged);
             buttonItemScheduleAddProgram.Click += new EventHandler(this.TabSchedule.buttonItemScheduleAddProgram_Click);
+            buttonItemScheduleBrowseDay.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseType_Click);
+            buttonItemScheduleBrowseWeek.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseType_Click);
+            buttonItemScheduleBrowseMonth.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseType_Click);
+            buttonItemScheduleBrowseDay.CheckedChanged += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseType_CheckedChanged);
+            buttonItemScheduleBrowseWeek.CheckedChanged += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseType_CheckedChanged);
+            buttonItemScheduleBrowseMonth.CheckedChanged += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseType_CheckedChanged);
+            buttonItemScheduleBrowseForward.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseButton_Click);
+            buttonItemScheduleBrowseBackward.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseButton_Click);
             #endregion
 
             ribbonControl.SelectedRibbonTabChanged += new EventHandler(ribbonControl_SelectedRibbonTabChanged);

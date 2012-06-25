@@ -58,12 +58,16 @@ namespace ProgramManager.BusinessClasses
             DateTime[] programSpotDates = program.GetUsedTimes(lastCreatedDay.Date.AddDays(1));
             foreach (Day day in this.Days)
             {
-                foreach (DateTime time in programSpotDates.Where(x => x >= day.Date && x < day.Date.AddDays(1)))
+                foreach (DateTime time in programSpotDates.Where(x => x >= day.StartTime && x <= day.EndTime))
                 {
                     Spot spot = new Spot(day, time);
                     spot.Program = program.Name;
                     spot.Type = program.Type;
                     spot.FCC = program.FCC;
+                    spot.MovieTitle = program.MovieTitle;
+                    spot.Distributor = program.Distributor;
+                    spot.ContractLength = program.ContractLength;
+                    spot.CustomNote = program.CustomNote;
                     day.AddSpot(spot);
                 }
             }
