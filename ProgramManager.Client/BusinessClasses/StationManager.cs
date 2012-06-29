@@ -14,6 +14,8 @@ namespace ProgramManager.Client.BusinessClasses
         public CoreObjects.Station SelectedStation { get; private set; }
         public CoreObjects.Day SelectedDay { get; private set; }
 
+        public event EventHandler<EventArgs> StationChanged;
+
         public static StationManager Instance
         {
             get
@@ -48,13 +50,23 @@ namespace ProgramManager.Client.BusinessClasses
             return _stations.Select(x => x.Name).ToArray();
         }
 
-        public void LoadStation(string selectedStationName)
+        public string[] GetProgramList()
+        {
+            if (this.SelectedStation != null)
+                return this.SelectedStation.ProgramNames.ToArray();
+            else
+                return new string[] { };
+        }
+
+        public void LoadStation(object sender, string selectedStationName)
         {
             this.SelectedStation = _stations.Where(x => x.Name.Equals(selectedStationName)).FirstOrDefault();
             if (this.SelectedStation != null)
             {
                 ConfigurationClasses.SettingsManager.Instance.SelectedStation = this.SelectedStation.Name;
                 ConfigurationClasses.SettingsManager.Instance.SaveApplicationSettings();
+                if (this.StationChanged != null)
+                    this.StationChanged(sender, new EventArgs());
             }
         }
 

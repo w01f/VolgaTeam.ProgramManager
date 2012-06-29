@@ -18,6 +18,21 @@ namespace ProgramManager.Client.TabPages
             InitializeComponent();
             this.Dock = DockStyle.Fill;
 
+            BusinessClasses.StationManager.Instance.StationChanged += new EventHandler<EventArgs>((sender, e) =>
+            {
+                if (sender != this)
+                {
+                    _allowToSave = false;
+                    FormMain.Instance.comboBoxEditScheduleStation.EditValue = BusinessClasses.StationManager.Instance.SelectedStation.Name;
+                    FormMain.Instance.labelItemScheduleStationLogo.Image = BusinessClasses.StationManager.Instance.SelectedStation.Logo;
+                    FormMain.Instance.ribbonBarScheduleStation.RecalcLayout();
+                    FormMain.Instance.ribbonPanelSchedule.PerformLayout();
+                    _allowToSave = true;
+
+                    LoadDay();
+                }
+            });
+
             FormMain.Instance.SetClickEventHandler(this);
 
             repositoryItemTextEditProgram.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
@@ -48,10 +63,10 @@ namespace ProgramManager.Client.TabPages
 
         private void LoadStation()
         {
-            BusinessClasses.StationManager.Instance.LoadStation(FormMain.Instance.comboBoxEditScheduleStation.EditValue != null ? FormMain.Instance.comboBoxEditScheduleStation.EditValue.ToString() : string.Empty);
+            BusinessClasses.StationManager.Instance.LoadStation(this, FormMain.Instance.comboBoxEditScheduleStation.EditValue != null ? FormMain.Instance.comboBoxEditScheduleStation.EditValue.ToString() : string.Empty);
             if (BusinessClasses.StationManager.Instance.SelectedStation != null)
             {
-                FormMain.Instance.labelItemScheduleSationLogo.Image = BusinessClasses.StationManager.Instance.SelectedStation.Logo;
+                FormMain.Instance.labelItemScheduleStationLogo.Image = BusinessClasses.StationManager.Instance.SelectedStation.Logo;
                 FormMain.Instance.ribbonBarScheduleStation.RecalcLayout();
                 FormMain.Instance.ribbonPanelSchedule.PerformLayout();
             }
@@ -317,7 +332,7 @@ namespace ProgramManager.Client.TabPages
                             }
                         }
                     }
-                    else if(result == DialogResult.OK)
+                    else if (result == DialogResult.OK)
                     {
                         gridViewPrograms.RefreshData();
                         this.DataNotSaved = true;

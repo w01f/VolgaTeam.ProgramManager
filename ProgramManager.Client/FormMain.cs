@@ -13,6 +13,7 @@ namespace ProgramManager.Client
 
         #region Tab Pages
         public TabPages.TabSchedule TabSchedule { get; set; }
+        public TabPages.TabSearch TabSearch { get; set; }
         #endregion
 
         private FormMain()
@@ -53,6 +54,11 @@ namespace ProgramManager.Client
                 if (this.TabSchedule.AllowToLeaveControl)
                     result = true;
             }
+            else if ((_currentControl == this.TabSearch))
+            {
+                if (this.TabSearch.AllowToLeaveControl)
+                    result = true;
+            }
             else
                 result = true;
             return result;
@@ -78,10 +84,15 @@ namespace ProgramManager.Client
             buttonItemScheduleBrowseMonth.CheckedChanged += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseType_CheckedChanged);
             buttonItemScheduleBrowseForward.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseButton_Click);
             buttonItemScheduleBrowseBackward.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseButton_Click);
+
+            this.TabSearch = new TabPages.TabSearch();
+            comboBoxEditSearchStation.EditValueChanged += new EventHandler(this.TabSearch.comboBoxEditSearchStation_EditValueChanged);
+            comboBoxEditSearchPrograms.EditValueChanged += new EventHandler(this.TabSearch.comboBoxEditSearchPrograms_EditValueChanged);
+            buttonItemSearchRun.Click += new EventHandler(this.TabSearch.buttonItemSearchRun_Click);
             #endregion
 
             ribbonControl.SelectedRibbonTabChanged += new EventHandler(ribbonControl_SelectedRibbonTabChanged);
-            
+
             this.SetClickEventHandler(ribbonControl);
         }
 
@@ -102,6 +113,7 @@ namespace ProgramManager.Client
                     this.Invoke((MethodInvoker)delegate()
                     {
                         this.TabSchedule.LoadPage();
+                        this.TabSearch.LoadPage();
                         ribbonControl_SelectedRibbonTabChanged(null, null);
                     });
                 }));
@@ -131,6 +143,11 @@ namespace ProgramManager.Client
             {
                 if (AllowToLeaveCurrentControl())
                     _currentControl = this.TabSchedule;
+            }
+            else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
+            {
+                if (AllowToLeaveCurrentControl())
+                    _currentControl = this.TabSearch;
             }
             else
             {

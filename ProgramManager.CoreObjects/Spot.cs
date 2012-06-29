@@ -251,7 +251,15 @@ namespace ProgramManager.CoreObjects
             result.AppendLine(@"<Time>" + this.Time.ToString() + @"</Time>");
             result.AppendLine(@"<ProgramLink>" + this.ProgramLink.ToString() + @"</ProgramLink>");
             if (!string.IsNullOrEmpty(_program))
+            {
                 result.AppendLine(@"<Program>" + _program.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Program>");
+
+                if (!this.Day.Station.ProgramNames.Contains(_program.Trim()))
+                {
+                    this.Day.Station.ProgramNames.Add(_program.Trim());
+                    this.Day.Station.SaveProgramNames();
+                }
+            }
             if (!string.IsNullOrEmpty(_episode))
                 result.AppendLine(@"<Episode>" + _episode.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Episode>");
             if (!string.IsNullOrEmpty(_type))

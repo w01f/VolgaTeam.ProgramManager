@@ -30,7 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanelSchedule = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarScheduleExit = new DevComponents.DotNetBar.RibbonBar();
@@ -52,13 +54,37 @@
             this.comboBoxEditScheduleStation = new DevExpress.XtraEditors.ComboBoxEdit();
             this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
             this.dateEditScheduleDay = new DevExpress.XtraEditors.DateEdit();
-            this.labelItemScheduleSationLogo = new DevComponents.DotNetBar.LabelItem();
+            this.labelItemScheduleStationLogo = new DevComponents.DotNetBar.LabelItem();
             this.itemContainerScheduleStation = new DevComponents.DotNetBar.ItemContainer();
+            this.controlContainerItemScheduleStation = new DevComponents.DotNetBar.ControlContainerItem();
+            this.controlContainerItemScheduleDay = new DevComponents.DotNetBar.ControlContainerItem();
+            this.ribbonPanelSearch = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarSearchRun = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemSearchRun = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarSearchPrograms = new DevComponents.DotNetBar.RibbonBar();
+            this.comboBoxEditSearchPrograms = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.itemContainerSearchPrograms = new DevComponents.DotNetBar.ItemContainer();
+            this.labelItemSearchPrograms = new DevComponents.DotNetBar.LabelItem();
             this.controlContainerItem1 = new DevComponents.DotNetBar.ControlContainerItem();
-            this.controlContainerItem2 = new DevComponents.DotNetBar.ControlContainerItem();
+            this.ribbonBarSearchDateRange = new DevComponents.DotNetBar.RibbonBar();
+            this.dateEditSearchDateStart = new DevExpress.XtraEditors.DateEdit();
+            this.dateEditSearchDateEnd = new DevExpress.XtraEditors.DateEdit();
+            this.itemContainerSearchDateRange = new DevComponents.DotNetBar.ItemContainer();
+            this.itemContainerSearchDateStart = new DevComponents.DotNetBar.ItemContainer();
+            this.labelItemSearchDateStart = new DevComponents.DotNetBar.LabelItem();
+            this.controlContainerItemSearchDateStart = new DevComponents.DotNetBar.ControlContainerItem();
+            this.itemContainerSearchDateEnd = new DevComponents.DotNetBar.ItemContainer();
+            this.labelItemSearchDateEnd = new DevComponents.DotNetBar.LabelItem();
+            this.controlContainerItemSearchDateEnd = new DevComponents.DotNetBar.ControlContainerItem();
+            this.ribbonBarSearchStation = new DevComponents.DotNetBar.RibbonBar();
+            this.comboBoxEditSearchStation = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelItemSearchStationLogo = new DevComponents.DotNetBar.LabelItem();
+            this.itemContainerSearchStation = new DevComponents.DotNetBar.ItemContainer();
+            this.controlContainerItemSearchStation = new DevComponents.DotNetBar.ControlContainerItem();
             this.ribbonPanelOutput = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonPanelSettings = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonTabItemSchedule = new DevComponents.DotNetBar.RibbonTabItem();
+            this.ribbonTabItemSearch = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItemOutput = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItemSettings = new DevComponents.DotNetBar.RibbonTabItem();
             this.pnMain = new System.Windows.Forms.Panel();
@@ -73,6 +99,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditScheduleDay.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditScheduleDay.Properties)).BeginInit();
+            this.ribbonPanelSearch.SuspendLayout();
+            this.ribbonBarSearchPrograms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchPrograms.Properties)).BeginInit();
+            this.ribbonBarSearchDateRange.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditSearchDateStart.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditSearchDateStart.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditSearchDateEnd.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditSearchDateEnd.Properties)).BeginInit();
+            this.ribbonBarSearchStation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchStation.Properties)).BeginInit();
             this.pnMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,6 +120,7 @@
             // 
             this.ribbonControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonControl.Controls.Add(this.ribbonPanelSchedule);
+            this.ribbonControl.Controls.Add(this.ribbonPanelSearch);
             this.ribbonControl.Controls.Add(this.ribbonPanelOutput);
             this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
             this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
@@ -91,6 +128,7 @@
             this.ribbonControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ribbonTabItemSchedule,
+            this.ribbonTabItemSearch,
             this.ribbonTabItemOutput,
             this.ribbonTabItemSettings});
             this.ribbonControl.KeyTipsFont = new System.Drawing.Font("Tahoma", 7F);
@@ -377,7 +415,7 @@
             this.ribbonBarScheduleStation.Controls.Add(this.dateEditScheduleDay);
             this.ribbonBarScheduleStation.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarScheduleStation.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.labelItemScheduleSationLogo,
+            this.labelItemScheduleStationLogo,
             this.itemContainerScheduleStation});
             this.ribbonBarScheduleStation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.ribbonBarScheduleStation.Location = new System.Drawing.Point(3, 0);
@@ -413,7 +451,7 @@
             this.dateEditScheduleDay.Name = "dateEditScheduleDay";
             this.dateEditScheduleDay.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditScheduleDay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
             this.dateEditScheduleDay.Properties.DisplayFormat.FormatString = "MM/dd/yy";
             this.dateEditScheduleDay.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditScheduleDay.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -426,10 +464,10 @@
             this.dateEditScheduleDay.StyleController = this.styleController;
             this.dateEditScheduleDay.TabIndex = 0;
             // 
-            // labelItemScheduleSationLogo
+            // labelItemScheduleStationLogo
             // 
-            this.labelItemScheduleSationLogo.Name = "labelItemScheduleSationLogo";
-            this.labelItemScheduleSationLogo.Click += new System.EventHandler(this.labelItemLogo_Click);
+            this.labelItemScheduleStationLogo.Name = "labelItemScheduleStationLogo";
+            this.labelItemScheduleStationLogo.Click += new System.EventHandler(this.labelItemLogo_Click);
             // 
             // itemContainerScheduleStation
             // 
@@ -441,23 +479,366 @@
             this.itemContainerScheduleStation.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.itemContainerScheduleStation.Name = "itemContainerScheduleStation";
             this.itemContainerScheduleStation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.controlContainerItem1,
-            this.controlContainerItem2});
+            this.controlContainerItemScheduleStation,
+            this.controlContainerItemScheduleDay});
             this.itemContainerScheduleStation.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+            // 
+            // controlContainerItemScheduleStation
+            // 
+            this.controlContainerItemScheduleStation.AllowItemResize = false;
+            this.controlContainerItemScheduleStation.Control = this.comboBoxEditScheduleStation;
+            this.controlContainerItemScheduleStation.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.controlContainerItemScheduleStation.Name = "controlContainerItemScheduleStation";
+            // 
+            // controlContainerItemScheduleDay
+            // 
+            this.controlContainerItemScheduleDay.AllowItemResize = false;
+            this.controlContainerItemScheduleDay.Control = this.dateEditScheduleDay;
+            this.controlContainerItemScheduleDay.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.controlContainerItemScheduleDay.Name = "controlContainerItemScheduleDay";
+            // 
+            // ribbonPanelSearch
+            // 
+            this.ribbonPanelSearch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelSearch.Controls.Add(this.ribbonBarSearchRun);
+            this.ribbonPanelSearch.Controls.Add(this.ribbonBarSearchPrograms);
+            this.ribbonPanelSearch.Controls.Add(this.ribbonBarSearchDateRange);
+            this.ribbonPanelSearch.Controls.Add(this.ribbonBarSearchStation);
+            this.ribbonPanelSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelSearch.Location = new System.Drawing.Point(0, 25);
+            this.ribbonPanelSearch.Name = "ribbonPanelSearch";
+            this.ribbonPanelSearch.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelSearch.Size = new System.Drawing.Size(894, 114);
+            // 
+            // 
+            // 
+            this.ribbonPanelSearch.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonPanelSearch.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonPanelSearch.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonPanelSearch.TabIndex = 4;
+            this.ribbonPanelSearch.Visible = false;
+            // 
+            // ribbonBarSearchRun
+            // 
+            this.ribbonBarSearchRun.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchRun.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchRun.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarSearchRun.ContainerControlProcessDialogKey = true;
+            this.ribbonBarSearchRun.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarSearchRun.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemSearchRun});
+            this.ribbonBarSearchRun.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarSearchRun.Location = new System.Drawing.Point(468, 0);
+            this.ribbonBarSearchRun.Name = "ribbonBarSearchRun";
+            this.ribbonBarSearchRun.Size = new System.Drawing.Size(85, 111);
+            this.ribbonBarSearchRun.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarSearchRun.TabIndex = 25;
+            this.ribbonBarSearchRun.Text = "Run";
+            // 
+            // 
+            // 
+            this.ribbonBarSearchRun.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchRun.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemSearchRun
+            // 
+            this.buttonItemSearchRun.Enabled = false;
+            this.buttonItemSearchRun.Image = global::ProgramManager.Client.Properties.Resources.Search;
+            this.buttonItemSearchRun.Name = "buttonItemSearchRun";
+            this.buttonItemSearchRun.SubItemsExpandWidth = 14;
+            this.buttonItemSearchRun.Text = "buttonItem1";
+            // 
+            // ribbonBarSearchPrograms
+            // 
+            this.ribbonBarSearchPrograms.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchPrograms.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchPrograms.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarSearchPrograms.ContainerControlProcessDialogKey = true;
+            this.ribbonBarSearchPrograms.Controls.Add(this.comboBoxEditSearchPrograms);
+            this.ribbonBarSearchPrograms.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarSearchPrograms.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerSearchPrograms});
+            this.ribbonBarSearchPrograms.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarSearchPrograms.Location = new System.Drawing.Point(256, 0);
+            this.ribbonBarSearchPrograms.Name = "ribbonBarSearchPrograms";
+            this.ribbonBarSearchPrograms.Size = new System.Drawing.Size(212, 111);
+            this.ribbonBarSearchPrograms.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarSearchPrograms.TabIndex = 24;
+            this.ribbonBarSearchPrograms.Text = "Program Search";
+            // 
+            // 
+            // 
+            this.ribbonBarSearchPrograms.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchPrograms.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // comboBoxEditSearchPrograms
+            // 
+            this.comboBoxEditSearchPrograms.Location = new System.Drawing.Point(4, 48);
+            this.comboBoxEditSearchPrograms.Name = "comboBoxEditSearchPrograms";
+            this.comboBoxEditSearchPrograms.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEditSearchPrograms.Properties.NullText = "Type or Select...";
+            this.comboBoxEditSearchPrograms.Size = new System.Drawing.Size(195, 20);
+            this.comboBoxEditSearchPrograms.StyleController = this.styleController;
+            this.comboBoxEditSearchPrograms.TabIndex = 0;
+            // 
+            // itemContainerSearchPrograms
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerSearchPrograms.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerSearchPrograms.ItemSpacing = 7;
+            this.itemContainerSearchPrograms.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerSearchPrograms.Name = "itemContainerSearchPrograms";
+            this.itemContainerSearchPrograms.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemSearchPrograms,
+            this.controlContainerItem1});
+            this.itemContainerSearchPrograms.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+            // 
+            // labelItemSearchPrograms
+            // 
+            this.labelItemSearchPrograms.ForeColor = System.Drawing.Color.Black;
+            this.labelItemSearchPrograms.Name = "labelItemSearchPrograms";
+            this.labelItemSearchPrograms.Text = " Search for Programs:";
             // 
             // controlContainerItem1
             // 
             this.controlContainerItem1.AllowItemResize = false;
-            this.controlContainerItem1.Control = this.comboBoxEditScheduleStation;
+            this.controlContainerItem1.Control = this.comboBoxEditSearchPrograms;
             this.controlContainerItem1.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
             this.controlContainerItem1.Name = "controlContainerItem1";
             // 
-            // controlContainerItem2
+            // ribbonBarSearchDateRange
             // 
-            this.controlContainerItem2.AllowItemResize = false;
-            this.controlContainerItem2.Control = this.dateEditScheduleDay;
-            this.controlContainerItem2.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
-            this.controlContainerItem2.Name = "controlContainerItem2";
+            this.ribbonBarSearchDateRange.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchDateRange.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchDateRange.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarSearchDateRange.ContainerControlProcessDialogKey = true;
+            this.ribbonBarSearchDateRange.Controls.Add(this.dateEditSearchDateStart);
+            this.ribbonBarSearchDateRange.Controls.Add(this.dateEditSearchDateEnd);
+            this.ribbonBarSearchDateRange.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarSearchDateRange.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerSearchDateRange});
+            this.ribbonBarSearchDateRange.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarSearchDateRange.Location = new System.Drawing.Point(133, 0);
+            this.ribbonBarSearchDateRange.Name = "ribbonBarSearchDateRange";
+            this.ribbonBarSearchDateRange.Size = new System.Drawing.Size(123, 111);
+            this.ribbonBarSearchDateRange.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarSearchDateRange.TabIndex = 23;
+            this.ribbonBarSearchDateRange.Text = "Date Range";
+            // 
+            // 
+            // 
+            this.ribbonBarSearchDateRange.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchDateRange.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // dateEditSearchDateStart
+            // 
+            this.dateEditSearchDateStart.EditValue = null;
+            this.dateEditSearchDateStart.Location = new System.Drawing.Point(4, 20);
+            this.dateEditSearchDateStart.Name = "dateEditSearchDateStart";
+            this.dateEditSearchDateStart.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dateEditSearchDateStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            this.dateEditSearchDateStart.Properties.DisplayFormat.FormatString = "MM/dd/yy";
+            this.dateEditSearchDateStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEditSearchDateStart.Properties.EditFormat.FormatString = "MM/dd/yy";
+            this.dateEditSearchDateStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEditSearchDateStart.Properties.ShowToday = false;
+            this.dateEditSearchDateStart.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dateEditSearchDateStart.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dateEditSearchDateStart.Size = new System.Drawing.Size(112, 20);
+            this.dateEditSearchDateStart.StyleController = this.styleController;
+            this.dateEditSearchDateStart.TabIndex = 1;
+            // 
+            // dateEditSearchDateEnd
+            // 
+            this.dateEditSearchDateEnd.EditValue = null;
+            this.dateEditSearchDateEnd.Location = new System.Drawing.Point(4, 72);
+            this.dateEditSearchDateEnd.Name = "dateEditSearchDateEnd";
+            this.dateEditSearchDateEnd.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dateEditSearchDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            this.dateEditSearchDateEnd.Properties.DisplayFormat.FormatString = "MM/dd/yy";
+            this.dateEditSearchDateEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEditSearchDateEnd.Properties.EditFormat.FormatString = "MM/dd/yy";
+            this.dateEditSearchDateEnd.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEditSearchDateEnd.Properties.ShowToday = false;
+            this.dateEditSearchDateEnd.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dateEditSearchDateEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dateEditSearchDateEnd.Size = new System.Drawing.Size(112, 20);
+            this.dateEditSearchDateEnd.StyleController = this.styleController;
+            this.dateEditSearchDateEnd.TabIndex = 2;
+            // 
+            // itemContainerSearchDateRange
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerSearchDateRange.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerSearchDateRange.ItemSpacing = 15;
+            this.itemContainerSearchDateRange.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerSearchDateRange.Name = "itemContainerSearchDateRange";
+            this.itemContainerSearchDateRange.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerSearchDateStart,
+            this.itemContainerSearchDateEnd});
+            this.itemContainerSearchDateRange.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+            // 
+            // itemContainerSearchDateStart
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerSearchDateStart.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerSearchDateStart.ItemSpacing = 2;
+            this.itemContainerSearchDateStart.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerSearchDateStart.Name = "itemContainerSearchDateStart";
+            this.itemContainerSearchDateStart.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemSearchDateStart,
+            this.controlContainerItemSearchDateStart});
+            // 
+            // labelItemSearchDateStart
+            // 
+            this.labelItemSearchDateStart.ForeColor = System.Drawing.Color.Black;
+            this.labelItemSearchDateStart.Name = "labelItemSearchDateStart";
+            this.labelItemSearchDateStart.Text = " Start Date:";
+            // 
+            // controlContainerItemSearchDateStart
+            // 
+            this.controlContainerItemSearchDateStart.AllowItemResize = false;
+            this.controlContainerItemSearchDateStart.Control = this.dateEditSearchDateStart;
+            this.controlContainerItemSearchDateStart.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.controlContainerItemSearchDateStart.Name = "controlContainerItemSearchDateStart";
+            // 
+            // itemContainerSearchDateEnd
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerSearchDateEnd.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerSearchDateEnd.ItemSpacing = 2;
+            this.itemContainerSearchDateEnd.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerSearchDateEnd.Name = "itemContainerSearchDateEnd";
+            this.itemContainerSearchDateEnd.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemSearchDateEnd,
+            this.controlContainerItemSearchDateEnd});
+            // 
+            // labelItemSearchDateEnd
+            // 
+            this.labelItemSearchDateEnd.ForeColor = System.Drawing.Color.Black;
+            this.labelItemSearchDateEnd.Name = "labelItemSearchDateEnd";
+            this.labelItemSearchDateEnd.Text = " End Date:";
+            // 
+            // controlContainerItemSearchDateEnd
+            // 
+            this.controlContainerItemSearchDateEnd.AllowItemResize = false;
+            this.controlContainerItemSearchDateEnd.Control = this.dateEditSearchDateEnd;
+            this.controlContainerItemSearchDateEnd.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.controlContainerItemSearchDateEnd.Name = "controlContainerItemSearchDateEnd";
+            // 
+            // ribbonBarSearchStation
+            // 
+            this.ribbonBarSearchStation.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchStation.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchStation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarSearchStation.ContainerControlProcessDialogKey = true;
+            this.ribbonBarSearchStation.Controls.Add(this.comboBoxEditSearchStation);
+            this.ribbonBarSearchStation.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarSearchStation.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemSearchStationLogo,
+            this.itemContainerSearchStation});
+            this.ribbonBarSearchStation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarSearchStation.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarSearchStation.Name = "ribbonBarSearchStation";
+            this.ribbonBarSearchStation.Size = new System.Drawing.Size(130, 111);
+            this.ribbonBarSearchStation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarSearchStation.TabIndex = 22;
+            this.ribbonBarSearchStation.Text = "Station";
+            // 
+            // 
+            // 
+            this.ribbonBarSearchStation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchStation.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // comboBoxEditSearchStation
+            // 
+            this.comboBoxEditSearchStation.Location = new System.Drawing.Point(7, 38);
+            this.comboBoxEditSearchStation.Name = "comboBoxEditSearchStation";
+            this.comboBoxEditSearchStation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEditSearchStation.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.comboBoxEditSearchStation.Size = new System.Drawing.Size(112, 20);
+            this.comboBoxEditSearchStation.StyleController = this.styleController;
+            this.comboBoxEditSearchStation.TabIndex = 0;
+            // 
+            // labelItemSearchStationLogo
+            // 
+            this.labelItemSearchStationLogo.Name = "labelItemSearchStationLogo";
+            // 
+            // itemContainerSearchStation
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerSearchStation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerSearchStation.ItemSpacing = 30;
+            this.itemContainerSearchStation.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerSearchStation.Name = "itemContainerSearchStation";
+            this.itemContainerSearchStation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.controlContainerItemSearchStation});
+            this.itemContainerSearchStation.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+            // 
+            // controlContainerItemSearchStation
+            // 
+            this.controlContainerItemSearchStation.AllowItemResize = false;
+            this.controlContainerItemSearchStation.Control = this.comboBoxEditSearchStation;
+            this.controlContainerItemSearchStation.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.controlContainerItemSearchStation.Name = "controlContainerItemSearchStation";
             // 
             // ribbonPanelOutput
             // 
@@ -511,6 +892,12 @@
             this.ribbonTabItemSchedule.Name = "ribbonTabItemSchedule";
             this.ribbonTabItemSchedule.Panel = this.ribbonPanelSchedule;
             this.ribbonTabItemSchedule.Text = "Schedule";
+            // 
+            // ribbonTabItemSearch
+            // 
+            this.ribbonTabItemSearch.Name = "ribbonTabItemSearch";
+            this.ribbonTabItemSearch.Panel = this.ribbonPanelSearch;
+            this.ribbonTabItemSearch.Text = "Search";
             // 
             // ribbonTabItemOutput
             // 
@@ -581,6 +968,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditScheduleDay.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditScheduleDay.Properties)).EndInit();
+            this.ribbonPanelSearch.ResumeLayout(false);
+            this.ribbonBarSearchPrograms.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchPrograms.Properties)).EndInit();
+            this.ribbonBarSearchDateRange.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditSearchDateStart.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditSearchDateStart.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditSearchDateEnd.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditSearchDateEnd.Properties)).EndInit();
+            this.ribbonBarSearchStation.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchStation.Properties)).EndInit();
             this.pnMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -605,12 +1002,12 @@
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         private DevComponents.DotNetBar.StyleManager styleManager;
         private DevExpress.XtraEditors.StyleController styleController;
-        private DevComponents.DotNetBar.ControlContainerItem controlContainerItem1;
-        private DevComponents.DotNetBar.ControlContainerItem controlContainerItem2;
+        private DevComponents.DotNetBar.ControlContainerItem controlContainerItemScheduleStation;
+        private DevComponents.DotNetBar.ControlContainerItem controlContainerItemScheduleDay;
         private System.Windows.Forms.Panel pnEmpty;
         public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditScheduleStation;
         public DevExpress.XtraEditors.DateEdit dateEditScheduleDay;
-        public DevComponents.DotNetBar.LabelItem labelItemScheduleSationLogo;
+        public DevComponents.DotNetBar.LabelItem labelItemScheduleStationLogo;
         public DevComponents.DotNetBar.RibbonBar ribbonBarScheduleStation;
         private DevComponents.DotNetBar.RibbonBar ribbonBarScheduleBrowse;
         private DevComponents.DotNetBar.ItemContainer itemContainerScheduleBrowseType;
@@ -623,6 +1020,30 @@
         private DevComponents.DotNetBar.ButtonItem buttonItemScheduleManagePrograms;
         private DevComponents.DotNetBar.RibbonBar ribbonBarScheduleInfo;
         public DevComponents.DotNetBar.ButtonItem buttonItemScheduleInfo;
+        public DevComponents.DotNetBar.RibbonBar ribbonBarSearchStation;
+        public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditSearchStation;
+        public DevComponents.DotNetBar.LabelItem labelItemSearchStationLogo;
+        private DevComponents.DotNetBar.ItemContainer itemContainerSearchStation;
+        private DevComponents.DotNetBar.ControlContainerItem controlContainerItemSearchStation;
+        private DevComponents.DotNetBar.RibbonTabItem ribbonTabItemSearch;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarSearchDateRange;
+        public DevExpress.XtraEditors.DateEdit dateEditSearchDateEnd;
+        public DevExpress.XtraEditors.DateEdit dateEditSearchDateStart;
+        private DevComponents.DotNetBar.ItemContainer itemContainerSearchDateRange;
+        private DevComponents.DotNetBar.ItemContainer itemContainerSearchDateStart;
+        private DevComponents.DotNetBar.LabelItem labelItemSearchDateStart;
+        private DevComponents.DotNetBar.ControlContainerItem controlContainerItemSearchDateStart;
+        private DevComponents.DotNetBar.ItemContainer itemContainerSearchDateEnd;
+        private DevComponents.DotNetBar.LabelItem labelItemSearchDateEnd;
+        private DevComponents.DotNetBar.ControlContainerItem controlContainerItemSearchDateEnd;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarSearchRun;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarSearchPrograms;
+        public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditSearchPrograms;
+        private DevComponents.DotNetBar.ItemContainer itemContainerSearchPrograms;
+        private DevComponents.DotNetBar.LabelItem labelItemSearchPrograms;
+        private DevComponents.DotNetBar.ControlContainerItem controlContainerItem1;
+        public DevComponents.DotNetBar.RibbonPanel ribbonPanelSearch;
+        public DevComponents.DotNetBar.ButtonItem buttonItemSearchRun;
     }
 }
 

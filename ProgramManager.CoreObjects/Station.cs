@@ -14,6 +14,8 @@ namespace ProgramManager.CoreObjects
     {
         [DataMember]
         private string _programsStoragePath = string.Empty;
+        [DataMember]
+        private string _programNamesStoragePath = string.Empty;
 
         [DataMember]
         public string Name { get; private set; }
@@ -26,6 +28,8 @@ namespace ProgramManager.CoreObjects
         public List<Day> Days { get; private set; }
         [DataMember]
         public List<Program> Programs { get; private set; }
+        [DataMember]
+        public List<string> ProgramNames { get; private set; }
 
         public Station(DirectoryInfo rootFolder)
         {
@@ -42,7 +46,14 @@ namespace ProgramManager.CoreObjects
 
             _programsStoragePath = Path.Combine(this.RootFolder.FullName, "Programs.xml");
             this.Programs = new List<Program>();
+
+            _programNamesStoragePath = Path.Combine(this.RootFolder.FullName, "ProgramNames.xml");
+            this.ProgramNames = new List<string>();
+
             LoadPrograms();
+
+            LoadProgramNames();
+
             LoadDataFromOldFormat();
         }
 
@@ -64,6 +75,116 @@ namespace ProgramManager.CoreObjects
                 day.Save();
         }
 
+        public Spot[] Search(DateTime startDate, DateTime endDate, string programName)
+        {
+            List<Spot> searchResult = new List<Spot>();
+
+            DateTime currentDate = new DateTime(startDate.Year, startDate.Month, startDate.Day, 0, 0, 0);
+            startDate = new DateTime(startDate.Year, startDate.Month, startDate.Day, 0, 0, 0);
+            endDate = endDate.AddDays(1);
+            endDate = new DateTime(endDate.Year, endDate.Month, endDate.Day, 0, 0, 0);
+
+
+            while (currentDate <= endDate)
+            {
+                GetDay(currentDate);
+                currentDate = currentDate.AddDays(1);
+            }
+
+            foreach (Day day in this.Days.Where(x => x.Date >= startDate && x.Date <= endDate))
+                searchResult.AddRange(day.Spots.Where(x => (!string.IsNullOrEmpty(x.Program) && x.Program.ToLower().Contains(programName.ToLower())) || string.IsNullOrEmpty(programName)));
+
+            searchResult.Sort((x, y) => x.Time.CompareTo(y.Time));
+
+            return searchResult.ToArray();
+        }
+
+        #region Program Names Stuff
+        private void CreateProgramNamesList()
+        {
+            DateTime minDate = DateTime.MinValue;
+            while (minDate < DateTime.MaxValue)
+            {
+                string directoryName = Path.Combine(this.RootFolder.FullName, minDate.ToString("yyyy"));
+                if (Directory.Exists(directoryName))
+                {
+                    if (Directory.GetFiles(directoryName, string.Format("{0}*.*", minDate.ToString("MMddyy"))).Length > 0)
+                        GetDay(minDate);
+                    try
+                    {
+                        minDate = minDate.AddDays(1);
+                    }
+                    catch
+                    {
+                        break;
+                    }
+                }
+                else
+                    try
+                    {
+                        minDate = minDate.AddYears(1);
+                    }
+                    catch
+                    {
+                        break;
+                    }
+            }
+            foreach (Day day in this.Days)
+            {
+                string[] programNames = day.Spots.Where(x => !string.IsNullOrEmpty(x.Program)).Select(x => x.Program.Trim()).Distinct().ToArray();
+                this.ProgramNames.AddRange(programNames.Where(x => !this.ProgramNames.Contains(x)));
+            }
+
+            SaveProgramNames();
+        }
+
+        private void LoadProgramNames()
+        {
+            this.ProgramNames.Clear();
+            if (File.Exists(_programNamesStoragePath))
+            {
+                XmlDocument document = new XmlDocument();
+
+                document.Load(_programNamesStoragePath);
+
+                XmlNode node = document.SelectSingleNode(@"/ProgramNames");
+                if (node != null)
+                {
+                    foreach (XmlNode childNode in node.ChildNodes)
+                    {
+                        if (childNode.Name.Equals("ProgramName"))
+                        {
+                            if (!this.ProgramNames.Contains(childNode.InnerText.Trim()))
+                                this.ProgramNames.Add(childNode.InnerText);
+                        }
+                    }
+                }
+                this.ProgramNames.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x, y));
+            }
+            else
+                CreateProgramNamesList();
+        }
+
+        public void SaveProgramNames()
+        {
+            this.ProgramNames.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x, y));
+
+            StringBuilder xml = new StringBuilder();
+            xml.AppendLine(@"<ProgramNames>");
+            foreach (string programName in this.ProgramNames)
+                xml.AppendLine(@"<ProgramName>" + programName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</ProgramName>");
+            xml.AppendLine(@"</ProgramNames>");
+
+            using (StreamWriter sw = new StreamWriter(_programNamesStoragePath, false))
+            {
+                sw.Write(xml.ToString());
+                sw.Flush();
+                sw.Close();
+            }
+        }
+        #endregion
+
+        #region Programs Stuff
         public void LoadPrograms()
         {
             this.Programs.Clear();
@@ -152,7 +273,9 @@ namespace ProgramManager.CoreObjects
             this.Programs.Remove(program);
             SavePrograms();
         }
+        #endregion
 
+        #region Old Format Loading
         private void LoadDataFromOldFormat()
         {
             DateTime tempDate;
@@ -227,5 +350,6 @@ namespace ProgramManager.CoreObjects
                 }
             }
         }
+        #endregion
     }
 }

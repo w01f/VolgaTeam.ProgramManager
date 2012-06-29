@@ -109,6 +109,13 @@ namespace ProgramManager.Client.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Search {
+            get {
+                object obj = ResourceManager.GetObject("Search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap ShowInfo {
             get {
                 object obj = ResourceManager.GetObject("ShowInfo", resourceCulture);
