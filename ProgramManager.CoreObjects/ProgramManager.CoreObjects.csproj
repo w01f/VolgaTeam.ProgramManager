@@ -57,9 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationLog.cs" />
+    <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Day.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Spot.cs" />
+    <Compile Include="ProgramActivity.cs" />
     <Compile Include="Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -67,6 +69,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StationInformation.cs" />
+    <Compile Include="Week.cs" />
     <Compile Include="WinAPIHelper.cs" />
   </ItemGroup>
   <ItemGroup>

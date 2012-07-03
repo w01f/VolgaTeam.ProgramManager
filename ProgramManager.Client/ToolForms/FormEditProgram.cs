@@ -92,9 +92,9 @@ namespace ProgramManager.Client.ToolForms
         {
             _allowToSave = false;
             comboBoxEditFCC.Properties.Items.Clear();
-            comboBoxEditFCC.Properties.Items.AddRange(BusinessClasses.ListManager.Instance.FCC);
+            comboBoxEditFCC.Properties.Items.AddRange(Controllers.ListManager.Instance.FCC);
             comboBoxEditType.Properties.Items.Clear();
-            comboBoxEditType.Properties.Items.AddRange(BusinessClasses.ListManager.Instance.Type);
+            comboBoxEditType.Properties.Items.AddRange(Controllers.ListManager.Instance.Type);
 
             if (_program != null)
             {
@@ -220,7 +220,7 @@ namespace ProgramManager.Client.ToolForms
             DateTime newEndTime = (DateTime)e.NewValue;
             if (newEndTime < timeEditStart.Time && _allowToSave)
             {
-                AppManager.Instance.ShowWarning("End time should later then start time");
+                Controllers.AppManager.Instance.ShowWarning("End time should later then start time");
                 e.Cancel = true;
             }
         }
@@ -230,7 +230,7 @@ namespace ProgramManager.Client.ToolForms
             DateTime newEndDate = (DateTime)e.NewValue;
             if (newEndDate < dateEditDate.DateTime && _allowToSave)
             {
-                AppManager.Instance.ShowWarning("End date should later then start date");
+                Controllers.AppManager.Instance.ShowWarning("End date should later then start date");
                 e.Cancel = true;
             }
         }

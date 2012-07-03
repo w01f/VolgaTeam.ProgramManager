@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/ProgramManager.CoreObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ProgramManager.CoreObjects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Drawing" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="StationInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorOfChanges" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastModified" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StationInformation" nillable="true" type="tns:StationInformation" />
+  <xs:complexType name="Station">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Days" nillable="true" type="tns:ArrayOfDay" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Drawing" minOccurs="0" name="Logo" nillable="true" type="q1:Bitmap" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ProgramNames" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Programs" nillable="true" type="tns:ArrayOfProgram" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Station" nillable="true" type="tns:Station" />
+  <xs:complexType name="ArrayOfDay">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Day" nillable="true" type="tns:Day" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDay" nillable="true" type="tns:ArrayOfDay" />
+  <xs:complexType name="Day">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProgramActivities" nillable="true" type="tns:ArrayOfProgramActivity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Day" nillable="true" type="tns:Day" />
+  <xs:complexType name="ArrayOfProgramActivity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProgramActivity" nillable="true" type="tns:ProgramActivity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProgramActivity" nillable="true" type="tns:ArrayOfProgramActivity" />
+  <xs:complexType name="ProgramActivity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LastModified" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProgramLink" type="ser:guid" />
+      <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_contractLength" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_customNote" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_distributor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_episode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_fcc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_houseNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_movieTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_program" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProgramActivity" nillable="true" type="tns:ProgramActivity" />
+  <xs:complexType name="ArrayOfProgram">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Program" nillable="true" type="tns:Program" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProgram" nillable="true" type="tns:ArrayOfProgram" />
+  <xs:complexType name="Program">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContractLength" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomNote" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Distributor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FCC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="LimitedByEndDate" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LimitedByRecurenceNumber" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MovieTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NoEndRecurence" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecureEveryWeek" type="xs:int" />
+      <xs:element minOccurs="0" name="RecureOnFriday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecureOnMonday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecureOnSaturday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecureOnSunday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecureOnThursday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecureOnTuesday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecureOnWednesday" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecurenceNumberLimit" type="xs:int" />
+      <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Program" nillable="true" type="tns:Program" />
+</xs:schema>

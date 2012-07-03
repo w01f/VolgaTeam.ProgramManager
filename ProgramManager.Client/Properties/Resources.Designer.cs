@@ -67,6 +67,13 @@ namespace ProgramManager.Client.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap AddWeek {
+            get {
+                object obj = ResourceManager.GetObject("AddWeek", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap BrowseBackward {
             get {
                 object obj = ResourceManager.GetObject("BrowseBackward", resourceCulture);
@@ -95,6 +102,20 @@ namespace ProgramManager.Client.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Download {
+            get {
+                object obj = ResourceManager.GetObject("Download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Excel {
+            get {
+                object obj = ResourceManager.GetObject("Excel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Exit {
             get {
                 object obj = ResourceManager.GetObject("Exit", resourceCulture);
@@ -109,6 +130,13 @@ namespace ProgramManager.Client.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap PDF {
+            get {
+                object obj = ResourceManager.GetObject("PDF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Search {
             get {
                 object obj = ResourceManager.GetObject("Search", resourceCulture);
@@ -119,6 +147,20 @@ namespace ProgramManager.Client.Properties {
         internal static System.Drawing.Bitmap ShowInfo {
             get {
                 object obj = ResourceManager.GetObject("ShowInfo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Sync {
+            get {
+                object obj = ResourceManager.GetObject("Sync", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Upload {
+            get {
+                object obj = ResourceManager.GetObject("Upload", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -7,7 +7,7 @@ using System.Xml;
 namespace ProgramManager.CoreObjects
 {
     [DataContract]
-    public class Spot
+    public class ProgramActivity
     {
         [DataMember]
         private string _program = null;
@@ -28,8 +28,7 @@ namespace ProgramManager.CoreObjects
         [DataMember]
         private string _customNote = null;
 
-        [DataMember]
-        public Day Day { get; private set; }
+        public Day Day { get; set; }
         [DataMember]
         public DateTime Time { get; set; }
         [DataMember]
@@ -37,8 +36,10 @@ namespace ProgramManager.CoreObjects
 
         [DataMember]
         public DateTime? LastModified { get; private set; }
+        [DataMember]
+        public string UserName { get; private set; }
 
-        #region Spot properties
+        #region ProgramActivity properties
         public DateTime Date
         {
             get
@@ -56,6 +57,7 @@ namespace ProgramManager.CoreObjects
             {
                 _program = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -70,6 +72,7 @@ namespace ProgramManager.CoreObjects
             {
                 _episode = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -84,6 +87,7 @@ namespace ProgramManager.CoreObjects
             {
                 _type = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -98,6 +102,7 @@ namespace ProgramManager.CoreObjects
             {
                 _fcc = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -112,6 +117,7 @@ namespace ProgramManager.CoreObjects
             {
                 _houseNumber = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -126,6 +132,7 @@ namespace ProgramManager.CoreObjects
             {
                 _movieTitle = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -140,6 +147,7 @@ namespace ProgramManager.CoreObjects
             {
                 _distributor = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -154,6 +162,7 @@ namespace ProgramManager.CoreObjects
             {
                 _contractLength = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -168,6 +177,7 @@ namespace ProgramManager.CoreObjects
             {
                 _customNote = value;
                 this.LastModified = DateTime.Now;
+                this.UserName = Environment.UserName;
                 this.Day.DataNotSaved = true;
             }
         }
@@ -182,13 +192,13 @@ namespace ProgramManager.CoreObjects
             }
         }
 
-        public Spot NextSpot
+        public ProgramActivity NextProgramActivity
         {
             get
             {
-                int nextStepIndex = this.Day.Spots.IndexOf(this) + 1;
-                if (nextStepIndex > 0 && nextStepIndex < this.Day.Spots.Count)
-                    return this.Day.Spots[nextStepIndex];
+                int nextStepIndex = this.Day.ProgramActivities.IndexOf(this) + 1;
+                if (nextStepIndex > 0 && nextStepIndex < this.Day.ProgramActivities.Count)
+                    return this.Day.ProgramActivities[nextStepIndex];
                 else
                     return null;
             }
@@ -220,7 +230,7 @@ namespace ProgramManager.CoreObjects
             {
                 if (!string.IsNullOrEmpty(this.DetailedInfoText))
                 {
-                    if (this.NextSpot != null && this.DetailedInfoText.Equals(this.NextSpot.DetailedInfoText))
+                    if (this.NextProgramActivity != null && this.DetailedInfoText.Equals(this.NextProgramActivity.DetailedInfoText))
                         return null;
                     else
                         return this.DetailedInfoText;
@@ -231,17 +241,19 @@ namespace ProgramManager.CoreObjects
         }
         #endregion
 
-        public Spot(Day day)
+        public ProgramActivity(Day day)
         {
             this.Day = day;
             this.ProgramLink = Guid.Empty;
+            this.UserName = string.Empty;
         }
 
-        public Spot(Day day, DateTime time)
+        public ProgramActivity(Day day, DateTime time)
         {
             this.Day = day;
             this.Time = time;
             this.ProgramLink = Guid.Empty;
+            this.UserName = string.Empty;
         }
 
         public string Serialize()
@@ -277,6 +289,7 @@ namespace ProgramManager.CoreObjects
             if (!string.IsNullOrEmpty(_customNote))
                 result.AppendLine(@"<CustomNote>" + _customNote.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</CustomNote>");
             result.AppendLine(@"<LastModified>" + (this.LastModified.HasValue ? this.LastModified.Value.ToString() : string.Empty) + @"</LastModified>");
+            result.AppendLine(@"<UserName>" + this.UserName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</UserName>");
 
             return result.ToString();
         }
@@ -328,6 +341,9 @@ namespace ProgramManager.CoreObjects
                     case "LastModified":
                         if (DateTime.TryParse(childNode.InnerText, out tempDate))
                             this.LastModified = tempDate;
+                        break;
+                    case "UserName":
+                        this.UserName = childNode.InnerText;
                         break;
                 }
             }

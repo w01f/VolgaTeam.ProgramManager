@@ -1,6 +1,6 @@
 ﻿namespace ProgramManager.Client.ToolForms
 {
-    partial class FormEditSpot
+    partial class FormEditProgramActivity
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             this.checkEditEpisode = new DevExpress.XtraEditors.CheckEdit();
             this.textEditHouseNumber = new DevExpress.XtraEditors.TextEdit();
             this.checkEditHouseNumber = new DevExpress.XtraEditors.CheckEdit();
-            this.laSpotHeader = new System.Windows.Forms.Label();
+            this.laProgramActivityHeader = new System.Windows.Forms.Label();
             this.memoEditCustomNote = new DevExpress.XtraEditors.MemoEdit();
             this.checkEditCustomNote = new DevExpress.XtraEditors.CheckEdit();
             this.textEditContractLength = new DevExpress.XtraEditors.TextEdit();
@@ -161,7 +161,7 @@
             this.pnMain.Controls.Add(this.checkEditEpisode);
             this.pnMain.Controls.Add(this.textEditHouseNumber);
             this.pnMain.Controls.Add(this.checkEditHouseNumber);
-            this.pnMain.Controls.Add(this.laSpotHeader);
+            this.pnMain.Controls.Add(this.laProgramActivityHeader);
             this.pnMain.Controls.Add(this.memoEditCustomNote);
             this.pnMain.Controls.Add(this.checkEditCustomNote);
             this.pnMain.Controls.Add(this.textEditContractLength);
@@ -224,15 +224,15 @@
             this.checkEditHouseNumber.TabIndex = 4;
             this.checkEditHouseNumber.CheckedChanged += new System.EventHandler(this.checkEditHouseNumber_CheckedChanged);
             // 
-            // laSpotHeader
+            // laProgramActivityHeader
             // 
-            this.laSpotHeader.AutoSize = true;
-            this.laSpotHeader.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laSpotHeader.Location = new System.Drawing.Point(11, 9);
-            this.laSpotHeader.Name = "laSpotHeader";
-            this.laSpotHeader.Size = new System.Drawing.Size(104, 19);
-            this.laSpotHeader.TabIndex = 30;
-            this.laSpotHeader.Text = "Spot Header";
+            this.laProgramActivityHeader.AutoSize = true;
+            this.laProgramActivityHeader.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laProgramActivityHeader.Location = new System.Drawing.Point(11, 9);
+            this.laProgramActivityHeader.Name = "laProgramActivityHeader";
+            this.laProgramActivityHeader.Size = new System.Drawing.Size(104, 19);
+            this.laProgramActivityHeader.TabIndex = 30;
+            this.laProgramActivityHeader.Text = "ProgramActivity Header";
             // 
             // memoEditCustomNote
             // 
@@ -378,7 +378,7 @@
             this.simpleButtonCreateProgram.TabIndex = 20;
             this.simpleButtonCreateProgram.Text = "Convert to Program Block";
             // 
-            // FormEditSpot
+            // FormEditProgramActivity
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
@@ -391,12 +391,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormEditSpot";
+            this.Name = "FormEditProgramActivity";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormEditSpot_FormClosed);
-            this.Load += new System.EventHandler(this.FormEditSpot_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormEditProgramActivity_FormClosed);
+            this.Load += new System.EventHandler(this.FormEditProgramActivity_Load);
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
             this.pnMain.ResumeLayout(false);
@@ -448,7 +448,7 @@
         private DevExpress.XtraEditors.CheckEdit checkEditEpisode;
         private DevExpress.XtraEditors.TextEdit textEditHouseNumber;
         private DevExpress.XtraEditors.CheckEdit checkEditHouseNumber;
-        private System.Windows.Forms.Label laSpotHeader;
+        private System.Windows.Forms.Label laProgramActivityHeader;
         private DevExpress.XtraEditors.SimpleButton simpleButtonCreateProgram;
     }
 }

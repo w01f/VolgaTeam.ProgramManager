@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml;
 
-namespace ProgramManager.Client.BusinessClasses
+namespace ProgramManager.Client.Controllers
 {
     public class ListManager
     {
@@ -17,7 +18,6 @@ namespace ProgramManager.Client.BusinessClasses
         {
             this.FCC = new List<string>();
             this.Type = new List<string>();
-            LoadLists();
         }
 
         public static ListManager Instance
@@ -28,8 +28,7 @@ namespace ProgramManager.Client.BusinessClasses
             }
         }
 
-
-        private void LoadLists()
+        public void LoadLists()
         {
             this.FCC.Clear();
             this.Type.Clear();
@@ -71,6 +70,39 @@ namespace ProgramManager.Client.BusinessClasses
                         }
                     }
                 }
+            }
+        }
+
+        public void LoadRemoteLists()
+        {
+            if (this.FCC.Count == 0)
+                this.FCC.AddRange(ServiceManager.GetFCCList());
+            if (this.Type.Count == 0)
+                this.Type.AddRange(ServiceManager.GetTypeList());
+            SaveLists();
+        }
+
+        public void SaveLists()
+        {
+            StringBuilder xml = new StringBuilder();
+
+            xml.AppendLine(@"<dropdowns>");
+
+            foreach (string fccValue in this.FCC)
+                xml.AppendLine("<EI Value =\"" + fccValue.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\"/>");
+
+            foreach (string typeValue in this.Type)
+                xml.AppendLine("<Type Value =\"" + typeValue.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\"/>");
+
+
+            xml.AppendLine(@"</dropdowns>");
+
+            string listPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.StationsRootPath, SourceFileName);
+            using (StreamWriter sw = new StreamWriter(listPath, false))
+            {
+                sw.Write(xml.ToString());
+                sw.Flush();
+                sw.Close();
             }
         }
     }

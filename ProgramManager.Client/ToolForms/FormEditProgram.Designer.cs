@@ -452,7 +452,7 @@
             this.checkEditNoEnd.Properties.Caption = "No end date";
             this.checkEditNoEnd.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.checkEditNoEnd.Properties.RadioGroupIndex = 1;
-            this.checkEditNoEnd.Size = new System.Drawing.Size(92, 21);
+            this.checkEditNoEnd.Size = new System.Drawing.Size(93, 21);
             this.checkEditNoEnd.StyleController = this.styleController;
             this.checkEditNoEnd.TabIndex = 25;
             // 
@@ -464,7 +464,7 @@
             this.checkEditLimitedOccurence.Properties.Caption = "End after: ";
             this.checkEditLimitedOccurence.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.checkEditLimitedOccurence.Properties.RadioGroupIndex = 1;
-            this.checkEditLimitedOccurence.Size = new System.Drawing.Size(82, 21);
+            this.checkEditLimitedOccurence.Size = new System.Drawing.Size(83, 21);
             this.checkEditLimitedOccurence.StyleController = this.styleController;
             this.checkEditLimitedOccurence.TabIndex = 26;
             this.checkEditLimitedOccurence.TabStop = false;
@@ -517,7 +517,7 @@
             this.checkEditLimitedDate.Properties.Caption = "End by: ";
             this.checkEditLimitedDate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.checkEditLimitedDate.Properties.RadioGroupIndex = 1;
-            this.checkEditLimitedDate.Size = new System.Drawing.Size(71, 21);
+            this.checkEditLimitedDate.Size = new System.Drawing.Size(72, 21);
             this.checkEditLimitedDate.StyleController = this.styleController;
             this.checkEditLimitedDate.TabIndex = 28;
             this.checkEditLimitedDate.TabStop = false;
@@ -622,7 +622,7 @@
             this.checkEditCustomNote.Properties.Appearance.Options.UseFont = true;
             this.checkEditCustomNote.Properties.AutoWidth = true;
             this.checkEditCustomNote.Properties.Caption = "";
-            this.checkEditCustomNote.Size = new System.Drawing.Size(22, 21);
+            this.checkEditCustomNote.Size = new System.Drawing.Size(23, 21);
             this.checkEditCustomNote.TabIndex = 13;
             this.checkEditCustomNote.CheckedChanged += new System.EventHandler(this.checkEditCustomNote_CheckedChanged);
             // 
@@ -643,7 +643,7 @@
             this.checkEditContractLength.Properties.Appearance.Options.UseFont = true;
             this.checkEditContractLength.Properties.AutoWidth = true;
             this.checkEditContractLength.Properties.Caption = "Air Window/Contract Length:";
-            this.checkEditContractLength.Size = new System.Drawing.Size(205, 21);
+            this.checkEditContractLength.Size = new System.Drawing.Size(206, 21);
             this.checkEditContractLength.TabIndex = 11;
             this.checkEditContractLength.CheckedChanged += new System.EventHandler(this.checkEditContractLength_CheckedChanged);
             // 
@@ -664,7 +664,7 @@
             this.checkEditDistributor.Properties.Appearance.Options.UseFont = true;
             this.checkEditDistributor.Properties.AutoWidth = true;
             this.checkEditDistributor.Properties.Caption = "Syndicator/Distributor:";
-            this.checkEditDistributor.Size = new System.Drawing.Size(163, 21);
+            this.checkEditDistributor.Size = new System.Drawing.Size(164, 21);
             this.checkEditDistributor.TabIndex = 9;
             this.checkEditDistributor.CheckedChanged += new System.EventHandler(this.checkEditDistributor_CheckedChanged);
             // 
@@ -685,7 +685,7 @@
             this.checkEditMovieTitle.Properties.Appearance.Options.UseFont = true;
             this.checkEditMovieTitle.Properties.AutoWidth = true;
             this.checkEditMovieTitle.Properties.Caption = "Movie Title:";
-            this.checkEditMovieTitle.Size = new System.Drawing.Size(96, 21);
+            this.checkEditMovieTitle.Size = new System.Drawing.Size(97, 21);
             this.checkEditMovieTitle.TabIndex = 5;
             this.checkEditMovieTitle.CheckedChanged += new System.EventHandler(this.checkEditMovietitle_CheckedChanged);
             // 
@@ -710,7 +710,7 @@
             this.checkEditFCC.Properties.Appearance.Options.UseFont = true;
             this.checkEditFCC.Properties.AutoWidth = true;
             this.checkEditFCC.Properties.Caption = "E/I:";
-            this.checkEditFCC.Size = new System.Drawing.Size(42, 21);
+            this.checkEditFCC.Size = new System.Drawing.Size(43, 21);
             this.checkEditFCC.TabIndex = 7;
             this.checkEditFCC.CheckedChanged += new System.EventHandler(this.checkEditFCC_CheckedChanged);
             // 
@@ -735,7 +735,7 @@
             this.panel1.Size = new System.Drawing.Size(637, 563);
             this.panel1.TabIndex = 1;
             // 
-            // FormAddProgram
+            // FormEditProgram
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
@@ -747,7 +747,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormAddProgram";
+            this.Name = "FormEditProgram";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "{0} a Program";

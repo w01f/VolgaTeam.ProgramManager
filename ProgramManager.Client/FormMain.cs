@@ -84,6 +84,10 @@ namespace ProgramManager.Client
             buttonItemScheduleBrowseMonth.CheckedChanged += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseType_CheckedChanged);
             buttonItemScheduleBrowseForward.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseButton_Click);
             buttonItemScheduleBrowseBackward.Click += new EventHandler(this.TabSchedule.buttonItemScheduleBrowseButton_Click);
+            buttonItemScheduleDownload.Click += new EventHandler(this.TabSchedule.buttonItemScheduleDownload_Click);
+            buttonItemScheduleUpload.Click += new EventHandler(this.TabSchedule.buttonItemScheduleUpload_Click);
+            buttonItemScheduleOutputExcel.Click += new EventHandler(this.TabSchedule.buttonItemScheduleOutputExcel_Click);
+            buttonItemScheduleOutputPDF.Click += new EventHandler(this.TabSchedule.buttonItemScheduleOutputPDF_Click);
 
             this.TabSearch = new TabPages.TabSearch();
             comboBoxEditSearchStation.EditValueChanged += new EventHandler(this.TabSearch.comboBoxEditSearchStation_EditValueChanged);
@@ -102,32 +106,12 @@ namespace ProgramManager.Client
                 this.Icon = new Icon(ConfigurationClasses.SettingsManager.Instance.IconFilePath);
             this.Text = ConfigurationClasses.SettingsManager.Instance.ApplicationName;
 
-            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
-            {
-                form.laProgress.Text = "Loading Programs...";
-                form.TopMost = true;
-                ribbonControl.Enabled = false;
-                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                {
-                    BusinessClasses.StationManager.Instance.LoadStations();
-                    this.Invoke((MethodInvoker)delegate()
-                    {
-                        this.TabSchedule.LoadPage();
-                        this.TabSearch.LoadPage();
-                        ribbonControl_SelectedRibbonTabChanged(null, null);
-                    });
-                }));
-                form.Show();
-                Application.DoEvents();
-                thread.Start();
-                while (thread.IsAlive)
-                    Application.DoEvents();
-                ribbonControl.Enabled = true;
-                form.Close();
-            }
-            //AppManager.Instance.ActivatePowerPoint();
-            //AppManager.Instance.ActivateMiniBar();
-            //AppManager.Instance.ActivateMainForm();
+            ribbonControl.Enabled = false;
+
+            Controllers.StationManager.Instance.LoadData();
+
+            ribbonControl.Enabled = true;
+            ribbonControl_SelectedRibbonTabChanged(null, null);
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)

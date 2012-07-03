@@ -2,10 +2,15 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramManager.Client", "ProgramManager.Client\ProgramManager.Client.csproj", "{E38736E5-FD04-40AF-93C3-32E8EE1EC9FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E88FF8E2-5EE4-4945-A489-AD9AAEB49DEE} = {E88FF8E2-5EE4-4945-A489-AD9AAEB49DEE}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramManager.CoreObjects", "ProgramManager.CoreObjects\ProgramManager.CoreObjects.csproj", "{FB74FF1B-DB57-44C8-9797-E8C4BDBC1B29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramManager.Service", "ProgramManager.Service\ProgramManager.Service.csproj", "{E88FF8E2-5EE4-4945-A489-AD9AAEB49DEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramManager.Server", "ProgramManager.Server\ProgramManager.Server.csproj", "{0D217B17-07FC-4753-A229-0D781A7D2B1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +52,16 @@ Global
 		{E88FF8E2-5EE4-4945-A489-AD9AAEB49DEE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E88FF8E2-5EE4-4945-A489-AD9AAEB49DEE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E88FF8E2-5EE4-4945-A489-AD9AAEB49DEE}.Release|x86.ActiveCfg = Release|Any CPU
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Debug|x86.ActiveCfg = Debug|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Debug|x86.Build.0 = Debug|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Release|Any CPU.ActiveCfg = Release|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Release|x86.ActiveCfg = Release|x86
+		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -367,11 +367,11 @@ namespace ProgramManager.CoreObjects
 
                 if (weeksCount == 1 || this.RecureEveryWeek == 0)
                 {
-                    DateTime spotTime = startTime;
-                    while (spotTime < endTime)
+                    DateTime programActivityTime = startTime;
+                    while (programActivityTime < endTime)
                     {
-                        result.Add(spotTime);
-                        spotTime = spotTime.AddMinutes(30);
+                        result.Add(programActivityTime);
+                        programActivityTime = programActivityTime.AddMinutes(30);
                     }
                     occurenceCount++;
                 }

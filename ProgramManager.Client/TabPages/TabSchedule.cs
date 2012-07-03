@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -18,13 +19,13 @@ namespace ProgramManager.Client.TabPages
             InitializeComponent();
             this.Dock = DockStyle.Fill;
 
-            BusinessClasses.StationManager.Instance.StationChanged += new EventHandler<EventArgs>((sender, e) =>
+            Controllers.StationManager.Instance.StationChanged += new EventHandler<EventArgs>((sender, e) =>
             {
                 if (sender != this)
                 {
                     _allowToSave = false;
-                    FormMain.Instance.comboBoxEditScheduleStation.EditValue = BusinessClasses.StationManager.Instance.SelectedStation.Name;
-                    FormMain.Instance.labelItemScheduleStationLogo.Image = BusinessClasses.StationManager.Instance.SelectedStation.Logo;
+                    FormMain.Instance.comboBoxEditScheduleStation.EditValue = Controllers.StationManager.Instance.SelectedStation.Name;
+                    FormMain.Instance.labelItemScheduleStationLogo.Image = Controllers.StationManager.Instance.SelectedStation.Logo;
                     FormMain.Instance.ribbonBarScheduleStation.RecalcLayout();
                     FormMain.Instance.ribbonPanelSchedule.PerformLayout();
                     _allowToSave = true;
@@ -63,10 +64,10 @@ namespace ProgramManager.Client.TabPages
 
         private void LoadStation()
         {
-            BusinessClasses.StationManager.Instance.LoadStation(this, FormMain.Instance.comboBoxEditScheduleStation.EditValue != null ? FormMain.Instance.comboBoxEditScheduleStation.EditValue.ToString() : string.Empty);
-            if (BusinessClasses.StationManager.Instance.SelectedStation != null)
+            Controllers.StationManager.Instance.LoadStation(this, FormMain.Instance.comboBoxEditScheduleStation.EditValue != null ? FormMain.Instance.comboBoxEditScheduleStation.EditValue.ToString() : string.Empty);
+            if (Controllers.StationManager.Instance.SelectedStation != null)
             {
-                FormMain.Instance.labelItemScheduleStationLogo.Image = BusinessClasses.StationManager.Instance.SelectedStation.Logo;
+                FormMain.Instance.labelItemScheduleStationLogo.Image = Controllers.StationManager.Instance.SelectedStation.Logo;
                 FormMain.Instance.ribbonBarScheduleStation.RecalcLayout();
                 FormMain.Instance.ribbonPanelSchedule.PerformLayout();
             }
@@ -76,10 +77,10 @@ namespace ProgramManager.Client.TabPages
         {
             if (this.DataNotSaved)
                 SavePage();
-            BusinessClasses.StationManager.Instance.LoadDay(FormMain.Instance.dateEditScheduleDay.DateTime);
+            Controllers.StationManager.Instance.LoadDay(FormMain.Instance.dateEditScheduleDay.DateTime);
             _allowToSave = false;
-            if (BusinessClasses.StationManager.Instance.SelectedDay != null)
-                gridControlPrograms.DataSource = new BindingList<CoreObjects.Spot>(BusinessClasses.StationManager.Instance.SelectedDay.Spots);
+            if (Controllers.StationManager.Instance.SelectedDay != null)
+                gridControlPrograms.DataSource = new BindingList<CoreObjects.ProgramActivity>(Controllers.StationManager.Instance.SelectedDay.ProgramActivities);
             else
                 gridControlPrograms.DataSource = null;
             _allowToSave = true;
@@ -91,7 +92,7 @@ namespace ProgramManager.Client.TabPages
 
             FormMain.Instance.ribbonPanelSchedule.Enabled = true;
             FormMain.Instance.comboBoxEditScheduleStation.Properties.Items.Clear();
-            FormMain.Instance.comboBoxEditScheduleStation.Properties.Items.AddRange(BusinessClasses.StationManager.Instance.GetStationList());
+            FormMain.Instance.comboBoxEditScheduleStation.Properties.Items.AddRange(Controllers.StationManager.Instance.GetStationList());
             if (FormMain.Instance.comboBoxEditScheduleStation.Properties.Items.Contains(ConfigurationClasses.SettingsManager.Instance.SelectedStation))
                 FormMain.Instance.comboBoxEditScheduleStation.SelectedIndex = FormMain.Instance.comboBoxEditScheduleStation.Properties.Items.IndexOf(ConfigurationClasses.SettingsManager.Instance.SelectedStation);
             else if (FormMain.Instance.comboBoxEditScheduleStation.Properties.Items.Count > 0)
@@ -122,9 +123,9 @@ namespace ProgramManager.Client.TabPages
             }
 
             repositoryItemComboBoxType.Items.Clear();
-            repositoryItemComboBoxType.Items.AddRange(BusinessClasses.ListManager.Instance.Type);
+            repositoryItemComboBoxType.Items.AddRange(Controllers.ListManager.Instance.Type);
             repositoryItemComboBoxFCC.Items.Clear();
-            repositoryItemComboBoxFCC.Items.AddRange(BusinessClasses.ListManager.Instance.FCC);
+            repositoryItemComboBoxFCC.Items.AddRange(Controllers.ListManager.Instance.FCC);
 
             _allowToSave = true;
 
@@ -135,7 +136,7 @@ namespace ProgramManager.Client.TabPages
 
         public void SavePage()
         {
-            BusinessClasses.StationManager.Instance.SaveDay();
+            Controllers.StationManager.Instance.SaveDay();
         }
         #endregion
 
@@ -215,16 +216,19 @@ namespace ProgramManager.Client.TabPages
         #region Ribbon Buttons Clicks
         public void buttonItemScheduleAddProgram_Click(object sender, EventArgs e)
         {
-            if (BusinessClasses.StationManager.Instance.SelectedStation != null)
+            if (Controllers.StationManager.Instance.SelectedStation != null)
             {
                 using (ToolForms.FormEditProgram form = new ToolForms.FormEditProgram(null))
                 {
                     form.Text = string.Format(form.Text, "Add");
                     if (form.ShowDialog() == DialogResult.OK)
                     {
-                        BusinessClasses.StationManager.Instance.SelectedStation.AddProgram(form.Program);
-                        LoadDay();
-                        this.DataNotSaved = true;
+                        if (Controllers.AppManager.Instance.ShowWarningQuestion("You are about to save new Program Information in areas that already have programs scheduled...\nDo you want to continue?") == DialogResult.Yes)
+                        {
+                            Controllers.StationManager.Instance.SelectedStation.AddProgram(form.Program);
+                            LoadDay();
+                            this.DataNotSaved = true;
+                        }
                     }
                 }
             }
@@ -233,7 +237,7 @@ namespace ProgramManager.Client.TabPages
 
         public void buttonItemScheduleManagePrograms_Click(object sender, EventArgs e)
         {
-            if (BusinessClasses.StationManager.Instance.SelectedStation != null)
+            if (Controllers.StationManager.Instance.SelectedStation != null)
             {
                 using (ToolForms.FormManagePrograms form = new ToolForms.FormManagePrograms())
                 {
@@ -253,6 +257,52 @@ namespace ProgramManager.Client.TabPages
                 ConfigurationClasses.SettingsManager.Instance.SaveApplicationSettings();
 
                 gridViewPrograms.OptionsView.ShowPreview = ConfigurationClasses.SettingsManager.Instance.ShowInfo;
+            }
+        }
+
+        public void buttonItemScheduleDownload_Click(object sender, EventArgs e)
+        {
+            if (AllowToLeaveControl)
+            {
+                FormMain.Instance.labelItemScheduleStationLogo.Image = null;
+                FormMain.Instance.labelItemSearchStationLogo.Image = null;
+                gridControlPrograms.DataSource = null;
+
+                FormMain.Instance.ribbonControl.Enabled = false;
+                Controllers.StationManager.Instance.LoadData(true);
+                FormMain.Instance.ribbonControl.Enabled = true;
+            }
+        }
+
+        public void buttonItemScheduleUpload_Click(object sender, EventArgs e)
+        {
+            if (AllowToLeaveControl)
+            {
+                FormMain.Instance.ribbonControl.Enabled = false;
+                Controllers.StationManager.Instance.UploadData();
+                FormMain.Instance.ribbonControl.Enabled = true;
+            }
+        }
+
+        public void buttonItemScheduleOutputExcel_Click(object sender, EventArgs e)
+        {
+            using (ToolForms.FormOutputParameters form = new ToolForms.FormOutputParameters())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    Controllers.StationManager.Instance.ReportWeekSchedule(form.Station, form.Weeks, false, form.Landscape);
+                }
+            }
+        }
+
+        public void buttonItemScheduleOutputPDF_Click(object sender, EventArgs e)
+        {
+            using (ToolForms.FormOutputParameters form = new ToolForms.FormOutputParameters())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    Controllers.StationManager.Instance.ReportWeekSchedule(form.Station, form.Weeks, true, form.Landscape);
+                }
             }
         }
         #endregion
@@ -276,23 +326,23 @@ namespace ProgramManager.Client.TabPages
         {
             if (e.Clicks == 2)
             {
-                CoreObjects.Spot spot = BusinessClasses.StationManager.Instance.SelectedDay.Spots[gridViewPrograms.GetDataSourceRowIndex(e.RowHandle)];
-                using (ToolForms.FormEditSpot form = new ToolForms.FormEditSpot(spot))
+                CoreObjects.ProgramActivity programActivity = Controllers.StationManager.Instance.SelectedDay.ProgramActivities[gridViewPrograms.GetDataSourceRowIndex(e.RowHandle)];
+                using (ToolForms.FormEditProgramActivity form = new ToolForms.FormEditProgramActivity(programActivity))
                 {
                     DialogResult result = form.ShowDialog();
                     if (result == DialogResult.Retry)
                     {
                         CoreObjects.Program program = new CoreObjects.Program();
-                        program.Name = spot.Program;
-                        program.Type = spot.Type;
-                        program.FCC = spot.FCC;
-                        program.MovieTitle = spot.MovieTitle;
-                        program.Distributor = spot.Distributor;
-                        program.ContractLength = spot.ContractLength;
-                        program.CustomNote = spot.CustomNote;
+                        program.Name = programActivity.Program;
+                        program.Type = programActivity.Type;
+                        program.FCC = programActivity.FCC;
+                        program.MovieTitle = programActivity.MovieTitle;
+                        program.Distributor = programActivity.Distributor;
+                        program.ContractLength = programActivity.ContractLength;
+                        program.CustomNote = programActivity.CustomNote;
 
-                        program.Date = spot.Date;
-                        program.StartTime = spot.Time;
+                        program.Date = programActivity.Date;
+                        program.StartTime = programActivity.Time;
                         program.EndTime = program.StartTime.AddMinutes(30);
                         program.RecureEveryWeek = 1;
                         switch (program.Date.DayOfWeek)
@@ -326,9 +376,12 @@ namespace ProgramManager.Client.TabPages
                             formEditProgram.Text = string.Format(form.Text, "Add");
                             if (formEditProgram.ShowDialog() == DialogResult.OK)
                             {
-                                BusinessClasses.StationManager.Instance.SelectedStation.AddProgram(formEditProgram.Program);
-                                LoadDay();
-                                this.DataNotSaved = true;
+                                if (Controllers.AppManager.Instance.ShowWarningQuestion("You are about to save new Program Information in areas that already have programs scheduled...\nDo you want to continue?") == DialogResult.Yes)
+                                {
+                                    Controllers.StationManager.Instance.SelectedStation.AddProgram(formEditProgram.Program);
+                                    LoadDay();
+                                    this.DataNotSaved = true;
+                                }
                             }
                         }
                     }

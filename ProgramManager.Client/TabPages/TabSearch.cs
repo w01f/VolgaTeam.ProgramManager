@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace ProgramManager.Client.TabPages
@@ -16,13 +14,13 @@ namespace ProgramManager.Client.TabPages
             InitializeComponent();
             this.Dock = DockStyle.Fill;
 
-            BusinessClasses.StationManager.Instance.StationChanged += new EventHandler<EventArgs>((sender, e) =>
+            Controllers.StationManager.Instance.StationChanged += new EventHandler<EventArgs>((sender, e) =>
             {
                 if (sender != this)
                 {
                     _allowToSave = false;
-                    FormMain.Instance.comboBoxEditSearchStation.EditValue = BusinessClasses.StationManager.Instance.SelectedStation.Name;
-                    FormMain.Instance.labelItemSearchStationLogo.Image = BusinessClasses.StationManager.Instance.SelectedStation.Logo;
+                    FormMain.Instance.comboBoxEditSearchStation.EditValue = Controllers.StationManager.Instance.SelectedStation.Name;
+                    FormMain.Instance.labelItemSearchStationLogo.Image = Controllers.StationManager.Instance.SelectedStation.Logo;
                     FormMain.Instance.ribbonBarSearchStation.RecalcLayout();
                     FormMain.Instance.ribbonPanelSearch.PerformLayout();
                     _allowToSave = true;
@@ -50,10 +48,10 @@ namespace ProgramManager.Client.TabPages
 
         private void LoadStation()
         {
-            BusinessClasses.StationManager.Instance.LoadStation(this, FormMain.Instance.comboBoxEditSearchStation.EditValue != null ? FormMain.Instance.comboBoxEditSearchStation.EditValue.ToString() : string.Empty);
-            if (BusinessClasses.StationManager.Instance.SelectedStation != null)
+            Controllers.StationManager.Instance.LoadStation(this, FormMain.Instance.comboBoxEditSearchStation.EditValue != null ? FormMain.Instance.comboBoxEditSearchStation.EditValue.ToString() : string.Empty);
+            if (Controllers.StationManager.Instance.SelectedStation != null)
             {
-                FormMain.Instance.labelItemSearchStationLogo.Image = BusinessClasses.StationManager.Instance.SelectedStation.Logo;
+                FormMain.Instance.labelItemSearchStationLogo.Image = Controllers.StationManager.Instance.SelectedStation.Logo;
                 FormMain.Instance.ribbonBarSearchStation.RecalcLayout();
                 FormMain.Instance.ribbonPanelSearch.PerformLayout();
             }
@@ -62,7 +60,7 @@ namespace ProgramManager.Client.TabPages
         private void LoadProgramsList()
         {
             FormMain.Instance.comboBoxEditSearchPrograms.Properties.Items.Clear();
-            FormMain.Instance.comboBoxEditSearchPrograms.Properties.Items.AddRange(BusinessClasses.StationManager.Instance.GetProgramList());
+            FormMain.Instance.comboBoxEditSearchPrograms.Properties.Items.AddRange(Controllers.StationManager.Instance.GetProgramList());
         }
 
         public void LoadPage()
@@ -71,7 +69,7 @@ namespace ProgramManager.Client.TabPages
 
             FormMain.Instance.ribbonPanelSearch.Enabled = true;
             FormMain.Instance.comboBoxEditSearchStation.Properties.Items.Clear();
-            FormMain.Instance.comboBoxEditSearchStation.Properties.Items.AddRange(BusinessClasses.StationManager.Instance.GetStationList());
+            FormMain.Instance.comboBoxEditSearchStation.Properties.Items.AddRange(Controllers.StationManager.Instance.GetStationList());
             if (FormMain.Instance.comboBoxEditSearchStation.Properties.Items.Contains(ConfigurationClasses.SettingsManager.Instance.SelectedStation))
                 FormMain.Instance.comboBoxEditSearchStation.SelectedIndex = FormMain.Instance.comboBoxEditSearchStation.Properties.Items.IndexOf(ConfigurationClasses.SettingsManager.Instance.SelectedStation);
             else if (FormMain.Instance.comboBoxEditSearchStation.Properties.Items.Count > 0)
@@ -82,9 +80,9 @@ namespace ProgramManager.Client.TabPages
             gridViewPrograms.OptionsView.ShowPreview = false;
 
             repositoryItemComboBoxType.Items.Clear();
-            repositoryItemComboBoxType.Items.AddRange(BusinessClasses.ListManager.Instance.Type);
+            repositoryItemComboBoxType.Items.AddRange(Controllers.ListManager.Instance.Type);
             repositoryItemComboBoxFCC.Items.Clear();
-            repositoryItemComboBoxFCC.Items.AddRange(BusinessClasses.ListManager.Instance.FCC);
+            repositoryItemComboBoxFCC.Items.AddRange(Controllers.ListManager.Instance.FCC);
 
             _allowToSave = true;
 
@@ -126,7 +124,7 @@ namespace ProgramManager.Client.TabPages
         #region Ribbon Buttons Clicks
         public void buttonItemSearchRun_Click(object sender, EventArgs e)
         {
-            if (BusinessClasses.StationManager.Instance.SelectedStation != null)
+            if (Controllers.StationManager.Instance.SelectedStation != null)
             {
                 using (ToolForms.FormProgress form = new ToolForms.FormProgress())
                 {
@@ -134,10 +132,10 @@ namespace ProgramManager.Client.TabPages
                     form.TopMost = true;
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
-                        CoreObjects.Spot[] searchResult = BusinessClasses.StationManager.Instance.SelectedStation.Search(FormMain.Instance.dateEditSearchDateStart.DateTime, FormMain.Instance.dateEditSearchDateEnd.DateTime, FormMain.Instance.comboBoxEditSearchPrograms.EditValue != null ? FormMain.Instance.comboBoxEditSearchPrograms.EditValue.ToString() : null);
+                        CoreObjects.ProgramActivity[] searchResult = Controllers.StationManager.Instance.SelectedStation.Search(FormMain.Instance.dateEditSearchDateStart.DateTime, FormMain.Instance.dateEditSearchDateEnd.DateTime, FormMain.Instance.comboBoxEditSearchPrograms.EditValue != null ? FormMain.Instance.comboBoxEditSearchPrograms.EditValue.ToString() : null);
                         this.Invoke((MethodInvoker)delegate()
                         {
-                            gridControlPrograms.DataSource = new BindingList<CoreObjects.Spot>(searchResult);
+                            gridControlPrograms.DataSource = new BindingList<CoreObjects.ProgramActivity>(searchResult);
                         });
                     }));
                     form.Show();

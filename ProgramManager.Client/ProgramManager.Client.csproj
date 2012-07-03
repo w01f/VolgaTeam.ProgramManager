@@ -75,6 +75,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,9 +87,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppManager.cs" />
-    <Compile Include="BusinessClasses\ListManager.cs" />
-    <Compile Include="BusinessClasses\StationManager.cs" />
+    <Compile Include="Controllers\AppManager.cs" />
+    <Compile Include="Controllers\ListManager.cs" />
+    <Compile Include="Controllers\OutputManager.cs" />
+    <Compile Include="InteropClasses\ExcelHelper.cs" />
+    <Compile Include="Service References\Service\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ServiceManager.cs" />
+    <Compile Include="Controllers\StationManager.cs" />
     <Compile Include="ConfigurationClasses\RegistryHelper.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="FormMain.cs">
@@ -96,7 +106,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="InteropClasses\PowerPointHelper.cs" />
     <Compile Include="InteropClasses\WinAPIHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,6 +120,24 @@
     </Compile>
     <Compile Include="TabPages\TabSchedule.Designer.cs">
       <DependentUpon>TabSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormOutputParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormOutputParameters.designer.cs">
+      <DependentUpon>FormOutputParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormUploadWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormUploadWarning.designer.cs">
+      <DependentUpon>FormUploadWarning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormDownloadWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormDownloadWarning.designer.cs">
+      <DependentUpon>FormDownloadWarning.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\FormEditSpot.cs">
       <SubType>Form</SubType>
@@ -136,6 +163,12 @@
     <Compile Include="ToolForms\FormProgress.designer.cs">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\FormSelectStations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormSelectStations.Designer.cs">
+      <DependentUpon>FormSelectStations.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +189,15 @@
     <EmbeddedResource Include="TabPages\TabSchedule.resx">
       <DependentUpon>TabSchedule.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormOutputParameters.resx">
+      <DependentUpon>FormOutputParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormUploadWarning.resx">
+      <DependentUpon>FormUploadWarning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormDownloadWarning.resx">
+      <DependentUpon>FormDownloadWarning.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormEditSpot.resx">
       <DependentUpon>FormEditSpot.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,7 +210,12 @@
     <EmbeddedResource Include="ToolForms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormSelectStations.resx">
+      <DependentUpon>FormSelectStations.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\ProgramManager.CoreObjects.Station.datasource" />
+    <None Include="Properties\DataSources\ProgramManager.CoreObjects.StationInformation.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -178,6 +225,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\Service\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\ProgramManager.CoreObjects.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service.wsdl" />
+    <None Include="Service References\Service\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\System.Drawing.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Exit.png" />
@@ -195,10 +258,10 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.PowerPoint">
-      <Guid>{91493440-5A91-11CF-8700-00AA0060263B}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>10</VersionMinor>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
@@ -262,6 +325,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PDF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddWeek.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

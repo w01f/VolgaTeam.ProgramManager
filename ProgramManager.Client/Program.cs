@@ -25,17 +25,11 @@ namespace ProgramManager.Client
                 System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.FirstDayOfWeek = DayOfWeek.Monday;
                 System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern = @"MM/dd/yyyy";
                 System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
-                //if (AppManager.Instance.RunPowerPoint())
-                AppManager.Instance.RunForm();
+                Controllers.AppManager.Instance.RunForm();
             }
             else
             {
-                //if (AppManager.Instance.RunPowerPoint())
-                //{
-                //AppManager.Instance.ActivatePowerPoint();
-                //AppManager.Instance.ActivateMiniBar();
-                AppManager.Instance.ActivateMainForm();
-                //}
+                Controllers.AppManager.Instance.ActivateMainForm();
             }
         }
     }

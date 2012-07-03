@@ -11,18 +11,21 @@ namespace ProgramManager.CoreObjects
     [DataContract]
     public class Day
     {
-        [DataMember]
-        private string _dataFilePath = string.Empty;
-
-        [DataMember]
-        public Station Station { get; private set; }
+        public Station Station { get; set; }
         [DataMember]
         public DateTime Date { get; private set; }
         [DataMember]
-        public List<Spot> Spots { get; private set; }
+        public List<ProgramActivity> ProgramActivities { get; private set; }
 
-        [DataMember]
         public bool DataNotSaved { get; set; }
+
+        private string DataFilePath
+        {
+            get
+            {
+                return Path.Combine(this.Station.RootFolderPath, string.Format(@"{0}\{1}.xml", new string[] { this.Date.Year.ToString(), this.Date.ToString("MMddyy") }));
+            }
+        }
 
         public DateTime StartTime
         {
@@ -40,69 +43,69 @@ namespace ProgramManager.CoreObjects
             }
         }
 
+
         public Day(Station station, DateTime date)
         {
             this.Station = station;
             this.Date = date;
-            this.Spots = new List<Spot>();
-
-            _dataFilePath = Path.Combine(this.Station.RootFolder.FullName, string.Format(@"{0}\{1}.xml", new string[] { this.Date.Year.ToString(), this.Date.ToString("MMddyy") }));
-            if (!Directory.Exists(Path.GetDirectoryName(_dataFilePath)))
-                Directory.CreateDirectory(Path.GetDirectoryName(_dataFilePath));
+            this.ProgramActivities = new List<ProgramActivity>();
 
             Load();
         }
 
         private void InitDay()
         {
-            this.Spots.Clear();
-            DateTime spotTime = this.StartTime;
+            this.ProgramActivities.Clear();
+            DateTime programActivityTime = this.StartTime;
             do
             {
-                Spot spot = new Spot(this, spotTime);
-                foreach (Program program in this.Station.Programs)
-                    if (program.ContainsGivenTime(spot.Time))
-                    {
-                        spot.Program = program.Name;
-                        spot.ProgramLink = program.Id;
-                        spot.Type = program.Type;
-                        spot.FCC = program.FCC;
-                        spot.MovieTitle = program.MovieTitle;
-                        spot.Distributor = program.Distributor;
-                        spot.ContractLength = program.ContractLength;
-                        spot.CustomNote = program.CustomNote;
-                    }
-                this.Spots.Add(spot);
-                spotTime = spotTime.AddMinutes(30);
+                ProgramActivity programActivity = new ProgramActivity(this, programActivityTime);
+                ApplyPrograms(programActivity);
+                this.ProgramActivities.Add(programActivity);
+                programActivityTime = programActivityTime.AddMinutes(30);
             }
-            while (!(spotTime.Hour == 5 && spotTime.Minute == 0));
+            while (!(programActivityTime.Hour == 5 && programActivityTime.Minute == 0));
+        }
+
+        private void ApplyPrograms(ProgramActivity programActivity)
+        {
+            foreach (Program program in this.Station.Programs)
+                if (program.ContainsGivenTime(programActivity.Time))
+                {
+                    programActivity.Program = program.Name;
+                    programActivity.ProgramLink = program.Id;
+                    programActivity.Type = program.Type;
+                    programActivity.FCC = program.FCC;
+                    programActivity.MovieTitle = program.MovieTitle;
+                    programActivity.Distributor = program.Distributor;
+                    programActivity.ContractLength = program.ContractLength;
+                    programActivity.CustomNote = program.CustomNote;
+                }
         }
 
         private void Load()
         {
-            this.Spots.Clear();
-            if (File.Exists(_dataFilePath))
+            this.ProgramActivities.Clear();
+            if (File.Exists(this.DataFilePath))
             {
                 XmlDocument document = new XmlDocument();
 
-                document.Load(_dataFilePath);
+                document.Load(this.DataFilePath);
 
                 XmlNode node = document.SelectSingleNode(@"/Programs");
                 if (node != null)
                 {
                     foreach (XmlNode childNode in node.ChildNodes)
                     {
-                        if (childNode.Name.Equals("Spot"))
-                        {
-                            Spot spot = new Spot(this);
-                            spot.Deserialize(childNode);
-                            if (this.Station.Programs.Where(x => x.Id.Equals(spot.ProgramLink)).Count() == 0 && !spot.ProgramLink.Equals(Guid.Empty))
-                                spot.Clear();
-                            this.Spots.Add(spot);
-                        }
+                        ProgramActivity programActivity = new ProgramActivity(this);
+                        programActivity.Deserialize(childNode);
+                        if (this.Station.Programs.Where(x => x.Id.Equals(programActivity.ProgramLink)).Count() == 0 && !programActivity.ProgramLink.Equals(Guid.Empty))
+                            programActivity.Clear();
+                        ApplyPrograms(programActivity);
+                        this.ProgramActivities.Add(programActivity);
                     }
                 }
-                if (this.Spots.Count == 0)
+                if (this.ProgramActivities.Count == 0)
                 {
                     InitDay();
                     Save();
@@ -113,7 +116,7 @@ namespace ProgramManager.CoreObjects
                 InitDay();
                 Save();
             }
-            this.Spots.Sort((x, y) => x.Time.CompareTo(y.Time));
+            this.ProgramActivities.Sort((x, y) => x.Time.CompareTo(y.Time));
             this.DataNotSaved = false;
         }
 
@@ -122,11 +125,14 @@ namespace ProgramManager.CoreObjects
             StringBuilder xml = new StringBuilder();
 
             xml.AppendLine(@"<Programs>");
-            foreach (Spot spot in this.Spots)
-                xml.AppendLine(@"<Spot>" + spot.Serialize() + @"</Spot>");
+            foreach (ProgramActivity programActivity in this.ProgramActivities)
+                xml.AppendLine(@"<ProgramActivity>" + programActivity.Serialize() + @"</ProgramActivity>");
             xml.AppendLine(@"</Programs>");
 
-            using (StreamWriter sw = new StreamWriter(_dataFilePath, false))
+            if (!Directory.Exists(Path.GetDirectoryName(this.DataFilePath)))
+                Directory.CreateDirectory(Path.GetDirectoryName(this.DataFilePath));
+
+            using (StreamWriter sw = new StreamWriter(this.DataFilePath, false))
             {
                 sw.Write(xml.ToString());
                 sw.Flush();
@@ -135,51 +141,51 @@ namespace ProgramManager.CoreObjects
             this.DataNotSaved = false;
         }
 
-        public void AddSpotRange(Spot[] spots)
+        public void AddProgramActivityRange(ProgramActivity[] programActivities)
         {
-            foreach (Spot spot in spots)
+            foreach (ProgramActivity programActivity in programActivities)
             {
-                Spot existedSpot = this.Spots.Where(x => x.Time.Equals(spot.Time)).FirstOrDefault();
-                if (existedSpot != null)
+                ProgramActivity existedProgramActivity = this.ProgramActivities.Where(x => x.Time.Equals(programActivity.Time)).FirstOrDefault();
+                if (existedProgramActivity != null)
                 {
-                    existedSpot.Program = spot.Program;
-                    existedSpot.ProgramLink = spot.ProgramLink;
-                    existedSpot.Episode = spot.Episode;
-                    existedSpot.Type = spot.Type;
-                    existedSpot.FCC = spot.FCC;
-                    existedSpot.MovieTitle = spot.MovieTitle;
-                    existedSpot.Distributor = spot.Distributor;
-                    existedSpot.ContractLength = spot.ContractLength;
-                    existedSpot.CustomNote = spot.CustomNote;
+                    existedProgramActivity.Program = programActivity.Program;
+                    existedProgramActivity.ProgramLink = programActivity.ProgramLink;
+                    existedProgramActivity.Episode = programActivity.Episode;
+                    existedProgramActivity.Type = programActivity.Type;
+                    existedProgramActivity.FCC = programActivity.FCC;
+                    existedProgramActivity.MovieTitle = programActivity.MovieTitle;
+                    existedProgramActivity.Distributor = programActivity.Distributor;
+                    existedProgramActivity.ContractLength = programActivity.ContractLength;
+                    existedProgramActivity.CustomNote = programActivity.CustomNote;
                 }
                 else
                 {
-                    this.Spots.Add(spot);
-                    this.Spots.Sort((x, y) => x.Time.CompareTo(y.Time));
+                    this.ProgramActivities.Add(programActivity);
+                    this.ProgramActivities.Sort((x, y) => x.Time.CompareTo(y.Time));
                 }
             }
             this.DataNotSaved = true;
         }
 
-        public void AddSpot(Spot spot)
+        public void AddProgramActivity(ProgramActivity programActivity)
         {
-            Spot existedSpot = this.Spots.Where(x => x.Time.Year.Equals(spot.Time.Year) && x.Time.Month.Equals(spot.Time.Month) && x.Time.Day.Equals(spot.Time.Day) && x.Time.Hour.Equals(spot.Time.Hour) && x.Time.Minute.Equals(spot.Time.Minute)).FirstOrDefault();
-            if (existedSpot != null)
+            ProgramActivity existedProgramActivity = this.ProgramActivities.Where(x => x.Time.Year.Equals(programActivity.Time.Year) && x.Time.Month.Equals(programActivity.Time.Month) && x.Time.Day.Equals(programActivity.Time.Day) && x.Time.Hour.Equals(programActivity.Time.Hour) && x.Time.Minute.Equals(programActivity.Time.Minute)).FirstOrDefault();
+            if (existedProgramActivity != null)
             {
-                existedSpot.Program = spot.Program;
-                existedSpot.ProgramLink = spot.ProgramLink;
-                existedSpot.Episode = spot.Episode;
-                existedSpot.Type = spot.Type;
-                existedSpot.FCC = spot.FCC;
-                existedSpot.MovieTitle = spot.MovieTitle;
-                existedSpot.Distributor = spot.Distributor;
-                existedSpot.ContractLength = spot.ContractLength;
-                existedSpot.CustomNote = spot.CustomNote;
+                existedProgramActivity.Program = programActivity.Program;
+                existedProgramActivity.ProgramLink = programActivity.ProgramLink;
+                existedProgramActivity.Episode = programActivity.Episode;
+                existedProgramActivity.Type = programActivity.Type;
+                existedProgramActivity.FCC = programActivity.FCC;
+                existedProgramActivity.MovieTitle = programActivity.MovieTitle;
+                existedProgramActivity.Distributor = programActivity.Distributor;
+                existedProgramActivity.ContractLength = programActivity.ContractLength;
+                existedProgramActivity.CustomNote = programActivity.CustomNote;
             }
             else
             {
-                this.Spots.Add(spot);
-                this.Spots.Sort((x, y) => x.Time.CompareTo(y.Time));
+                this.ProgramActivities.Add(programActivity);
+                this.ProgramActivities.Sort((x, y) => x.Time.CompareTo(y.Time));
             }
             this.DataNotSaved = true;
         }

@@ -3,15 +3,15 @@ using System.Windows.Forms;
 
 namespace ProgramManager.Client.ToolForms
 {
-    public partial class FormEditSpot : Form
+    public partial class FormEditProgramActivity : Form
     {
-        private CoreObjects.Spot _spot = null;
+        private CoreObjects.ProgramActivity _programActivity = null;
 
-        public FormEditSpot(CoreObjects.Spot spot)
+        public FormEditProgramActivity(CoreObjects.ProgramActivity programActivity)
         {
             InitializeComponent();
 
-            _spot = spot;
+            _programActivity = programActivity;
 
             textEditMovieTitle.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
             textEditMovieTitle.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
@@ -38,53 +38,53 @@ namespace ProgramManager.Client.ToolForms
             FormMain.Instance.SetClickEventHandler(this);
         }
 
-        private void FormEditSpot_Load(object sender, EventArgs e)
+        private void FormEditProgramActivity_Load(object sender, EventArgs e)
         {
             comboBoxEditFCC.Properties.Items.Clear();
-            comboBoxEditFCC.Properties.Items.AddRange(BusinessClasses.ListManager.Instance.FCC);
+            comboBoxEditFCC.Properties.Items.AddRange(Controllers.ListManager.Instance.FCC);
             comboBoxEditType.Properties.Items.Clear();
-            comboBoxEditType.Properties.Items.AddRange(BusinessClasses.ListManager.Instance.Type);
+            comboBoxEditType.Properties.Items.AddRange(Controllers.ListManager.Instance.Type);
 
-            laSpotHeader.Text = string.Format("{0}, {1}, {2}", new string[] { _spot.Date.ToString("ddd, MM/dd/yy"), _spot.Time.ToString("hh:mm tt"), _spot.Station });
+            laProgramActivityHeader.Text = string.Format("{0}, {1}, {2}", new string[] { _programActivity.Date.ToString("ddd, MM/dd/yy"), _programActivity.Time.ToString("hh:mm tt"), _programActivity.Station });
 
-            textEditName.EditValue = _spot.Program;
-            comboBoxEditType.EditValue = _spot.Type;
+            textEditName.EditValue = _programActivity.Program;
+            comboBoxEditType.EditValue = _programActivity.Type;
 
-            checkEditHouseNumber.Checked = !string.IsNullOrEmpty(_spot.HouseNumber);
-            textEditHouseNumber.EditValue = _spot.HouseNumber;
+            checkEditHouseNumber.Checked = !string.IsNullOrEmpty(_programActivity.HouseNumber);
+            textEditHouseNumber.EditValue = _programActivity.HouseNumber;
 
-            checkEditEpisode.Checked = !string.IsNullOrEmpty(_spot.Episode);
-            textEditEpisode.EditValue = _spot.Episode;
+            checkEditEpisode.Checked = !string.IsNullOrEmpty(_programActivity.Episode);
+            textEditEpisode.EditValue = _programActivity.Episode;
 
-            checkEditMovieTitle.Checked = !string.IsNullOrEmpty(_spot.MovieTitle);
-            textEditMovieTitle.EditValue = _spot.MovieTitle;
+            checkEditMovieTitle.Checked = !string.IsNullOrEmpty(_programActivity.MovieTitle);
+            textEditMovieTitle.EditValue = _programActivity.MovieTitle;
 
-            checkEditFCC.Checked = !string.IsNullOrEmpty(_spot.FCC);
-            comboBoxEditFCC.EditValue = _spot.FCC;
+            checkEditFCC.Checked = !string.IsNullOrEmpty(_programActivity.FCC);
+            comboBoxEditFCC.EditValue = _programActivity.FCC;
 
-            checkEditDistributor.Checked = !string.IsNullOrEmpty(_spot.Distributor);
-            textEditDistributor.EditValue = _spot.Distributor;
+            checkEditDistributor.Checked = !string.IsNullOrEmpty(_programActivity.Distributor);
+            textEditDistributor.EditValue = _programActivity.Distributor;
 
-            checkEditContractLength.Checked = !string.IsNullOrEmpty(_spot.ContractLength);
-            textEditContractLength.EditValue = _spot.ContractLength;
+            checkEditContractLength.Checked = !string.IsNullOrEmpty(_programActivity.ContractLength);
+            textEditContractLength.EditValue = _programActivity.ContractLength;
 
-            checkEditCustomNote.Checked = !string.IsNullOrEmpty(_spot.CustomNote);
-            memoEditCustomNote.EditValue = _spot.CustomNote;
+            checkEditCustomNote.Checked = !string.IsNullOrEmpty(_programActivity.CustomNote);
+            memoEditCustomNote.EditValue = _programActivity.CustomNote;
         }
 
-        private void FormEditSpot_FormClosed(object sender, FormClosedEventArgs e)
+        private void FormEditProgramActivity_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK || this.DialogResult == System.Windows.Forms.DialogResult.Retry)
             {
-                _spot.Program = textEditName.EditValue != null ? textEditName.EditValue.ToString() : null;
-                _spot.Type = comboBoxEditType.EditValue != null ? comboBoxEditType.EditValue.ToString() : null;
-                _spot.HouseNumber = textEditHouseNumber.EditValue != null ? textEditHouseNumber.EditValue.ToString() : null;
-                _spot.Episode = textEditEpisode.EditValue != null ? textEditEpisode.EditValue.ToString() : null;
-                _spot.MovieTitle = textEditMovieTitle.EditValue != null ? textEditMovieTitle.EditValue.ToString() : null;
-                _spot.FCC = comboBoxEditFCC.EditValue != null ? comboBoxEditFCC.EditValue.ToString() : null;
-                _spot.Distributor = textEditDistributor.EditValue != null ? textEditDistributor.EditValue.ToString() : null;
-                _spot.ContractLength = textEditContractLength.EditValue != null ? textEditContractLength.EditValue.ToString() : null;
-                _spot.CustomNote = memoEditCustomNote.EditValue != null ? memoEditCustomNote.EditValue.ToString() : null;
+                _programActivity.Program = textEditName.EditValue != null ? textEditName.EditValue.ToString() : null;
+                _programActivity.Type = comboBoxEditType.EditValue != null ? comboBoxEditType.EditValue.ToString() : null;
+                _programActivity.HouseNumber = textEditHouseNumber.EditValue != null ? textEditHouseNumber.EditValue.ToString() : null;
+                _programActivity.Episode = textEditEpisode.EditValue != null ? textEditEpisode.EditValue.ToString() : null;
+                _programActivity.MovieTitle = textEditMovieTitle.EditValue != null ? textEditMovieTitle.EditValue.ToString() : null;
+                _programActivity.FCC = comboBoxEditFCC.EditValue != null ? comboBoxEditFCC.EditValue.ToString() : null;
+                _programActivity.Distributor = textEditDistributor.EditValue != null ? textEditDistributor.EditValue.ToString() : null;
+                _programActivity.ContractLength = textEditContractLength.EditValue != null ? textEditContractLength.EditValue.ToString() : null;
+                _programActivity.CustomNote = memoEditCustomNote.EditValue != null ? memoEditCustomNote.EditValue.ToString() : null;
             }
         }
 
