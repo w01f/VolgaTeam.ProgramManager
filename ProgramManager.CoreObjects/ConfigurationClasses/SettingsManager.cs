@@ -5,13 +5,13 @@ using System.Xml;
 
 namespace ProgramManager.CoreObjects.ConfigurationClasses
 {
-    class SettingsManager
+    public class SettingsManager
     {
         private static SettingsManager _instance = new SettingsManager();
 
         #region Path Section
         public string ApplicationRootsPath { get; private set; }
-        public string StationsRootPath { get; private set; }
+        public string StationsRootPath { get; set; }
         #endregion
 
         public static SettingsManager Instance

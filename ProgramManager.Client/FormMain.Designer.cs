@@ -30,21 +30,34 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanelSchedule = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarScheduleExit = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemScheduleExit = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarScheduleOutput = new DevComponents.DotNetBar.RibbonBar();
+            this.itemContainerScheduleOutput = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemScheduleOutputExcel = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemScheduleOutputPDF = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarScheduleSync = new DevComponents.DotNetBar.RibbonBar();
+            this.itemContainerScheduleSync = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemScheduleDownload = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemScheduleUpload = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarScheduleBrowse = new DevComponents.DotNetBar.RibbonBar();
             this.itemContainerScheduleBrowseType = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItemScheduleBrowseDay = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItemScheduleBrowseWeek = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItemScheduleBrowseMonth = new DevComponents.DotNetBar.ButtonItem();
             this.itemContainerScheduleBrowseButtons = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemScheduleBrowseForward = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemScheduleBrowseBackward = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarScheduleInfo = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemScheduleInfo = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarSchedulePrograms = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemScheduleAddProgram = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemScheduleManagePrograms = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarScheduleStation = new DevComponents.DotNetBar.RibbonBar();
             this.comboBoxEditScheduleStation = new DevExpress.XtraEditors.ComboBoxEdit();
             this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -55,6 +68,7 @@
             this.controlContainerItemScheduleDay = new DevComponents.DotNetBar.ControlContainerItem();
             this.ribbonPanelSearch = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarSearchRun = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemSearchRun = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarSearchPrograms = new DevComponents.DotNetBar.RibbonBar();
             this.comboBoxEditSearchPrograms = new DevExpress.XtraEditors.ComboBoxEdit();
             this.itemContainerSearchPrograms = new DevComponents.DotNetBar.ItemContainer();
@@ -86,20 +100,6 @@
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
-            this.itemContainerScheduleSync = new DevComponents.DotNetBar.ItemContainer();
-            this.ribbonBarScheduleOutput = new DevComponents.DotNetBar.RibbonBar();
-            this.itemContainerScheduleOutput = new DevComponents.DotNetBar.ItemContainer();
-            this.buttonItemScheduleExit = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleOutputExcel = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleOutputPDF = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleDownload = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleUpload = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleBrowseForward = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleBrowseBackward = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleInfo = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleAddProgram = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemScheduleManagePrograms = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemSearchRun = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelSchedule.SuspendLayout();
             this.ribbonBarScheduleStation.SuspendLayout();
@@ -224,6 +224,71 @@
             // 
             this.ribbonBarScheduleExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // buttonItemScheduleExit
+            // 
+            this.buttonItemScheduleExit.Image = global::ProgramManager.Client.Properties.Resources.Exit;
+            this.buttonItemScheduleExit.Name = "buttonItemScheduleExit";
+            this.buttonItemScheduleExit.SubItemsExpandWidth = 14;
+            this.buttonItemScheduleExit.Text = "buttonItemHomeExit";
+            this.buttonItemScheduleExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+            // 
+            // ribbonBarScheduleOutput
+            // 
+            this.ribbonBarScheduleOutput.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarScheduleOutput.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarScheduleOutput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarScheduleOutput.ContainerControlProcessDialogKey = true;
+            this.ribbonBarScheduleOutput.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarScheduleOutput.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerScheduleOutput});
+            this.ribbonBarScheduleOutput.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarScheduleOutput.Location = new System.Drawing.Point(586, 0);
+            this.ribbonBarScheduleOutput.Name = "ribbonBarScheduleOutput";
+            this.ribbonBarScheduleOutput.Size = new System.Drawing.Size(82, 111);
+            this.ribbonBarScheduleOutput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarScheduleOutput.TabIndex = 28;
+            this.ribbonBarScheduleOutput.Text = "Output";
+            // 
+            // 
+            // 
+            this.ribbonBarScheduleOutput.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarScheduleOutput.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // itemContainerScheduleOutput
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerScheduleOutput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerScheduleOutput.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerScheduleOutput.Name = "itemContainerScheduleOutput";
+            this.itemContainerScheduleOutput.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemScheduleOutputExcel,
+            this.buttonItemScheduleOutputPDF});
+            // 
+            // buttonItemScheduleOutputExcel
+            // 
+            this.buttonItemScheduleOutputExcel.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemScheduleOutputExcel.Image = global::ProgramManager.Client.Properties.Resources.Excel;
+            this.buttonItemScheduleOutputExcel.Name = "buttonItemScheduleOutputExcel";
+            this.buttonItemScheduleOutputExcel.Text = "Excel";
+            // 
+            // buttonItemScheduleOutputPDF
+            // 
+            this.buttonItemScheduleOutputPDF.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemScheduleOutputPDF.Image = global::ProgramManager.Client.Properties.Resources.PDF;
+            this.buttonItemScheduleOutputPDF.Name = "buttonItemScheduleOutputPDF";
+            this.buttonItemScheduleOutputPDF.Text = "PDF";
+            // 
             // ribbonBarScheduleSync
             // 
             this.ribbonBarScheduleSync.AutoOverflowEnabled = true;
@@ -254,6 +319,35 @@
             // 
             // 
             this.ribbonBarScheduleSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarScheduleSync.Visible = false;
+            // 
+            // itemContainerScheduleSync
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerScheduleSync.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerScheduleSync.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerScheduleSync.Name = "itemContainerScheduleSync";
+            this.itemContainerScheduleSync.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemScheduleDownload,
+            this.buttonItemScheduleUpload});
+            // 
+            // buttonItemScheduleDownload
+            // 
+            this.buttonItemScheduleDownload.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemScheduleDownload.Image = global::ProgramManager.Client.Properties.Resources.Download;
+            this.buttonItemScheduleDownload.Name = "buttonItemScheduleDownload";
+            this.buttonItemScheduleDownload.SubItemsExpandWidth = 14;
+            this.buttonItemScheduleDownload.Text = "Download";
+            // 
+            // buttonItemScheduleUpload
+            // 
+            this.buttonItemScheduleUpload.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemScheduleUpload.Image = global::ProgramManager.Client.Properties.Resources.Upload;
+            this.buttonItemScheduleUpload.Name = "buttonItemScheduleUpload";
+            this.buttonItemScheduleUpload.SubItemsExpandWidth = 14;
+            this.buttonItemScheduleUpload.Text = "Upload";
             // 
             // ribbonBarScheduleBrowse
             // 
@@ -330,6 +424,18 @@
             this.buttonItemScheduleBrowseForward,
             this.buttonItemScheduleBrowseBackward});
             // 
+            // buttonItemScheduleBrowseForward
+            // 
+            this.buttonItemScheduleBrowseForward.Image = global::ProgramManager.Client.Properties.Resources.BrowseForward;
+            this.buttonItemScheduleBrowseForward.Name = "buttonItemScheduleBrowseForward";
+            this.buttonItemScheduleBrowseForward.Text = "buttonItem1";
+            // 
+            // buttonItemScheduleBrowseBackward
+            // 
+            this.buttonItemScheduleBrowseBackward.Image = global::ProgramManager.Client.Properties.Resources.BrowseBackward;
+            this.buttonItemScheduleBrowseBackward.Name = "buttonItemScheduleBrowseBackward";
+            this.buttonItemScheduleBrowseBackward.Text = "buttonItem1";
+            // 
             // ribbonBarScheduleInfo
             // 
             this.ribbonBarScheduleInfo.AutoOverflowEnabled = true;
@@ -360,6 +466,15 @@
             // 
             // 
             this.ribbonBarScheduleInfo.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemScheduleInfo
+            // 
+            this.buttonItemScheduleInfo.AutoCheckOnClick = true;
+            this.buttonItemScheduleInfo.FixedSize = new System.Drawing.Size(72, 72);
+            this.buttonItemScheduleInfo.Image = global::ProgramManager.Client.Properties.Resources.ShowInfo;
+            this.buttonItemScheduleInfo.Name = "buttonItemScheduleInfo";
+            this.buttonItemScheduleInfo.SubItemsExpandWidth = 14;
+            this.buttonItemScheduleInfo.Text = "         Info";
             // 
             // ribbonBarSchedulePrograms
             // 
@@ -392,6 +507,24 @@
             // 
             // 
             this.ribbonBarSchedulePrograms.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemScheduleAddProgram
+            // 
+            this.buttonItemScheduleAddProgram.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemScheduleAddProgram.Image = global::ProgramManager.Client.Properties.Resources.AddProgram;
+            this.buttonItemScheduleAddProgram.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.buttonItemScheduleAddProgram.Name = "buttonItemScheduleAddProgram";
+            this.buttonItemScheduleAddProgram.SubItemsExpandWidth = 14;
+            this.buttonItemScheduleAddProgram.Text = "Add";
+            // 
+            // buttonItemScheduleManagePrograms
+            // 
+            this.buttonItemScheduleManagePrograms.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemScheduleManagePrograms.Image = global::ProgramManager.Client.Properties.Resources.ManagePrograms;
+            this.buttonItemScheduleManagePrograms.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.buttonItemScheduleManagePrograms.Name = "buttonItemScheduleManagePrograms";
+            this.buttonItemScheduleManagePrograms.SubItemsExpandWidth = 14;
+            this.buttonItemScheduleManagePrograms.Text = "Manage";
             // 
             // ribbonBarScheduleStation
             // 
@@ -445,7 +578,7 @@
             this.dateEditScheduleDay.Name = "dateEditScheduleDay";
             this.dateEditScheduleDay.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditScheduleDay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.dateEditScheduleDay.Properties.DisplayFormat.FormatString = "MM/dd/yy";
             this.dateEditScheduleDay.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditScheduleDay.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -548,6 +681,14 @@
             // 
             // 
             this.ribbonBarSearchRun.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemSearchRun
+            // 
+            this.buttonItemSearchRun.Enabled = false;
+            this.buttonItemSearchRun.Image = global::ProgramManager.Client.Properties.Resources.Search;
+            this.buttonItemSearchRun.Name = "buttonItemSearchRun";
+            this.buttonItemSearchRun.SubItemsExpandWidth = 14;
+            this.buttonItemSearchRun.Text = "buttonItem1";
             // 
             // ribbonBarSearchPrograms
             // 
@@ -659,7 +800,7 @@
             this.dateEditSearchDateStart.Name = "dateEditSearchDateStart";
             this.dateEditSearchDateStart.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditSearchDateStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.dateEditSearchDateStart.Properties.DisplayFormat.FormatString = "MM/dd/yy";
             this.dateEditSearchDateStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditSearchDateStart.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -679,7 +820,7 @@
             this.dateEditSearchDateEnd.Name = "dateEditSearchDateEnd";
             this.dateEditSearchDateEnd.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditSearchDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
             this.dateEditSearchDateEnd.Properties.DisplayFormat.FormatString = "MM/dd/yy";
             this.dateEditSearchDateEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditSearchDateEnd.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -929,146 +1070,6 @@
             // 
             this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
             this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
-            // 
-            // itemContainerScheduleSync
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerScheduleSync.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainerScheduleSync.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainerScheduleSync.Name = "itemContainerScheduleSync";
-            this.itemContainerScheduleSync.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemScheduleDownload,
-            this.buttonItemScheduleUpload});
-            // 
-            // ribbonBarScheduleOutput
-            // 
-            this.ribbonBarScheduleOutput.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarScheduleOutput.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonBarScheduleOutput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ribbonBarScheduleOutput.ContainerControlProcessDialogKey = true;
-            this.ribbonBarScheduleOutput.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarScheduleOutput.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainerScheduleOutput});
-            this.ribbonBarScheduleOutput.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarScheduleOutput.Location = new System.Drawing.Point(586, 0);
-            this.ribbonBarScheduleOutput.Name = "ribbonBarScheduleOutput";
-            this.ribbonBarScheduleOutput.Size = new System.Drawing.Size(82, 111);
-            this.ribbonBarScheduleOutput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarScheduleOutput.TabIndex = 28;
-            this.ribbonBarScheduleOutput.Text = "Output";
-            // 
-            // 
-            // 
-            this.ribbonBarScheduleOutput.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonBarScheduleOutput.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // itemContainerScheduleOutput
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerScheduleOutput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainerScheduleOutput.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainerScheduleOutput.Name = "itemContainerScheduleOutput";
-            this.itemContainerScheduleOutput.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemScheduleOutputExcel,
-            this.buttonItemScheduleOutputPDF});
-            // 
-            // buttonItemScheduleExit
-            // 
-            this.buttonItemScheduleExit.Image = global::ProgramManager.Client.Properties.Resources.Exit;
-            this.buttonItemScheduleExit.Name = "buttonItemScheduleExit";
-            this.buttonItemScheduleExit.SubItemsExpandWidth = 14;
-            this.buttonItemScheduleExit.Text = "buttonItemHomeExit";
-            this.buttonItemScheduleExit.Click += new System.EventHandler(this.buttonItemExit_Click);
-            // 
-            // buttonItemScheduleOutputExcel
-            // 
-            this.buttonItemScheduleOutputExcel.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemScheduleOutputExcel.Image = global::ProgramManager.Client.Properties.Resources.Excel;
-            this.buttonItemScheduleOutputExcel.Name = "buttonItemScheduleOutputExcel";
-            this.buttonItemScheduleOutputExcel.Text = "Excel";
-            // 
-            // buttonItemScheduleOutputPDF
-            // 
-            this.buttonItemScheduleOutputPDF.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemScheduleOutputPDF.Image = global::ProgramManager.Client.Properties.Resources.PDF;
-            this.buttonItemScheduleOutputPDF.Name = "buttonItemScheduleOutputPDF";
-            this.buttonItemScheduleOutputPDF.Text = "PDF";
-            // 
-            // buttonItemScheduleDownload
-            // 
-            this.buttonItemScheduleDownload.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemScheduleDownload.Image = global::ProgramManager.Client.Properties.Resources.Download;
-            this.buttonItemScheduleDownload.Name = "buttonItemScheduleDownload";
-            this.buttonItemScheduleDownload.SubItemsExpandWidth = 14;
-            this.buttonItemScheduleDownload.Text = "Download";
-            // 
-            // buttonItemScheduleUpload
-            // 
-            this.buttonItemScheduleUpload.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemScheduleUpload.Image = global::ProgramManager.Client.Properties.Resources.Upload;
-            this.buttonItemScheduleUpload.Name = "buttonItemScheduleUpload";
-            this.buttonItemScheduleUpload.SubItemsExpandWidth = 14;
-            this.buttonItemScheduleUpload.Text = "Upload";
-            // 
-            // buttonItemScheduleBrowseForward
-            // 
-            this.buttonItemScheduleBrowseForward.Image = global::ProgramManager.Client.Properties.Resources.BrowseForward;
-            this.buttonItemScheduleBrowseForward.Name = "buttonItemScheduleBrowseForward";
-            this.buttonItemScheduleBrowseForward.Text = "buttonItem1";
-            // 
-            // buttonItemScheduleBrowseBackward
-            // 
-            this.buttonItemScheduleBrowseBackward.Image = global::ProgramManager.Client.Properties.Resources.BrowseBackward;
-            this.buttonItemScheduleBrowseBackward.Name = "buttonItemScheduleBrowseBackward";
-            this.buttonItemScheduleBrowseBackward.Text = "buttonItem1";
-            // 
-            // buttonItemScheduleInfo
-            // 
-            this.buttonItemScheduleInfo.AutoCheckOnClick = true;
-            this.buttonItemScheduleInfo.FixedSize = new System.Drawing.Size(72, 72);
-            this.buttonItemScheduleInfo.Image = global::ProgramManager.Client.Properties.Resources.ShowInfo;
-            this.buttonItemScheduleInfo.Name = "buttonItemScheduleInfo";
-            this.buttonItemScheduleInfo.SubItemsExpandWidth = 14;
-            this.buttonItemScheduleInfo.Text = "         Info";
-            // 
-            // buttonItemScheduleAddProgram
-            // 
-            this.buttonItemScheduleAddProgram.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemScheduleAddProgram.Image = global::ProgramManager.Client.Properties.Resources.AddProgram;
-            this.buttonItemScheduleAddProgram.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.buttonItemScheduleAddProgram.Name = "buttonItemScheduleAddProgram";
-            this.buttonItemScheduleAddProgram.SubItemsExpandWidth = 14;
-            this.buttonItemScheduleAddProgram.Text = "Add";
-            // 
-            // buttonItemScheduleManagePrograms
-            // 
-            this.buttonItemScheduleManagePrograms.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemScheduleManagePrograms.Image = global::ProgramManager.Client.Properties.Resources.ManagePrograms;
-            this.buttonItemScheduleManagePrograms.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.buttonItemScheduleManagePrograms.Name = "buttonItemScheduleManagePrograms";
-            this.buttonItemScheduleManagePrograms.SubItemsExpandWidth = 14;
-            this.buttonItemScheduleManagePrograms.Text = "Manage";
-            // 
-            // buttonItemSearchRun
-            // 
-            this.buttonItemSearchRun.Enabled = false;
-            this.buttonItemSearchRun.Image = global::ProgramManager.Client.Properties.Resources.Search;
-            this.buttonItemSearchRun.Name = "buttonItemSearchRun";
-            this.buttonItemSearchRun.SubItemsExpandWidth = 14;
-            this.buttonItemSearchRun.Text = "buttonItem1";
             // 
             // FormMain
             // 

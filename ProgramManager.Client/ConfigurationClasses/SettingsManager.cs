@@ -18,6 +18,7 @@ namespace ProgramManager.Client.ConfigurationClasses
 
         #region Path Section
         public string ApplicationRootsPath { get; private set; }
+        public string DataRootsPath { get; private set; }
         private string _applicationSettingsFile = string.Empty;
         private string _manifestFile = string.Empty;
         public string LogFilePath { get; private set; }
@@ -33,6 +34,7 @@ namespace ProgramManager.Client.ConfigurationClasses
         public string SelectedStation { get; set; }
         public BrowseType BrowseType { get; set; }
         public bool ShowInfo { get; set; }
+        public bool OfflineMode { get; set; }
         public bool AlwaysDownload { get; set; }
         public bool AlwaysCancelDownload { get; set; }
         #endregion
@@ -47,26 +49,28 @@ namespace ProgramManager.Client.ConfigurationClasses
 
         private SettingsManager()
         {
-            #region Path Section
             this.ApplicationRootsPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
+            this.DataRootsPath = this.ApplicationRootsPath;
             _applicationSettingsFile = Path.Combine(this.ApplicationRootsPath, "LocalSettings.xml");
             _manifestFile = Path.Combine(this.ApplicationRootsPath, "manifest.xml");
-            this.StationsRootPath = Path.Combine(this.ApplicationRootsPath, "Stations");
-            this.OutputRootPath = Path.Combine(this.ApplicationRootsPath, "Output Templates");
-            this.OutputCache = Path.Combine(this.ApplicationRootsPath, "Output Cache");
             this.LogFilePath = Path.Combine(this.ApplicationRootsPath, "ApplicatonLog.xml");
             this.IconFilePath = Path.Combine(this.ApplicationRootsPath, "icon.ico");
+            this.OutputCache = Path.Combine(this.ApplicationRootsPath, "Output Cache");
 
-            if (!Directory.Exists(this.StationsRootPath))
-                Directory.CreateDirectory(this.StationsRootPath);
-            #endregion
-
+            this.OfflineMode = true;
             this.ServerName = "127.0.0.1";
             this.ApplicationName = "Program Manager";
             this.ShowInfo = true;
 
             LoadApplicationSettings();
             LoadManifest();
+
+            this.StationsRootPath = Path.Combine(this.DataRootsPath, "Stations");
+            this.OutputRootPath = Path.Combine(this.DataRootsPath, "Output Templates");
+            if (!Directory.Exists(this.StationsRootPath))
+                Directory.CreateDirectory(this.StationsRootPath);
+
+            CoreObjects.ConfigurationClasses.SettingsManager.Instance.StationsRootPath = this.StationsRootPath;
         }
 
         private void LoadApplicationSettings()
@@ -149,6 +153,12 @@ namespace ProgramManager.Client.ConfigurationClasses
                 if (node != null)
                 {
                     this.ServerName = node.InnerText;
+                }
+
+                node = document.SelectSingleNode(@"/Manifest/DataLocation");
+                if (node != null)
+                {
+                    this.DataRootsPath = node.InnerText;
                 }
 
                 node = document.SelectSingleNode(@"/Manifest/Title");

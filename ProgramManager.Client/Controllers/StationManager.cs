@@ -50,7 +50,7 @@ namespace ProgramManager.Client.Controllers
                 {
                     CoreObjects.Station station = new CoreObjects.Station(stationFolder.Name);
 
-                    if (!ConfigurationClasses.SettingsManager.Instance.AlwaysCancelDownload)
+                    if (!ConfigurationClasses.SettingsManager.Instance.AlwaysCancelDownload && !ConfigurationClasses.SettingsManager.Instance.OfflineMode)
                     {
                         CoreObjects.StationInformation stationInfo = ServiceManager.GetStationInfo(station.Name);
                         if (stationInfo != null)
@@ -129,7 +129,7 @@ namespace ProgramManager.Client.Controllers
                         form.Hide();
                         Application.DoEvents();
                     });
-                    if (!this.StationsLoaded)
+                    if (!this.StationsLoaded && !ConfigurationClasses.SettingsManager.Instance.OfflineMode)
                     {
                         FormMain.Instance.Invoke((MethodInvoker)delegate()
                         {
