@@ -49,7 +49,9 @@ namespace ProgramManager.CoreObjects
         {
             StringBuilder xml = new StringBuilder();
             xml.AppendLine(@"<ApplicationLog>");
-            foreach (LogRecord record in this.Records)
+
+            DateTime borderDate = DateTime.Now.AddDays(-7);
+            foreach (LogRecord record in this.Records.Where(x => x.TimeStamp > borderDate))
                 xml.AppendLine(@"<Record>" + record.Serialize() + @"</Record>");
             xml.AppendLine(@"</ApplicationLog>");
 

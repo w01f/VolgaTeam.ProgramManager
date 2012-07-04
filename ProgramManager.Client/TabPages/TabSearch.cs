@@ -7,6 +7,7 @@ namespace ProgramManager.Client.TabPages
     [System.ComponentModel.ToolboxItem(false)]
     public partial class TabSearch : UserControl
     {
+        private CoreObjects.ProgramActivity[] _searchResult;
         private bool _allowToSave = false;
 
         public TabSearch()
@@ -98,7 +99,8 @@ namespace ProgramManager.Client.TabPages
             FormMain.Instance.comboBoxEditSearchPrograms.EditValue = null;
             FormMain.Instance.dateEditSearchDateStart.DateTime = DateTime.Now;
             FormMain.Instance.dateEditSearchDateEnd.DateTime = FormMain.Instance.dateEditSearchDateStart.DateTime;
-            FormMain.Instance.buttonItemSearchRun.Enabled = false;
+            FormMain.Instance.buttonItemSearchRun.Enabled = true;
+            FormMain.Instance.ribbonBarSearchOutput.Enabled = false;
             gridControlPrograms.DataSource = null;
         }
         #endregion
@@ -113,12 +115,6 @@ namespace ProgramManager.Client.TabPages
                 LoadProgramsList();
             }
         }
-
-        public void comboBoxEditSearchPrograms_EditValueChanged(object sender, EventArgs e)
-        {
-            if (_allowToSave)
-                FormMain.Instance.buttonItemSearchRun.Enabled = FormMain.Instance.comboBoxEditSearchPrograms.EditValue != null;
-        }
         #endregion
 
         #region Ribbon Buttons Clicks
@@ -132,10 +128,11 @@ namespace ProgramManager.Client.TabPages
                     form.TopMost = true;
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
-                        CoreObjects.ProgramActivity[] searchResult = Controllers.StationManager.Instance.SelectedStation.Search(FormMain.Instance.dateEditSearchDateStart.DateTime, FormMain.Instance.dateEditSearchDateEnd.DateTime, FormMain.Instance.comboBoxEditSearchPrograms.EditValue != null ? FormMain.Instance.comboBoxEditSearchPrograms.EditValue.ToString() : null);
+                        _searchResult = Controllers.StationManager.Instance.SelectedStation.Search(FormMain.Instance.dateEditSearchDateStart.DateTime, FormMain.Instance.dateEditSearchDateEnd.DateTime, FormMain.Instance.comboBoxEditSearchPrograms.EditValue != null ? FormMain.Instance.comboBoxEditSearchPrograms.EditValue.ToString() : null);
                         this.Invoke((MethodInvoker)delegate()
                         {
-                            gridControlPrograms.DataSource = new BindingList<CoreObjects.ProgramActivity>(searchResult);
+                            gridControlPrograms.DataSource = new BindingList<CoreObjects.ProgramActivity>(_searchResult);
+                            FormMain.Instance.ribbonBarSearchOutput.Enabled = _searchResult.Length > 0;
                         });
                     }));
                     form.Show();
@@ -146,6 +143,16 @@ namespace ProgramManager.Client.TabPages
                     form.Close();
                 }
             }
+        }
+
+        public void buttonItemSearchOutputExcel_Click(object sender, EventArgs e)
+        {
+            Controllers.StationManager.Instance.ReportActivityList(_searchResult, false);
+        }
+
+        public void buttonItemSearchOutputPDF_Click(object sender, EventArgs e)
+        {
+            Controllers.StationManager.Instance.ReportActivityList(_searchResult, true);
         }
         #endregion
     }

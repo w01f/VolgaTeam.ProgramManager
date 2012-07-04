@@ -79,7 +79,9 @@
             this.comboBoxEditFCC = new DevExpress.XtraEditors.ComboBoxEdit();
             this.checkEditFCC = new DevExpress.XtraEditors.CheckEdit();
             this.comboBoxEditType = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnMainInner = new System.Windows.Forms.Panel();
+            this.textEditHouseNumber = new DevExpress.XtraEditors.TextEdit();
+            this.checkEditHouseNumber = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditDate.Properties)).BeginInit();
@@ -113,7 +115,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditFCC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditFCC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditType.Properties)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pnMainInner.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditHouseNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditHouseNumber.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // defaultLookAndFeel
@@ -219,7 +223,7 @@
             this.panelExTime.Controls.Add(this.laEndTime);
             this.panelExTime.Controls.Add(this.timeEditStart);
             this.panelExTime.Controls.Add(this.laStartTime);
-            this.panelExTime.Location = new System.Drawing.Point(11, 296);
+            this.panelExTime.Location = new System.Drawing.Point(11, 365);
             this.panelExTime.Name = "panelExTime";
             this.panelExTime.Size = new System.Drawing.Size(614, 101);
             this.panelExTime.Style.Alignment = System.Drawing.StringAlignment.Center;
@@ -427,7 +431,7 @@
             // 
             this.laRecurenceRange.AutoSize = true;
             this.laRecurenceRange.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laRecurenceRange.Location = new System.Drawing.Point(11, 421);
+            this.laRecurenceRange.Location = new System.Drawing.Point(11, 490);
             this.laRecurenceRange.Name = "laRecurenceRange";
             this.laRecurenceRange.Size = new System.Drawing.Size(142, 16);
             this.laRecurenceRange.TabIndex = 11;
@@ -437,7 +441,7 @@
             // 
             this.laRecurenceStart.AutoSize = true;
             this.laRecurenceStart.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laRecurenceStart.Location = new System.Drawing.Point(11, 449);
+            this.laRecurenceStart.Location = new System.Drawing.Point(11, 518);
             this.laRecurenceStart.Name = "laRecurenceStart";
             this.laRecurenceStart.Size = new System.Drawing.Size(100, 16);
             this.laRecurenceStart.TabIndex = 12;
@@ -446,25 +450,25 @@
             // checkEditNoEnd
             // 
             this.checkEditNoEnd.EditValue = true;
-            this.checkEditNoEnd.Location = new System.Drawing.Point(183, 447);
+            this.checkEditNoEnd.Location = new System.Drawing.Point(183, 516);
             this.checkEditNoEnd.Name = "checkEditNoEnd";
             this.checkEditNoEnd.Properties.AutoWidth = true;
             this.checkEditNoEnd.Properties.Caption = "No end date";
             this.checkEditNoEnd.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.checkEditNoEnd.Properties.RadioGroupIndex = 1;
-            this.checkEditNoEnd.Size = new System.Drawing.Size(93, 21);
+            this.checkEditNoEnd.Size = new System.Drawing.Size(92, 21);
             this.checkEditNoEnd.StyleController = this.styleController;
             this.checkEditNoEnd.TabIndex = 25;
             // 
             // checkEditLimitedOccurence
             // 
-            this.checkEditLimitedOccurence.Location = new System.Drawing.Point(183, 484);
+            this.checkEditLimitedOccurence.Location = new System.Drawing.Point(183, 553);
             this.checkEditLimitedOccurence.Name = "checkEditLimitedOccurence";
             this.checkEditLimitedOccurence.Properties.AutoWidth = true;
             this.checkEditLimitedOccurence.Properties.Caption = "End after: ";
             this.checkEditLimitedOccurence.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.checkEditLimitedOccurence.Properties.RadioGroupIndex = 1;
-            this.checkEditLimitedOccurence.Size = new System.Drawing.Size(83, 21);
+            this.checkEditLimitedOccurence.Size = new System.Drawing.Size(82, 21);
             this.checkEditLimitedOccurence.StyleController = this.styleController;
             this.checkEditLimitedOccurence.TabIndex = 26;
             this.checkEditLimitedOccurence.TabStop = false;
@@ -475,7 +479,7 @@
             this.laLimitedOccurence.AutoSize = true;
             this.laLimitedOccurence.Enabled = false;
             this.laLimitedOccurence.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laLimitedOccurence.Location = new System.Drawing.Point(318, 487);
+            this.laLimitedOccurence.Location = new System.Drawing.Point(318, 556);
             this.laLimitedOccurence.Name = "laLimitedOccurence";
             this.laLimitedOccurence.Size = new System.Drawing.Size(79, 16);
             this.laLimitedOccurence.TabIndex = 15;
@@ -489,7 +493,7 @@
             0,
             0});
             this.spinEditOccurenceNumber.Enabled = false;
-            this.spinEditOccurenceNumber.Location = new System.Drawing.Point(271, 484);
+            this.spinEditOccurenceNumber.Location = new System.Drawing.Point(271, 553);
             this.spinEditOccurenceNumber.Name = "spinEditOccurenceNumber";
             this.spinEditOccurenceNumber.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -511,13 +515,13 @@
             // 
             // checkEditLimitedDate
             // 
-            this.checkEditLimitedDate.Location = new System.Drawing.Point(183, 522);
+            this.checkEditLimitedDate.Location = new System.Drawing.Point(183, 591);
             this.checkEditLimitedDate.Name = "checkEditLimitedDate";
             this.checkEditLimitedDate.Properties.AutoWidth = true;
             this.checkEditLimitedDate.Properties.Caption = "End by: ";
             this.checkEditLimitedDate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.checkEditLimitedDate.Properties.RadioGroupIndex = 1;
-            this.checkEditLimitedDate.Size = new System.Drawing.Size(72, 21);
+            this.checkEditLimitedDate.Size = new System.Drawing.Size(71, 21);
             this.checkEditLimitedDate.StyleController = this.styleController;
             this.checkEditLimitedDate.TabIndex = 28;
             this.checkEditLimitedDate.TabStop = false;
@@ -527,7 +531,7 @@
             // 
             this.dateEditEndDate.EditValue = null;
             this.dateEditEndDate.Enabled = false;
-            this.dateEditEndDate.Location = new System.Drawing.Point(271, 522);
+            this.dateEditEndDate.Location = new System.Drawing.Point(271, 591);
             this.dateEditEndDate.Name = "dateEditEndDate";
             this.dateEditEndDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -551,7 +555,7 @@
             this.simpleButtonOK.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonOK.Appearance.Options.UseFont = true;
             this.simpleButtonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.simpleButtonOK.Location = new System.Drawing.Point(200, 569);
+            this.simpleButtonOK.Location = new System.Drawing.Point(200, 626);
             this.simpleButtonOK.Name = "simpleButtonOK";
             this.simpleButtonOK.Size = new System.Drawing.Size(98, 35);
             this.simpleButtonOK.StyleController = this.styleController;
@@ -564,7 +568,7 @@
             this.simpleButtonCancel.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonCancel.Appearance.Options.UseFont = true;
             this.simpleButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.simpleButtonCancel.Location = new System.Drawing.Point(338, 569);
+            this.simpleButtonCancel.Location = new System.Drawing.Point(338, 626);
             this.simpleButtonCancel.Name = "simpleButtonCancel";
             this.simpleButtonCancel.Size = new System.Drawing.Size(98, 35);
             this.simpleButtonCancel.StyleController = this.styleController;
@@ -573,6 +577,8 @@
             // 
             // pnMain
             // 
+            this.pnMain.Controls.Add(this.textEditHouseNumber);
+            this.pnMain.Controls.Add(this.checkEditHouseNumber);
             this.pnMain.Controls.Add(this.memoEditCustomNote);
             this.pnMain.Controls.Add(this.checkEditCustomNote);
             this.pnMain.Controls.Add(this.textEditContractLength);
@@ -601,13 +607,13 @@
             this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnMain.Location = new System.Drawing.Point(0, 0);
             this.pnMain.Name = "pnMain";
-            this.pnMain.Size = new System.Drawing.Size(637, 563);
+            this.pnMain.Size = new System.Drawing.Size(637, 620);
             this.pnMain.TabIndex = 21;
             // 
             // memoEditCustomNote
             // 
             this.memoEditCustomNote.Enabled = false;
-            this.memoEditCustomNote.Location = new System.Drawing.Point(40, 204);
+            this.memoEditCustomNote.Location = new System.Drawing.Point(40, 273);
             this.memoEditCustomNote.Name = "memoEditCustomNote";
             this.memoEditCustomNote.Properties.NullText = "Type Custom Notes Here...";
             this.memoEditCustomNote.Size = new System.Drawing.Size(585, 73);
@@ -616,13 +622,13 @@
             // 
             // checkEditCustomNote
             // 
-            this.checkEditCustomNote.Location = new System.Drawing.Point(12, 199);
+            this.checkEditCustomNote.Location = new System.Drawing.Point(12, 268);
             this.checkEditCustomNote.Name = "checkEditCustomNote";
             this.checkEditCustomNote.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
             this.checkEditCustomNote.Properties.Appearance.Options.UseFont = true;
             this.checkEditCustomNote.Properties.AutoWidth = true;
             this.checkEditCustomNote.Properties.Caption = "";
-            this.checkEditCustomNote.Size = new System.Drawing.Size(23, 21);
+            this.checkEditCustomNote.Size = new System.Drawing.Size(22, 21);
             this.checkEditCustomNote.TabIndex = 13;
             this.checkEditCustomNote.CheckedChanged += new System.EventHandler(this.checkEditCustomNote_CheckedChanged);
             // 
@@ -643,7 +649,7 @@
             this.checkEditContractLength.Properties.Appearance.Options.UseFont = true;
             this.checkEditContractLength.Properties.AutoWidth = true;
             this.checkEditContractLength.Properties.Caption = "Air Window/Contract Length:";
-            this.checkEditContractLength.Size = new System.Drawing.Size(206, 21);
+            this.checkEditContractLength.Size = new System.Drawing.Size(205, 21);
             this.checkEditContractLength.TabIndex = 11;
             this.checkEditContractLength.CheckedChanged += new System.EventHandler(this.checkEditContractLength_CheckedChanged);
             // 
@@ -664,7 +670,7 @@
             this.checkEditDistributor.Properties.Appearance.Options.UseFont = true;
             this.checkEditDistributor.Properties.AutoWidth = true;
             this.checkEditDistributor.Properties.Caption = "Syndicator/Distributor:";
-            this.checkEditDistributor.Size = new System.Drawing.Size(164, 21);
+            this.checkEditDistributor.Size = new System.Drawing.Size(163, 21);
             this.checkEditDistributor.TabIndex = 9;
             this.checkEditDistributor.CheckedChanged += new System.EventHandler(this.checkEditDistributor_CheckedChanged);
             // 
@@ -685,7 +691,7 @@
             this.checkEditMovieTitle.Properties.Appearance.Options.UseFont = true;
             this.checkEditMovieTitle.Properties.AutoWidth = true;
             this.checkEditMovieTitle.Properties.Caption = "Movie Title:";
-            this.checkEditMovieTitle.Size = new System.Drawing.Size(97, 21);
+            this.checkEditMovieTitle.Size = new System.Drawing.Size(96, 21);
             this.checkEditMovieTitle.TabIndex = 5;
             this.checkEditMovieTitle.CheckedChanged += new System.EventHandler(this.checkEditMovietitle_CheckedChanged);
             // 
@@ -710,7 +716,7 @@
             this.checkEditFCC.Properties.Appearance.Options.UseFont = true;
             this.checkEditFCC.Properties.AutoWidth = true;
             this.checkEditFCC.Properties.Caption = "E/I:";
-            this.checkEditFCC.Size = new System.Drawing.Size(43, 21);
+            this.checkEditFCC.Size = new System.Drawing.Size(42, 21);
             this.checkEditFCC.TabIndex = 7;
             this.checkEditFCC.CheckedChanged += new System.EventHandler(this.checkEditFCC_CheckedChanged);
             // 
@@ -726,21 +732,42 @@
             this.comboBoxEditType.StyleController = this.styleController;
             this.comboBoxEditType.TabIndex = 3;
             // 
-            // panel1
+            // pnMainInner
             // 
-            this.panel1.Controls.Add(this.pnMain);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(637, 563);
-            this.panel1.TabIndex = 1;
+            this.pnMainInner.Controls.Add(this.pnMain);
+            this.pnMainInner.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnMainInner.Location = new System.Drawing.Point(0, 0);
+            this.pnMainInner.Name = "pnMainInner";
+            this.pnMainInner.Size = new System.Drawing.Size(637, 620);
+            this.pnMainInner.TabIndex = 1;
+            // 
+            // textEditHouseNumber
+            // 
+            this.textEditHouseNumber.Enabled = false;
+            this.textEditHouseNumber.Location = new System.Drawing.Point(14, 227);
+            this.textEditHouseNumber.Name = "textEditHouseNumber";
+            this.textEditHouseNumber.Size = new System.Drawing.Size(227, 22);
+            this.textEditHouseNumber.StyleController = this.styleController;
+            this.textEditHouseNumber.TabIndex = 31;
+            // 
+            // checkEditHouseNumber
+            // 
+            this.checkEditHouseNumber.Location = new System.Drawing.Point(12, 200);
+            this.checkEditHouseNumber.Name = "checkEditHouseNumber";
+            this.checkEditHouseNumber.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+            this.checkEditHouseNumber.Properties.Appearance.Options.UseFont = true;
+            this.checkEditHouseNumber.Properties.AutoWidth = true;
+            this.checkEditHouseNumber.Properties.Caption = "House #:";
+            this.checkEditHouseNumber.Size = new System.Drawing.Size(76, 21);
+            this.checkEditHouseNumber.TabIndex = 30;
+            this.checkEditHouseNumber.CheckedChanged += new System.EventHandler(this.checkEditHouseNumber_CheckedChanged);
             // 
             // FormEditProgram
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(637, 610);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(637, 667);
+            this.Controls.Add(this.pnMainInner);
             this.Controls.Add(this.simpleButtonCancel);
             this.Controls.Add(this.simpleButtonOK);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -787,7 +814,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditFCC.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditFCC.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditType.Properties)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.pnMainInner.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.textEditHouseNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditHouseNumber.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -830,7 +859,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButtonOK;
         private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
         private System.Windows.Forms.Panel pnMain;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnMainInner;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditType;
         private DevExpress.XtraEditors.MemoEdit memoEditCustomNote;
         private DevExpress.XtraEditors.CheckEdit checkEditCustomNote;
@@ -842,5 +871,7 @@
         private DevExpress.XtraEditors.CheckEdit checkEditMovieTitle;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditFCC;
         private DevExpress.XtraEditors.CheckEdit checkEditFCC;
+        private DevExpress.XtraEditors.TextEdit textEditHouseNumber;
+        private DevExpress.XtraEditors.CheckEdit checkEditHouseNumber;
     }
 }

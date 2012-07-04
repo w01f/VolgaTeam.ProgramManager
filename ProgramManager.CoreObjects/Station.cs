@@ -183,7 +183,7 @@ namespace ProgramManager.CoreObjects
             LoadExistedDays(startDate, endDate);
 
             foreach (Day day in this.Days.Where(x => x.Date >= startDate && x.Date <= endDate))
-                searchResult.AddRange(day.ProgramActivities.Where(x => (!string.IsNullOrEmpty(x.Program) && x.Program.ToLower().Contains(programName.ToLower())) || string.IsNullOrEmpty(programName)));
+                searchResult.AddRange(day.ProgramActivities.Where(x => string.IsNullOrEmpty(programName) || (!string.IsNullOrEmpty(x.Program) && x.Program.ToLower().Contains(programName.ToLower()))));
 
             searchResult.Sort((x, y) => x.Time.CompareTo(y.Time));
 
@@ -359,6 +359,7 @@ namespace ProgramManager.CoreObjects
                     programActivity.Program = program.Name;
                     programActivity.Type = program.Type;
                     programActivity.FCC = program.FCC;
+                    programActivity.HouseNumber = program.HouseNumber;
                     programActivity.MovieTitle = program.MovieTitle;
                     programActivity.Distributor = program.Distributor;
                     programActivity.ContractLength = program.ContractLength;

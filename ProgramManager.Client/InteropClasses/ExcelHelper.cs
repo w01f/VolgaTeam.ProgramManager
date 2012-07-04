@@ -48,7 +48,7 @@ namespace ProgramManager.Client.InteropClasses
             GC.Collect();
         }
 
-        public void ReportWeekSchedule(CoreObjects.Day[][] days, string destinationFilePath, bool converToPDF, bool landscape)
+        public void ReportWeekSchedule(CoreObjects.Day[][] days, string destinationFilePath, bool convertToPDF, bool landscape)
         {
             string templatePath = string.Format(Controllers.OutputManager.Instance.ReportWeekScheduleTemplatePath, landscape ? "Landscape" : "Portrait");
             if (File.Exists(templatePath) && Connect())
@@ -68,16 +68,23 @@ namespace ProgramManager.Client.InteropClasses
                         }
 
                     int worksheetIndex = 1;
+                    DateTime sheduleGenrated = DateTime.Now;
+
                     foreach (CoreObjects.Day[] weekDays in days)
                     {
                         Excel.Workbook sourceWorkBook = _excelObject.Workbooks.Open(templatePath);
                         Excel.Worksheet workSheet = sourceWorkBook.Worksheets["Week"];
-                        workSheet.Range["Title"].Formula = string.Format("{0} - Weekly Program Schedule", weekDays.FirstOrDefault().Station.Name);
-                        workSheet.Range["DateRange"].Formula = string.Format("Week of {0}", weekDays.FirstOrDefault().Date.ToString("MMMM d, yyyy"));
+
+                        string title = string.Format("{0} - Weekly Program Schedule", weekDays.FirstOrDefault().Station.Name);
+                        string dateRange = string.Format("Week of {0}", weekDays.FirstOrDefault().Date.ToString("MMMM d, yyyy"));
+                        workSheet.PageSetup.CenterHeader = "&12&B" + title + (char)13 + dateRange;
+
+                        workSheet.PageSetup.CenterFooter = "&11Schedule Generated" + (char)13 + sheduleGenrated.ToString("MM/dd/yy h:mm tt");
+
                         for (int i = 0; i < 7; i++)
                         {
                             Excel.Range range = workSheet.Range["day" + (i + 1).ToString()];
-                            range.Formula = weekDays[i].Date.ToString("dddd M/d");
+                            range.Formula = weekDays[i].Date.ToString(landscape ? "dddd M/d" : "ddd M/d");
                             int columnIndex = range.Column;
                             int rowIndex = range.Row + 1;
 
@@ -158,12 +165,88 @@ namespace ProgramManager.Client.InteropClasses
                     }
 
                     destinationWorkBook.Worksheets[1].Delete();
-                    if (converToPDF)
+                    if (convertToPDF)
                         destinationWorkBook.ExportAsFixedFormat(Filename: destinationFilePath, Type: Excel.XlFixedFormatType.xlTypePDF);
                     else
                         destinationWorkBook.SaveAs(Filename: destinationFilePath, FileFormat: Excel.XlFileFormat.xlWorkbookNormal);
 
                     destinationWorkBook.Close();
+                }
+                catch (Exception ex)
+                {
+                    Controllers.AppManager.Instance.Log.Records.Add(new CoreObjects.LogRecord(ex));
+                    Controllers.AppManager.Instance.Log.Save();
+                }
+                Disconnect();
+            }
+        }
+
+        public void ReportActivityList(CoreObjects.ProgramActivity[] activities, string destinationFilePath, bool convertToPDF)
+        {
+            string templatePath = Controllers.OutputManager.Instance.ReporActivityListTemplatePath;
+            if (File.Exists(templatePath) && Connect())
+            {
+                try
+                {
+                    Excel.Workbook sourceWorkBook = _excelObject.Workbooks.Open(templatePath);
+                    Excel.Worksheet workSheet = sourceWorkBook.Worksheets["Program Activities"];
+
+                    DateTime start = activities.FirstOrDefault().Time;
+                    DateTime end = activities.LastOrDefault().Time;
+                    string title = string.Format("Program Activity For {0}", activities.FirstOrDefault().Day.Station.Name);
+                    string dateRange = string.Format("Between {0} and {1} from {2} to {3}", new string[] { start.ToString("MM/dd/yyyy"), end.ToString("MM/dd/yyyy"), start.ToString("hh:mmtt"), end.ToString("hh:mmtt") });
+                    workSheet.PageSetup.CenterHeader = "&12&B" + title + (char)13 + dateRange;
+
+                    DateTime sheduleGenrated = DateTime.Now;
+                    workSheet.PageSetup.CenterFooter = "&11Generated" + (char)13 + sheduleGenrated.ToString("MM/dd/yy h:mm tt");
+
+                    Excel.Range range = workSheet.Range["Date"];
+                    int firstRow = range.Row + 1;
+                    int lastRow = firstRow;
+                    int firstColumn = range.Column;
+                    range = workSheet.Range["Episode"];
+                    int lastColumn = range.Column;
+
+                    List<object[]> rows = new List<object[]>();
+                    foreach (CoreObjects.ProgramActivity activity in activities)
+                    {
+                        List<object> cells = new List<object>();
+                        cells.Add(activity.Date.ToString("MM/dd/yyyy"));
+                        cells.Add(activity.Date.ToString("ddd"));
+                        cells.Add(activity.Time.ToString("hh:mmtt"));
+                        cells.Add(activity.Program);
+                        cells.Add(activity.Type);
+                        cells.Add(activity.Episode);
+                        rows.Add(cells.ToArray());
+                        lastRow++;
+                    }
+                    if (lastRow > firstRow)
+                        lastRow--;
+
+                    if (rows.Count > 0)
+                    {
+                        object[,] values = new object[rows.Count, rows[0].Length];
+                        for (int i = 0; i < rows.Count; i++)
+                            for (int j = 0; j < rows[0].Length; j++)
+                                values[i, j] = rows[i][j];
+
+                        range = workSheet.Range[GetColumnLetterByIndex(firstColumn) + firstRow.ToString() + ":" + GetColumnLetterByIndex(lastColumn) + lastRow.ToString()];
+                        range.Value2 = values;
+                        range.Rows.AutoFit();
+                        range.Borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        range.Borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        range.Borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        range.Borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        range.Borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlContinuous;
+                        range.Borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlContinuous;
+
+                        if (convertToPDF)
+                            sourceWorkBook.ExportAsFixedFormat(Filename: destinationFilePath, Type: Excel.XlFixedFormatType.xlTypePDF);
+                        else
+                            sourceWorkBook.SaveAs(Filename: destinationFilePath, FileFormat: Excel.XlFileFormat.xlWorkbookNormal);
+                    }
+
+                    sourceWorkBook.Close();
                 }
                 catch (Exception ex)
                 {

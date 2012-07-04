@@ -14,7 +14,15 @@ namespace ProgramManager.Client.Controllers
         {
             get
             {
-                return Path.Combine(ConfigurationClasses.SettingsManager.Instance.OutputRootPath, "OutputTemplate{0}.xls");
+                return Path.Combine(ConfigurationClasses.SettingsManager.Instance.OutputRootPath, "WeekSchedule{0}.xls");
+            }
+        }
+
+        public string ReporActivityListTemplatePath
+        {
+            get
+            {
+                return Path.Combine(ConfigurationClasses.SettingsManager.Instance.OutputRootPath, "ActivityList.xls");
             }
         }
 

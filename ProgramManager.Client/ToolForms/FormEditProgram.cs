@@ -19,6 +19,7 @@ namespace ProgramManager.Client.ToolForms
                 _program.Date = dateEditDate.DateTime;
                 _program.Type = comboBoxEditType.EditValue != null ? comboBoxEditType.EditValue.ToString() : string.Empty;
                 _program.FCC = comboBoxEditFCC.EditValue != null ? comboBoxEditFCC.EditValue.ToString() : string.Empty;
+                _program.HouseNumber = textEditHouseNumber.EditValue != null ? textEditHouseNumber.EditValue.ToString() : string.Empty;
                 _program.MovieTitle = textEditMovieTitle.EditValue != null ? textEditMovieTitle.EditValue.ToString() : string.Empty;
                 _program.Distributor = textEditDistributor.EditValue != null ? textEditDistributor.EditValue.ToString() : string.Empty;
                 _program.ContractLength = textEditContractLength.EditValue != null ? textEditContractLength.EditValue.ToString() : string.Empty;
@@ -113,6 +114,9 @@ namespace ProgramManager.Client.ToolForms
 
                 checkEditContractLength.Checked = !string.IsNullOrEmpty(_program.ContractLength);
                 textEditContractLength.EditValue = !string.IsNullOrEmpty(_program.ContractLength) ? _program.ContractLength : null;
+
+                checkEditHouseNumber.Checked = !string.IsNullOrEmpty(_program.HouseNumber);
+                textEditHouseNumber.EditValue = !string.IsNullOrEmpty(_program.HouseNumber) ? _program.HouseNumber : null;
 
                 checkEditCustomNote.Checked = !string.IsNullOrEmpty(_program.CustomNote);
                 memoEditCustomNote.EditValue = !string.IsNullOrEmpty(_program.CustomNote) ? _program.CustomNote : null;
@@ -274,6 +278,12 @@ namespace ProgramManager.Client.ToolForms
         {
             memoEditCustomNote.Enabled = checkEditCustomNote.Checked;
             memoEditCustomNote.EditValue = checkEditCustomNote.Checked ? memoEditCustomNote.EditValue : null;
+        }
+
+        private void checkEditHouseNumber_CheckedChanged(object sender, EventArgs e)
+        {
+            textEditHouseNumber.Enabled = checkEditHouseNumber.Checked;
+            textEditHouseNumber.EditValue = checkEditHouseNumber.Checked ? textEditHouseNumber.EditValue : null;
         }
     }
 }

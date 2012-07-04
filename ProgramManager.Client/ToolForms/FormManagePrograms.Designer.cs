@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormManagePrograms));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
             this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -52,6 +52,7 @@
             this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.pnTop = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.gridColumnHouseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             this.pnBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlPrograms)).BeginInit();
@@ -94,7 +95,7 @@
             this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnBottom.Location = new System.Drawing.Point(0, 356);
             this.pnBottom.Name = "pnBottom";
-            this.pnBottom.Size = new System.Drawing.Size(768, 56);
+            this.pnBottom.Size = new System.Drawing.Size(798, 56);
             this.pnBottom.TabIndex = 32;
             // 
             // simpleButtonClose
@@ -103,7 +104,7 @@
             this.simpleButtonClose.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonClose.Appearance.Options.UseFont = true;
             this.simpleButtonClose.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.simpleButtonClose.Location = new System.Drawing.Point(656, 9);
+            this.simpleButtonClose.Location = new System.Drawing.Point(686, 9);
             this.simpleButtonClose.Name = "simpleButtonClose";
             this.simpleButtonClose.Size = new System.Drawing.Size(98, 35);
             this.simpleButtonClose.StyleController = this.styleController;
@@ -121,7 +122,7 @@
             this.repositoryItemDateEdit,
             this.repositoryItemTimeEdit,
             this.repositoryItemButtonEdit});
-            this.gridControlPrograms.Size = new System.Drawing.Size(768, 321);
+            this.gridControlPrograms.Size = new System.Drawing.Size(798, 321);
             this.gridControlPrograms.TabIndex = 33;
             this.gridControlPrograms.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewPrograms});
@@ -130,11 +131,11 @@
             // 
             this.gridViewPrograms.Appearance.EvenRow.Font = new System.Drawing.Font("Arial", 9.75F);
             this.gridViewPrograms.Appearance.EvenRow.Options.UseFont = true;
-            this.gridViewPrograms.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gridViewPrograms.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
             this.gridViewPrograms.Appearance.FocusedCell.Options.UseFont = true;
             this.gridViewPrograms.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
             this.gridViewPrograms.Appearance.FocusedRow.Options.UseFont = true;
-            this.gridViewPrograms.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gridViewPrograms.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
             this.gridViewPrograms.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewPrograms.Appearance.OddRow.Font = new System.Drawing.Font("Arial", 9.75F);
             this.gridViewPrograms.Appearance.OddRow.Options.UseFont = true;
@@ -152,7 +153,8 @@
             this.gridColumnStartTime,
             this.gridColumnEndTime,
             this.gridColumnDuration,
-            this.gridColumnButtons});
+            this.gridColumnButtons,
+            this.gridColumnHouseNumber});
             this.gridViewPrograms.GridControl = this.gridControlPrograms;
             this.gridViewPrograms.Name = "gridViewPrograms";
             this.gridViewPrograms.OptionsCustomization.AllowFilter = false;
@@ -182,7 +184,7 @@
             this.gridColumnName.OptionsColumn.ReadOnly = true;
             this.gridColumnName.Visible = true;
             this.gridColumnName.VisibleIndex = 0;
-            this.gridColumnName.Width = 202;
+            this.gridColumnName.Width = 191;
             // 
             // repositoryItemTextEdit
             // 
@@ -219,7 +221,7 @@
             this.gridColumnFCC.OptionsColumn.ReadOnly = true;
             this.gridColumnFCC.Visible = true;
             this.gridColumnFCC.VisibleIndex = 2;
-            this.gridColumnFCC.Width = 92;
+            this.gridColumnFCC.Width = 80;
             // 
             // gridColumnStartDate
             // 
@@ -230,8 +232,8 @@
             this.gridColumnStartDate.OptionsColumn.AllowEdit = false;
             this.gridColumnStartDate.OptionsColumn.ReadOnly = true;
             this.gridColumnStartDate.Visible = true;
-            this.gridColumnStartDate.VisibleIndex = 3;
-            this.gridColumnStartDate.Width = 84;
+            this.gridColumnStartDate.VisibleIndex = 4;
+            this.gridColumnStartDate.Width = 80;
             // 
             // repositoryItemDateEdit
             // 
@@ -273,8 +275,8 @@
             this.gridColumnStartTime.OptionsColumn.AllowEdit = false;
             this.gridColumnStartTime.OptionsColumn.ReadOnly = true;
             this.gridColumnStartTime.Visible = true;
-            this.gridColumnStartTime.VisibleIndex = 4;
-            this.gridColumnStartTime.Width = 82;
+            this.gridColumnStartTime.VisibleIndex = 5;
+            this.gridColumnStartTime.Width = 79;
             // 
             // repositoryItemTimeEdit
             // 
@@ -304,8 +306,8 @@
             this.gridColumnEndTime.OptionsColumn.AllowEdit = false;
             this.gridColumnEndTime.OptionsColumn.ReadOnly = true;
             this.gridColumnEndTime.Visible = true;
-            this.gridColumnEndTime.VisibleIndex = 5;
-            this.gridColumnEndTime.Width = 76;
+            this.gridColumnEndTime.VisibleIndex = 6;
+            this.gridColumnEndTime.Width = 72;
             // 
             // gridColumnDuration
             // 
@@ -316,8 +318,8 @@
             this.gridColumnDuration.OptionsColumn.AllowEdit = false;
             this.gridColumnDuration.OptionsColumn.ReadOnly = true;
             this.gridColumnDuration.Visible = true;
-            this.gridColumnDuration.VisibleIndex = 6;
-            this.gridColumnDuration.Width = 88;
+            this.gridColumnDuration.VisibleIndex = 7;
+            this.gridColumnDuration.Width = 83;
             // 
             // gridColumnButtons
             // 
@@ -328,14 +330,14 @@
             this.gridColumnButtons.OptionsColumn.FixedWidth = true;
             this.gridColumnButtons.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
             this.gridColumnButtons.Visible = true;
-            this.gridColumnButtons.VisibleIndex = 7;
+            this.gridColumnButtons.VisibleIndex = 8;
             // 
             // repositoryItemButtonEdit
             // 
             this.repositoryItemButtonEdit.AutoHeight = false;
             this.repositoryItemButtonEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEdit.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEdit.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.repositoryItemButtonEdit.Name = "repositoryItemButtonEdit";
             this.repositoryItemButtonEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.repositoryItemButtonEdit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEdit_ButtonClick);
@@ -346,7 +348,7 @@
             this.pnTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnTop.Location = new System.Drawing.Point(0, 0);
             this.pnTop.Name = "pnTop";
-            this.pnTop.Size = new System.Drawing.Size(768, 35);
+            this.pnTop.Size = new System.Drawing.Size(798, 35);
             this.pnTop.TabIndex = 34;
             // 
             // label1
@@ -359,11 +361,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Double-Click on a row  to edit program";
             // 
+            // gridColumnHouseNumber
+            // 
+            this.gridColumnHouseNumber.Caption = "House #";
+            this.gridColumnHouseNumber.ColumnEdit = this.repositoryItemTextEdit;
+            this.gridColumnHouseNumber.FieldName = "HouseNumber";
+            this.gridColumnHouseNumber.Name = "gridColumnHouseNumber";
+            this.gridColumnHouseNumber.OptionsColumn.AllowEdit = false;
+            this.gridColumnHouseNumber.OptionsColumn.ReadOnly = true;
+            this.gridColumnHouseNumber.Visible = true;
+            this.gridColumnHouseNumber.VisibleIndex = 3;
+            this.gridColumnHouseNumber.Width = 79;
+            // 
             // FormManagePrograms
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(768, 412);
+            this.ClientSize = new System.Drawing.Size(798, 412);
             this.Controls.Add(this.gridControlPrograms);
             this.Controls.Add(this.pnTop);
             this.Controls.Add(this.pnBottom);
@@ -412,5 +426,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit repositoryItemTimeEdit;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit;
         private DevExpress.XtraEditors.SimpleButton simpleButtonClose;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnHouseNumber;
     }
 }

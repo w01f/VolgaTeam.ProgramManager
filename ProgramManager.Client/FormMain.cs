@@ -91,8 +91,9 @@ namespace ProgramManager.Client
 
             this.TabSearch = new TabPages.TabSearch();
             comboBoxEditSearchStation.EditValueChanged += new EventHandler(this.TabSearch.comboBoxEditSearchStation_EditValueChanged);
-            comboBoxEditSearchPrograms.EditValueChanged += new EventHandler(this.TabSearch.comboBoxEditSearchPrograms_EditValueChanged);
             buttonItemSearchRun.Click += new EventHandler(this.TabSearch.buttonItemSearchRun_Click);
+            buttonItemSearchOutputExcel.Click += new EventHandler(this.TabSearch.buttonItemSearchOutputExcel_Click);
+            buttonItemSearchOutputPDF.Click += new EventHandler(this.TabSearch.buttonItemSearchOutputPDF_Click);
             #endregion
 
             ribbonControl.SelectedRibbonTabChanged += new EventHandler(ribbonControl_SelectedRibbonTabChanged);

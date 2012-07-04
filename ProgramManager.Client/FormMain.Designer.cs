@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanelSchedule = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarScheduleExit = new DevComponents.DotNetBar.RibbonBar();
@@ -100,6 +100,10 @@
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
+            this.ribbonBarSearchOutput = new DevComponents.DotNetBar.RibbonBar();
+            this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemSearchOutputExcel = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemSearchOutputPDF = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelSchedule.SuspendLayout();
             this.ribbonBarScheduleStation.SuspendLayout();
@@ -578,7 +582,7 @@
             this.dateEditScheduleDay.Name = "dateEditScheduleDay";
             this.dateEditScheduleDay.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditScheduleDay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
             this.dateEditScheduleDay.Properties.DisplayFormat.FormatString = "MM/dd/yy";
             this.dateEditScheduleDay.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditScheduleDay.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -627,6 +631,7 @@
             // ribbonPanelSearch
             // 
             this.ribbonPanelSearch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelSearch.Controls.Add(this.ribbonBarSearchOutput);
             this.ribbonPanelSearch.Controls.Add(this.ribbonBarSearchRun);
             this.ribbonPanelSearch.Controls.Add(this.ribbonBarSearchPrograms);
             this.ribbonPanelSearch.Controls.Add(this.ribbonBarSearchDateRange);
@@ -724,7 +729,7 @@
             // 
             // comboBoxEditSearchPrograms
             // 
-            this.comboBoxEditSearchPrograms.Location = new System.Drawing.Point(4, 49);
+            this.comboBoxEditSearchPrograms.Location = new System.Drawing.Point(4, 48);
             this.comboBoxEditSearchPrograms.Name = "comboBoxEditSearchPrograms";
             this.comboBoxEditSearchPrograms.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -796,11 +801,11 @@
             // dateEditSearchDateStart
             // 
             this.dateEditSearchDateStart.EditValue = null;
-            this.dateEditSearchDateStart.Location = new System.Drawing.Point(4, 21);
+            this.dateEditSearchDateStart.Location = new System.Drawing.Point(4, 20);
             this.dateEditSearchDateStart.Name = "dateEditSearchDateStart";
             this.dateEditSearchDateStart.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditSearchDateStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.dateEditSearchDateStart.Properties.DisplayFormat.FormatString = "MM/dd/yy";
             this.dateEditSearchDateStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditSearchDateStart.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -816,11 +821,11 @@
             // dateEditSearchDateEnd
             // 
             this.dateEditSearchDateEnd.EditValue = null;
-            this.dateEditSearchDateEnd.Location = new System.Drawing.Point(4, 73);
+            this.dateEditSearchDateEnd.Location = new System.Drawing.Point(4, 72);
             this.dateEditSearchDateEnd.Name = "dateEditSearchDateEnd";
             this.dateEditSearchDateEnd.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditSearchDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.dateEditSearchDateEnd.Properties.DisplayFormat.FormatString = "MM/dd/yy";
             this.dateEditSearchDateEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEditSearchDateEnd.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -934,7 +939,7 @@
             // 
             // comboBoxEditSearchStation
             // 
-            this.comboBoxEditSearchStation.Location = new System.Drawing.Point(7, 39);
+            this.comboBoxEditSearchStation.Location = new System.Drawing.Point(7, 38);
             this.comboBoxEditSearchStation.Name = "comboBoxEditSearchStation";
             this.comboBoxEditSearchStation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1071,6 +1076,63 @@
             this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
             this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
             // 
+            // ribbonBarSearchOutput
+            // 
+            this.ribbonBarSearchOutput.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchOutput.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchOutput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarSearchOutput.ContainerControlProcessDialogKey = true;
+            this.ribbonBarSearchOutput.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarSearchOutput.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainer1});
+            this.ribbonBarSearchOutput.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarSearchOutput.Location = new System.Drawing.Point(553, 0);
+            this.ribbonBarSearchOutput.Name = "ribbonBarSearchOutput";
+            this.ribbonBarSearchOutput.Size = new System.Drawing.Size(82, 111);
+            this.ribbonBarSearchOutput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarSearchOutput.TabIndex = 29;
+            this.ribbonBarSearchOutput.Text = "Output";
+            // 
+            // 
+            // 
+            this.ribbonBarSearchOutput.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarSearchOutput.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // itemContainer1
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainer1.Name = "itemContainer1";
+            this.itemContainer1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemSearchOutputExcel,
+            this.buttonItemSearchOutputPDF});
+            // 
+            // buttonItemSearchOutputExcel
+            // 
+            this.buttonItemSearchOutputExcel.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemSearchOutputExcel.Image = global::ProgramManager.Client.Properties.Resources.Excel;
+            this.buttonItemSearchOutputExcel.Name = "buttonItemSearchOutputExcel";
+            this.buttonItemSearchOutputExcel.Text = "Excel";
+            // 
+            // buttonItemSearchOutputPDF
+            // 
+            this.buttonItemSearchOutputPDF.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemSearchOutputPDF.Image = global::ProgramManager.Client.Properties.Resources.PDF;
+            this.buttonItemSearchOutputPDF.Name = "buttonItemSearchOutputPDF";
+            this.buttonItemSearchOutputPDF.Text = "PDF";
+            // 
             // FormMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1179,6 +1241,10 @@
         private DevComponents.DotNetBar.ItemContainer itemContainerScheduleOutput;
         private DevComponents.DotNetBar.ButtonItem buttonItemScheduleOutputExcel;
         private DevComponents.DotNetBar.ButtonItem buttonItemScheduleOutputPDF;
+        private DevComponents.DotNetBar.ItemContainer itemContainer1;
+        private DevComponents.DotNetBar.ButtonItem buttonItemSearchOutputExcel;
+        private DevComponents.DotNetBar.ButtonItem buttonItemSearchOutputPDF;
+        public DevComponents.DotNetBar.RibbonBar ribbonBarSearchOutput;
     }
 }
 

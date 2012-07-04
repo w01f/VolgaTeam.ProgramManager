@@ -76,6 +76,7 @@ namespace ProgramManager.CoreObjects
                     programActivity.ProgramLink = program.Id;
                     programActivity.Type = program.Type;
                     programActivity.FCC = program.FCC;
+                    programActivity.HouseNumber = program.HouseNumber;
                     programActivity.MovieTitle = program.MovieTitle;
                     programActivity.Distributor = program.Distributor;
                     programActivity.ContractLength = program.ContractLength;
@@ -153,6 +154,7 @@ namespace ProgramManager.CoreObjects
                     existedProgramActivity.Episode = programActivity.Episode;
                     existedProgramActivity.Type = programActivity.Type;
                     existedProgramActivity.FCC = programActivity.FCC;
+                    existedProgramActivity.HouseNumber = programActivity.HouseNumber;
                     existedProgramActivity.MovieTitle = programActivity.MovieTitle;
                     existedProgramActivity.Distributor = programActivity.Distributor;
                     existedProgramActivity.ContractLength = programActivity.ContractLength;
@@ -177,6 +179,7 @@ namespace ProgramManager.CoreObjects
                 existedProgramActivity.Episode = programActivity.Episode;
                 existedProgramActivity.Type = programActivity.Type;
                 existedProgramActivity.FCC = programActivity.FCC;
+                existedProgramActivity.HouseNumber = programActivity.HouseNumber;
                 existedProgramActivity.MovieTitle = programActivity.MovieTitle;
                 existedProgramActivity.Distributor = programActivity.Distributor;
                 existedProgramActivity.ContractLength = programActivity.ContractLength;

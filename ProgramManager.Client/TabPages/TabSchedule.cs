@@ -336,6 +336,7 @@ namespace ProgramManager.Client.TabPages
                         program.Name = programActivity.Program;
                         program.Type = programActivity.Type;
                         program.FCC = programActivity.FCC;
+                        program.HouseNumber = programActivity.HouseNumber;
                         program.MovieTitle = programActivity.MovieTitle;
                         program.Distributor = programActivity.Distributor;
                         program.ContractLength = programActivity.ContractLength;

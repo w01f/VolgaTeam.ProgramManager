@@ -139,11 +139,11 @@
     <Compile Include="ToolForms\FormDownloadWarning.designer.cs">
       <DependentUpon>FormDownloadWarning.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormEditSpot.cs">
+    <Compile Include="ToolForms\FormEditProgramActivity.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormEditSpot.Designer.cs">
-      <DependentUpon>FormEditSpot.cs</DependentUpon>
+    <Compile Include="ToolForms\FormEditProgramActivity.Designer.cs">
+      <DependentUpon>FormEditProgramActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\FormEditProgram.cs">
       <SubType>Form</SubType>
@@ -198,8 +198,8 @@
     <EmbeddedResource Include="ToolForms\FormDownloadWarning.resx">
       <DependentUpon>FormDownloadWarning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormEditSpot.resx">
-      <DependentUpon>FormEditSpot.cs</DependentUpon>
+    <EmbeddedResource Include="ToolForms\FormEditProgramActivity.resx">
+      <DependentUpon>FormEditProgramActivity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormEditProgram.resx">
       <DependentUpon>FormEditProgram.cs</DependentUpon>

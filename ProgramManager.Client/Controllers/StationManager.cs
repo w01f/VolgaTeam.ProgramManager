@@ -466,5 +466,47 @@ namespace ProgramManager.Client.Controllers
                 form.Close();
             }
         }
+
+        public void ReportActivityList(CoreObjects.ProgramActivity[] activities, bool convertToPDF)
+        {
+            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            {
+                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    FormMain.Instance.Invoke((MethodInvoker)delegate()
+                    {
+                        form.laProgress.Text = "Generating output...";
+                        form.TopMost = true;
+                        form.Show();
+                        Application.DoEvents();
+                    });
+
+                    InteropClasses.ExcelHelper excelHelper = new InteropClasses.ExcelHelper();
+
+                    if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.OutputCache))
+                        Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.OutputCache);
+
+                    string destinationPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.OutputCache, string.Format("{0}.{1}", new string[] { DateTime.Now.ToString("MMddyy-hhmmtt"), convertToPDF ? "pdf" : "xls" }));
+
+                    excelHelper.ReportActivityList(activities, destinationPath, convertToPDF);
+
+                    if (File.Exists(destinationPath))
+                        Process.Start(destinationPath);
+
+                    FormMain.Instance.Invoke((MethodInvoker)delegate()
+                    {
+                        form.Hide();
+                        Application.DoEvents();
+                    });
+
+                }));
+                thread.Start();
+
+                while (thread.IsAlive)
+                    Application.DoEvents();
+
+                form.Close();
+            }
+        }
     }
 }

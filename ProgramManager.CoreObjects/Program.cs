@@ -21,6 +21,8 @@ namespace ProgramManager.CoreObjects
         [DataMember]
         public string FCC { get; set; }
         [DataMember]
+        public string HouseNumber { get; set; }
+        [DataMember]
         public string MovieTitle { get; set; }
         [DataMember]
         public string Distributor { get; set; }
@@ -137,6 +139,7 @@ namespace ProgramManager.CoreObjects
             clone.Date = this.Date;
             clone.Type = this.Type;
             clone.FCC = this.FCC;
+            clone.HouseNumber = this.HouseNumber;
             clone.MovieTitle = this.MovieTitle;
             clone.Distributor = this.Distributor;
             clone.ContractLength = this.ContractLength;
@@ -175,6 +178,8 @@ namespace ProgramManager.CoreObjects
                 result.AppendLine(@"<Type>" + this.Type.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Type>");
             if (!string.IsNullOrEmpty(this.FCC))
                 result.AppendLine(@"<FCC>" + this.FCC.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FCC>");
+            if (!string.IsNullOrEmpty(this.HouseNumber))
+                result.AppendLine(@"<HouseNumber>" + this.HouseNumber.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</HouseNumber>");
             if (!string.IsNullOrEmpty(this.MovieTitle))
                 result.AppendLine(@"<MovieTitle>" + this.MovieTitle.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</MovieTitle>");
             if (!string.IsNullOrEmpty(this.Distributor))
@@ -231,6 +236,9 @@ namespace ProgramManager.CoreObjects
                         break;
                     case "FCC":
                         this.FCC = childNode.InnerText;
+                        break;
+                    case "HouseNumber":
+                        this.HouseNumber = childNode.InnerText;
                         break;
                     case "MovieTitle":
                         this.MovieTitle = childNode.InnerText;
