@@ -60,6 +60,7 @@
     <Compile Include="ApplicationLog.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Day.cs" />
+    <Compile Include="OutputFont.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramActivity.cs" />
     <Compile Include="Station.cs" />

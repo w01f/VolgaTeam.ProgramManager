@@ -13,11 +13,40 @@ namespace ProgramManager.Client.Controllers
 
         public List<string> FCC { get; private set; }
         public List<string> Type { get; private set; }
+        public List<CoreObjects.OutputFont> HeaderFonts { get; private set; }
+        public List<CoreObjects.OutputFont> FooterFonts { get; private set; }
+        public List<CoreObjects.OutputFont> BodyFonts { get; private set; }
 
         private ListManager()
         {
             this.FCC = new List<string>();
             this.Type = new List<string>();
+
+            this.HeaderFonts = new List<CoreObjects.OutputFont>();
+            this.HeaderFonts.Add(new CoreObjects.OutputFont("Arial", 12, true));
+            this.HeaderFonts.Add(new CoreObjects.OutputFont("Verdana", 12, true));
+            this.HeaderFonts.Add(new CoreObjects.OutputFont("Calibri", 12, true));
+            this.HeaderFonts.Add(new CoreObjects.OutputFont("Trebuchet MS", 12, true));
+
+            this.FooterFonts = new List<CoreObjects.OutputFont>();
+            this.FooterFonts.Add(new CoreObjects.OutputFont("Arial", 11));
+            this.FooterFonts.Add(new CoreObjects.OutputFont("Verdana", 11));
+            this.FooterFonts.Add(new CoreObjects.OutputFont("Calibri", 11));
+            this.FooterFonts.Add(new CoreObjects.OutputFont("Trebuchet MS", 11));
+
+            this.BodyFonts = new List<CoreObjects.OutputFont>();
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Arial", 8));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Arial", 9));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Arial", 10));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Verdana", 8));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Calibri", 8));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Trebuchet MS", 8));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Verdana", 9));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Calibri", 9));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Trebuchet MS", 9));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Verdana", 10));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Calibri", 10));
+            this.BodyFonts.Add(new CoreObjects.OutputFont("Trebuchet MS", 10));
         }
 
         public static ListManager Instance

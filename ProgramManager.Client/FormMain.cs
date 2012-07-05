@@ -69,6 +69,10 @@ namespace ProgramManager.Client
             ribbonTabItemOutput.Enabled = false;
             ribbonTabItemSettings.Enabled = false;
 
+            bool isExcel2003 = InteropClasses.ExcelHelper.Is2003;
+            buttonItemScheduleOutputPDF.Enabled = !isExcel2003;
+            buttonItemSearchOutputPDF.Enabled = !isExcel2003;
+
             #region Tab Pages Initialization
             this.TabSchedule = new TabPages.TabSchedule();
             comboBoxEditScheduleStation.EditValueChanged += new EventHandler(this.TabSchedule.comboBoxEditScheduleStation_EditValueChanged);

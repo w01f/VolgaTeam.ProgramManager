@@ -37,6 +37,7 @@ namespace ProgramManager.Client.ConfigurationClasses
         public bool OfflineMode { get; set; }
         public bool AlwaysDownload { get; set; }
         public bool AlwaysCancelDownload { get; set; }
+        public OutputSettings OutputSettings { get; private set; }
         #endregion
 
         public static SettingsManager Instance
@@ -61,6 +62,7 @@ namespace ProgramManager.Client.ConfigurationClasses
             this.ServerName = "127.0.0.1";
             this.ApplicationName = "Program Manager";
             this.ShowInfo = true;
+            this.OutputSettings = new ConfigurationClasses.OutputSettings();
 
             LoadApplicationSettings();
             LoadManifest();
@@ -119,6 +121,12 @@ namespace ProgramManager.Client.ConfigurationClasses
                     if (bool.TryParse(node.InnerText, out tempBool))
                         this.AlwaysCancelDownload = tempBool;
                 }
+
+                node = document.SelectSingleNode(@"/LocalSettings/OutputSettings");
+                if (node != null)
+                {
+                    this.OutputSettings.Deserialize(node);
+                }
             }
         }
 
@@ -131,6 +139,7 @@ namespace ProgramManager.Client.ConfigurationClasses
             xml.AppendLine(@"<BrowseType>" + ((int)this.BrowseType).ToString() + @"</BrowseType>");
             xml.AppendLine(@"<AlwaysDownload>" + this.AlwaysDownload.ToString() + @"</AlwaysDownload>");
             xml.AppendLine(@"<AlwaysCancelDownload>" + this.AlwaysCancelDownload.ToString() + @"</AlwaysCancelDownload>");
+            xml.AppendLine(@"<OutputSettings>" + this.OutputSettings.Serialize() + @"</OutputSettings>");
             xml.AppendLine(@"</LocalSettings>");
 
             using (StreamWriter sw = new StreamWriter(_applicationSettingsFile, false))

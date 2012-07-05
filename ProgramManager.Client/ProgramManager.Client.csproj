@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationClasses\OutputSettings.cs" />
     <Compile Include="Controllers\AppManager.cs" />
     <Compile Include="Controllers\ListManager.cs" />
     <Compile Include="Controllers\OutputManager.cs" />

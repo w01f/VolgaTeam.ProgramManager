@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormManagePrograms));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
             this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -50,9 +50,9 @@
             this.gridColumnDuration = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnButtons = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumnHouseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnTop = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.gridColumnHouseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             this.pnBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlPrograms)).BeginInit();
@@ -295,6 +295,7 @@
             this.repositoryItemTimeEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.repositoryItemTimeEdit.EditFormat.FormatString = "hh:mm tt";
             this.repositoryItemTimeEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.repositoryItemTimeEdit.Mask.EditMask = "hh:mm tt";
             this.repositoryItemTimeEdit.Name = "repositoryItemTimeEdit";
             // 
             // gridColumnEndTime
@@ -337,10 +338,22 @@
             this.repositoryItemButtonEdit.AutoHeight = false;
             this.repositoryItemButtonEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEdit.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEdit.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.repositoryItemButtonEdit.Name = "repositoryItemButtonEdit";
             this.repositoryItemButtonEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.repositoryItemButtonEdit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEdit_ButtonClick);
+            // 
+            // gridColumnHouseNumber
+            // 
+            this.gridColumnHouseNumber.Caption = "House #";
+            this.gridColumnHouseNumber.ColumnEdit = this.repositoryItemTextEdit;
+            this.gridColumnHouseNumber.FieldName = "HouseNumber";
+            this.gridColumnHouseNumber.Name = "gridColumnHouseNumber";
+            this.gridColumnHouseNumber.OptionsColumn.AllowEdit = false;
+            this.gridColumnHouseNumber.OptionsColumn.ReadOnly = true;
+            this.gridColumnHouseNumber.Visible = true;
+            this.gridColumnHouseNumber.VisibleIndex = 3;
+            this.gridColumnHouseNumber.Width = 79;
             // 
             // pnTop
             // 
@@ -360,18 +373,6 @@
             this.label1.Size = new System.Drawing.Size(275, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Double-Click on a row  to edit program";
-            // 
-            // gridColumnHouseNumber
-            // 
-            this.gridColumnHouseNumber.Caption = "House #";
-            this.gridColumnHouseNumber.ColumnEdit = this.repositoryItemTextEdit;
-            this.gridColumnHouseNumber.FieldName = "HouseNumber";
-            this.gridColumnHouseNumber.Name = "gridColumnHouseNumber";
-            this.gridColumnHouseNumber.OptionsColumn.AllowEdit = false;
-            this.gridColumnHouseNumber.OptionsColumn.ReadOnly = true;
-            this.gridColumnHouseNumber.Visible = true;
-            this.gridColumnHouseNumber.VisibleIndex = 3;
-            this.gridColumnHouseNumber.Width = 79;
             // 
             // FormManagePrograms
             // 

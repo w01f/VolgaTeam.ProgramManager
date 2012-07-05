@@ -16,6 +16,21 @@ namespace ProgramManager.Client.InteropClasses
         {
         }
 
+        public static bool Is2003
+        {
+            get
+            {
+                bool result = true;
+                ExcelHelper helper = new ExcelHelper();
+                if (helper.Connect())
+                {
+                    result = helper._excelObject.Version.Equals("11.0");
+                    helper.Disconnect();
+                }
+                return result;
+            }
+        }
+
         public bool Connect()
         {
             bool result = false;
@@ -77,24 +92,86 @@ namespace ProgramManager.Client.InteropClasses
 
                         string title = string.Format("{0} - Weekly Program Schedule", weekDays.FirstOrDefault().Station.Name);
                         string dateRange = string.Format("Week of {0}", weekDays.FirstOrDefault().Date.ToString("MMMM d, yyyy"));
-                        workSheet.PageSetup.CenterHeader = "&12&B" + title + (char)13 + dateRange;
+                        workSheet.PageSetup.CenterHeader = string.Format("&\"{0}{2}\"&{1}", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Size.ToString(), ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Bold ? ",bold" : string.Empty }) + title + (char)13 + dateRange;
 
-                        workSheet.PageSetup.CenterFooter = "&11Schedule Generated" + (char)13 + sheduleGenrated.ToString("MM/dd/yy h:mm tt");
+                        workSheet.PageSetup.CenterFooter = string.Format("&\"{0}{2}\"&{1}", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Size.ToString(), ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Bold ? ",bold" : string.Empty }) + "Schedule Generated" + (char)13 + sheduleGenrated.ToString("MM/dd/yy h:mm tt");
+
+                        Excel.Range range = workSheet.Range["Data"];
+                        range.Font.Name = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Name;
+                        range.Font.Size = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Size;
+                        range.Font.Bold = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Bold;
+                        range.Font.Italic = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Italic;
+
+                        if (ConfigurationClasses.SettingsManager.Instance.OutputSettings.UsePrimeTimeSpecialFontSize)
+                        {
+                            {
+                                int firstColumn = workSheet.Range["day1"].Column;
+                                int lastColumn = workSheet.Range["day6"].Column;
+
+                                int firstRow = workSheet.Range["day1"].Row + 1;
+                                DateTime time = new DateTime(1, 1, 1, 5, 0, 0);
+                                while (!(time.Hour == ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeStart.Hour && time.Minute == ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeStart.Minute))
+                                {
+                                    time = time.AddMinutes(30);
+                                    firstRow++;
+                                }
+
+                                int lastRow = firstRow;
+                                while (!(time.Hour == ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeEnd.Hour && time.Minute == ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeEnd.Minute))
+                                {
+                                    time = time.AddMinutes(30);
+                                    lastRow++;
+                                }
+
+                                range = workSheet.Range[GetColumnLetterByIndex(firstColumn) + firstRow.ToString() + ":" + GetColumnLetterByIndex(lastColumn) + lastRow.ToString()];
+                                range.Font.Name = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Name;
+                                range.Font.Size = ConfigurationClasses.SettingsManager.Instance.OutputSettings.PrimeTimeSpecialFontSize;
+                                range.Font.Bold = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Bold;
+                                range.Font.Italic = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Italic;
+                            }
+
+                            {
+                                int firstColumn = workSheet.Range["day7"].Column;
+                                int lastColumn = workSheet.Range["day7"].Column;
+
+                                int firstRow = workSheet.Range["day7"].Row + 1;
+                                DateTime time = new DateTime(1, 1, 1, 5, 0, 0);
+                                while (!(time.Hour == ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeStart.Hour && time.Minute == ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeStart.Minute))
+                                {
+                                    time = time.AddMinutes(30);
+                                    firstRow++;
+                                }
+
+                                int lastRow = firstRow;
+                                while (!(time.Hour == ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeEnd.Hour && time.Minute == ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeEnd.Minute))
+                                {
+                                    time = time.AddMinutes(30);
+                                    lastRow++;
+                                }
+
+                                range = workSheet.Range[GetColumnLetterByIndex(firstColumn) + firstRow.ToString() + ":" + GetColumnLetterByIndex(lastColumn) + lastRow.ToString()];
+                                range.Font.Name = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Name;
+                                range.Font.Size = ConfigurationClasses.SettingsManager.Instance.OutputSettings.PrimeTimeSpecialFontSize;
+                                range.Font.Bold = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Bold;
+                                range.Font.Italic = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Italic;
+                            }
+                        }
+
+                        object[,] values = new object[48, 7];
+                        for (int j = 0; j < 48; j++)
+                        {
+                            List<object> cells = new List<object>();
+                            for (int i = 0; i < 7; i++)
+                                values[j,i] = weekDays[i].ProgramActivities[j].Program;
+                        }
+                        workSheet.Range["Data"].Value2 = values;
 
                         for (int i = 0; i < 7; i++)
                         {
-                            Excel.Range range = workSheet.Range["day" + (i + 1).ToString()];
+                            range = workSheet.Range["day" + (i + 1).ToString()];
                             range.Formula = weekDays[i].Date.ToString(landscape ? "dddd M/d" : "ddd M/d");
                             int columnIndex = range.Column;
                             int rowIndex = range.Row + 1;
-
-                            int j = rowIndex;
-                            foreach (CoreObjects.ProgramActivity programActivity in weekDays[i].ProgramActivities)
-                            {
-                                workSheet.Range[GetColumnLetterByIndex(columnIndex) + j.ToString()].Formula = programActivity.Program;
-                                j++;
-                            }
-
                             string programName = string.Empty;
                             int firstRow = 0;
                             for (int r = 0; r < 48; r++)
@@ -113,7 +190,7 @@ namespace ProgramManager.Client.InteropClasses
 
                         for (int i = 0; i < 7; i++)
                         {
-                            Excel.Range range = workSheet.Range["day" + (i + 1).ToString()];
+                            range = workSheet.Range["day" + (i + 1).ToString()];
                             int columnIndex = range.Column;
                             int r = 0;
                             object value = null;
@@ -132,7 +209,7 @@ namespace ProgramManager.Client.InteropClasses
                                 {
                                     string programName = string.Empty;
                                     int firstColumn = 0;
-                                    for (int j = 0; j < 7; j++)
+                                    for (int j = i; j < 7; j++)
                                     {
                                         object nextValue = null;
                                         try
@@ -204,7 +281,7 @@ namespace ProgramManager.Client.InteropClasses
                     int firstRow = range.Row + 1;
                     int lastRow = firstRow;
                     int firstColumn = range.Column;
-                    range = workSheet.Range["Episode"];
+                    range = workSheet.Range["Type"];
                     int lastColumn = range.Column;
 
                     List<object[]> rows = new List<object[]>();
@@ -215,8 +292,9 @@ namespace ProgramManager.Client.InteropClasses
                         cells.Add(activity.Date.ToString("ddd"));
                         cells.Add(activity.Time.ToString("hh:mmtt"));
                         cells.Add(activity.Program);
-                        cells.Add(activity.Type);
+                        cells.Add(activity.HouseNumber);
                         cells.Add(activity.Episode);
+                        cells.Add(activity.Type);
                         rows.Add(cells.ToArray());
                         lastRow++;
                     }

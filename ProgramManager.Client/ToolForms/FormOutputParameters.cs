@@ -41,6 +41,7 @@ namespace ProgramManager.Client.ToolForms
 
         private void FormOutputParameters_Load(object sender, System.EventArgs e)
         {
+            #region Schedule Tab
             comboBoxEditStation.Properties.Items.AddRange(Controllers.StationManager.Instance.GetStationList());
             comboBoxEditStation.EditValue = Controllers.StationManager.Instance.SelectedStation.Name;
 
@@ -55,8 +56,54 @@ namespace ProgramManager.Client.ToolForms
             _weeks.Add(week);
 
             gridControlWeeks.DataSource = _weeks;
+            #endregion
+
+            #region Text Settings Tab
+            comboBoxEditHeaderFont.Properties.Items.Clear();
+            comboBoxEditHeaderFont.Properties.Items.AddRange(Controllers.ListManager.Instance.HeaderFonts.Select(x => x.FontString).ToArray());
+            int selectedIndex = comboBoxEditHeaderFont.Properties.Items.IndexOf(ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.FontString);
+            if (selectedIndex >= 0 && comboBoxEditHeaderFont.Properties.Items.Count > 0)
+                comboBoxEditHeaderFont.SelectedIndex = selectedIndex;
+
+            comboBoxEditFooterFont.Properties.Items.Clear();
+            comboBoxEditFooterFont.Properties.Items.AddRange(Controllers.ListManager.Instance.FooterFonts.Select(x => x.FontString).ToArray());
+            selectedIndex = comboBoxEditFooterFont.Properties.Items.IndexOf(ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.FontString);
+            if (selectedIndex >= 0 && comboBoxEditFooterFont.Properties.Items.Count > 0)
+                comboBoxEditFooterFont.SelectedIndex = selectedIndex;
+
+            comboBoxEditBodyFont.Properties.Items.Clear();
+            comboBoxEditBodyFont.Properties.Items.AddRange(Controllers.ListManager.Instance.BodyFonts.Select(x => x.FontString).ToArray());
+            selectedIndex = comboBoxEditBodyFont.Properties.Items.IndexOf(ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.FontString);
+            if (selectedIndex >= 0 && comboBoxEditBodyFont.Properties.Items.Count > 0)
+                comboBoxEditBodyFont.SelectedIndex = selectedIndex;
+
+            checkEditPrimeTimeSpecialFontSize.Checked = ConfigurationClasses.SettingsManager.Instance.OutputSettings.UsePrimeTimeSpecialFontSize;
+            timeEditWeekPrimeTimeStart.Time = ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeStart;
+            timeEditWeekPrimeTimeEnd.Time = ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeEnd;
+            timeEditSundayPrimeTimeStart.Time = ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeStart;
+            timeEditSundayPrimeTimeEnd.Time = ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeEnd;
+            #endregion
         }
 
+        private void FormOutputParameters_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                #region Text Settings Tab
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont = comboBoxEditHeaderFont.Tag as CoreObjects.OutputFont;
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont = comboBoxEditFooterFont.Tag as CoreObjects.OutputFont;
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont = comboBoxEditBodyFont.Tag as CoreObjects.OutputFont;
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.UsePrimeTimeSpecialFontSize = checkEditPrimeTimeSpecialFontSize.Checked;
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeStart = timeEditWeekPrimeTimeStart.Time;
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeEnd = timeEditWeekPrimeTimeEnd.Time;
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeStart = timeEditSundayPrimeTimeStart.Time;
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeEnd = timeEditSundayPrimeTimeEnd.Time;
+                ConfigurationClasses.SettingsManager.Instance.SaveApplicationSettings();
+                #endregion
+            }
+        }
+
+        #region Schedule Event Handlers
         private void dateEditWeekStart_EditValueChanged(object sender, System.EventArgs e)
         {
             laWeekEnd.Text = string.Format("Sunday:   {0}", dateEditWeekStart.DateTime.AddDays(6).ToString("MM/dd/yy"));
@@ -113,5 +160,43 @@ namespace ProgramManager.Client.ToolForms
             _weeks.Remove(_weeks[gridViewWeeks.GetDataSourceRowIndex(gridViewWeeks.FocusedRowHandle)]);
             gridControlWeeks.RefreshDataSource();
         }
+        #endregion
+
+        #region Text Settings Event Handlers
+        private void comboBoxEditHeaderFont_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CoreObjects.OutputFont font = Controllers.ListManager.Instance.HeaderFonts[comboBoxEditHeaderFont.SelectedIndex];
+            comboBoxEditHeaderFont.Tag = font;
+            comboBoxEditHeaderFont.Font = font.FontObject;
+            comboBoxEditHeaderFont.Properties.AppearanceFocused.Font = font.FontObject;
+        }
+
+        private void comboBoxEditFooterFont_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CoreObjects.OutputFont font = Controllers.ListManager.Instance.FooterFonts[comboBoxEditFooterFont.SelectedIndex];
+            comboBoxEditFooterFont.Tag = font;
+            comboBoxEditFooterFont.Font = font.FontObject;
+            comboBoxEditFooterFont.Properties.AppearanceFocused.Font = font.FontObject;
+        }
+
+        private void comboBoxEditBodyFont_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CoreObjects.OutputFont font = Controllers.ListManager.Instance.BodyFonts[comboBoxEditBodyFont.SelectedIndex];
+            comboBoxEditBodyFont.Tag = font;
+            comboBoxEditBodyFont.Font = font.FontObject;
+            comboBoxEditBodyFont.Properties.AppearanceFocused.Font = font.FontObject;
+            groupBoxSpecialFont.Enabled = font.Size != 8;
+        }
+
+        private void checkEditSpecialFontSize_CheckedChanged(object sender, EventArgs e)
+        {
+            laWeekPrimeTime.Enabled = checkEditPrimeTimeSpecialFontSize.Checked;
+            timeEditWeekPrimeTimeStart.Enabled = checkEditPrimeTimeSpecialFontSize.Checked;
+            timeEditWeekPrimeTimeEnd.Enabled = checkEditPrimeTimeSpecialFontSize.Checked;
+            laSundayPrimeTime.Enabled = checkEditPrimeTimeSpecialFontSize.Checked;
+            timeEditSundayPrimeTimeStart.Enabled = checkEditPrimeTimeSpecialFontSize.Checked;
+            timeEditSundayPrimeTimeEnd.Enabled = checkEditPrimeTimeSpecialFontSize.Checked;
+        }
+        #endregion
     }
 }

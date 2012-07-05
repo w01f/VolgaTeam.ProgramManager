@@ -68,6 +68,8 @@
             this.simpleButtonOK = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
             this.pnMain = new System.Windows.Forms.Panel();
+            this.textEditHouseNumber = new DevExpress.XtraEditors.TextEdit();
+            this.checkEditHouseNumber = new DevExpress.XtraEditors.CheckEdit();
             this.memoEditCustomNote = new DevExpress.XtraEditors.MemoEdit();
             this.checkEditCustomNote = new DevExpress.XtraEditors.CheckEdit();
             this.textEditContractLength = new DevExpress.XtraEditors.TextEdit();
@@ -80,8 +82,6 @@
             this.checkEditFCC = new DevExpress.XtraEditors.CheckEdit();
             this.comboBoxEditType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.pnMainInner = new System.Windows.Forms.Panel();
-            this.textEditHouseNumber = new DevExpress.XtraEditors.TextEdit();
-            this.checkEditHouseNumber = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditDate.Properties)).BeginInit();
@@ -104,6 +104,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties)).BeginInit();
             this.pnMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditHouseNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditHouseNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEditCustomNote.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditCustomNote.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditContractLength.Properties)).BeginInit();
@@ -116,8 +118,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkEditFCC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditType.Properties)).BeginInit();
             this.pnMainInner.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditHouseNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditHouseNumber.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // defaultLookAndFeel
@@ -384,6 +384,7 @@
             this.timeEditEnd.Properties.EditFormat.FormatString = "hh:mm tt";
             this.timeEditEnd.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.timeEditEnd.Properties.EditValueChangedDelay = 10000;
+            this.timeEditEnd.Properties.Mask.EditMask = "hh:mm tt";
             this.timeEditEnd.Size = new System.Drawing.Size(103, 22);
             this.timeEditEnd.StyleController = this.styleController;
             this.timeEditEnd.TabIndex = 16;
@@ -412,6 +413,7 @@
             this.timeEditStart.Properties.EditFormat.FormatString = "hh:mm tt";
             this.timeEditStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.timeEditStart.Properties.EditValueChangedDelay = 10000;
+            this.timeEditStart.Properties.Mask.EditMask = "hh:mm tt";
             this.timeEditStart.Size = new System.Drawing.Size(103, 22);
             this.timeEditStart.StyleController = this.styleController;
             this.timeEditStart.TabIndex = 15;
@@ -610,6 +612,27 @@
             this.pnMain.Size = new System.Drawing.Size(637, 620);
             this.pnMain.TabIndex = 21;
             // 
+            // textEditHouseNumber
+            // 
+            this.textEditHouseNumber.Enabled = false;
+            this.textEditHouseNumber.Location = new System.Drawing.Point(14, 227);
+            this.textEditHouseNumber.Name = "textEditHouseNumber";
+            this.textEditHouseNumber.Size = new System.Drawing.Size(227, 22);
+            this.textEditHouseNumber.StyleController = this.styleController;
+            this.textEditHouseNumber.TabIndex = 31;
+            // 
+            // checkEditHouseNumber
+            // 
+            this.checkEditHouseNumber.Location = new System.Drawing.Point(12, 200);
+            this.checkEditHouseNumber.Name = "checkEditHouseNumber";
+            this.checkEditHouseNumber.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+            this.checkEditHouseNumber.Properties.Appearance.Options.UseFont = true;
+            this.checkEditHouseNumber.Properties.AutoWidth = true;
+            this.checkEditHouseNumber.Properties.Caption = "House #:";
+            this.checkEditHouseNumber.Size = new System.Drawing.Size(76, 21);
+            this.checkEditHouseNumber.TabIndex = 30;
+            this.checkEditHouseNumber.CheckedChanged += new System.EventHandler(this.checkEditHouseNumber_CheckedChanged);
+            // 
             // memoEditCustomNote
             // 
             this.memoEditCustomNote.Enabled = false;
@@ -741,27 +764,6 @@
             this.pnMainInner.Size = new System.Drawing.Size(637, 620);
             this.pnMainInner.TabIndex = 1;
             // 
-            // textEditHouseNumber
-            // 
-            this.textEditHouseNumber.Enabled = false;
-            this.textEditHouseNumber.Location = new System.Drawing.Point(14, 227);
-            this.textEditHouseNumber.Name = "textEditHouseNumber";
-            this.textEditHouseNumber.Size = new System.Drawing.Size(227, 22);
-            this.textEditHouseNumber.StyleController = this.styleController;
-            this.textEditHouseNumber.TabIndex = 31;
-            // 
-            // checkEditHouseNumber
-            // 
-            this.checkEditHouseNumber.Location = new System.Drawing.Point(12, 200);
-            this.checkEditHouseNumber.Name = "checkEditHouseNumber";
-            this.checkEditHouseNumber.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-            this.checkEditHouseNumber.Properties.Appearance.Options.UseFont = true;
-            this.checkEditHouseNumber.Properties.AutoWidth = true;
-            this.checkEditHouseNumber.Properties.Caption = "House #:";
-            this.checkEditHouseNumber.Size = new System.Drawing.Size(76, 21);
-            this.checkEditHouseNumber.TabIndex = 30;
-            this.checkEditHouseNumber.CheckedChanged += new System.EventHandler(this.checkEditHouseNumber_CheckedChanged);
-            // 
             // FormEditProgram
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -803,6 +805,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties)).EndInit();
             this.pnMain.ResumeLayout(false);
             this.pnMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditHouseNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditHouseNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEditCustomNote.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditCustomNote.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditContractLength.Properties)).EndInit();
@@ -815,8 +819,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkEditFCC.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditType.Properties)).EndInit();
             this.pnMainInner.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEditHouseNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditHouseNumber.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
