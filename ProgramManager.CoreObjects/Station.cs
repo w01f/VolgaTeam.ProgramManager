@@ -24,6 +24,7 @@ namespace ProgramManager.CoreObjects
         [DataMember]
         public List<string> ProgramNames { get; private set; }
 
+        public string RootFolderPath { get; private set; }
         public DateTime LastLoaded { get; set; }
         public bool NeedToUpdate { get; set; }
 
@@ -51,17 +52,10 @@ namespace ProgramManager.CoreObjects
             }
         }
 
-        public string RootFolderPath
+        public Station(DirectoryInfo stationFolder)
         {
-            get
-            {
-                return Path.Combine(ConfigurationClasses.SettingsManager.Instance.StationsRootPath, this.Name);
-            }
-        }
-
-        public Station(string stationName)
-        {
-            this.Name = stationName;
+            this.Name = stationFolder.Name;
+            this.RootFolderPath = stationFolder.FullName;
 
             string logoPath = Path.Combine(this.RootFolderPath, this.Name + ".png");
             if (File.Exists(logoPath))

@@ -48,7 +48,7 @@ namespace ProgramManager.Client.Controllers
                 DirectoryInfo rootFolder = new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.StationsRootPath);
                 foreach (DirectoryInfo stationFolder in rootFolder.GetDirectories())
                 {
-                    CoreObjects.Station station = new CoreObjects.Station(stationFolder.Name);
+                    CoreObjects.Station station = new CoreObjects.Station(stationFolder);
 
                     if (!ConfigurationClasses.SettingsManager.Instance.AlwaysCancelDownload && !ConfigurationClasses.SettingsManager.Instance.OfflineMode)
                     {
@@ -425,7 +425,7 @@ namespace ProgramManager.Client.Controllers
                 {
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {
-                        form.laProgress.Text = "Generating output...";
+                        form.laProgress.Text = "Generating Program Schedule...";
                         form.TopMost = true;
                         form.Show();
                         Application.DoEvents();
@@ -475,7 +475,7 @@ namespace ProgramManager.Client.Controllers
                 {
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {
-                        form.laProgress.Text = "Generating output...";
+                        form.laProgress.Text = "Generating Program List...";
                         form.TopMost = true;
                         form.Show();
                         Application.DoEvents();

@@ -113,7 +113,13 @@ namespace ProgramManager.Client.TabPages
                 ClearSearchParameters();
                 LoadStation();
                 LoadProgramsList();
+                gridControlPrograms.Focus();
             }
+        }
+
+        public void dateEditSearchDate_EditValueChanged(object sender, EventArgs e)
+        {
+            gridControlPrograms.Focus();
         }
         #endregion
 
@@ -132,6 +138,7 @@ namespace ProgramManager.Client.TabPages
                         this.Invoke((MethodInvoker)delegate()
                         {
                             gridControlPrograms.DataSource = new BindingList<CoreObjects.ProgramActivity>(_searchResult);
+                            gridControlPrograms.Focus();
                             FormMain.Instance.ribbonBarSearchOutput.Enabled = _searchResult.Length > 0;
                         });
                     }));
@@ -143,6 +150,12 @@ namespace ProgramManager.Client.TabPages
                     form.Close();
                 }
             }
+        }
+
+        public void comboBoxEditSearchPrograms_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                buttonItemSearchRun_Click(null, null);
         }
 
         public void buttonItemSearchOutputExcel_Click(object sender, EventArgs e)

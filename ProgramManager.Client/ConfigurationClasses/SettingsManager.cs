@@ -56,7 +56,7 @@ namespace ProgramManager.Client.ConfigurationClasses
             _manifestFile = Path.Combine(this.ApplicationRootsPath, "manifest.xml");
             this.LogFilePath = Path.Combine(this.ApplicationRootsPath, "ApplicatonLog.xml");
             this.IconFilePath = Path.Combine(this.ApplicationRootsPath, "icon.ico");
-            this.OutputCache = Path.Combine(this.ApplicationRootsPath, "Output Cache");
+            this.OutputCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
 
             this.OfflineMode = true;
             this.ServerName = "127.0.0.1";
@@ -71,8 +71,6 @@ namespace ProgramManager.Client.ConfigurationClasses
             this.OutputRootPath = Path.Combine(this.DataRootsPath, "Output Templates");
             if (!Directory.Exists(this.StationsRootPath))
                 Directory.CreateDirectory(this.StationsRootPath);
-
-            CoreObjects.ConfigurationClasses.SettingsManager.Instance.StationsRootPath = this.StationsRootPath;
         }
 
         private void LoadApplicationSettings()

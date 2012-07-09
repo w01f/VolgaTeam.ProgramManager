@@ -66,9 +66,6 @@ namespace ProgramManager.Client
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            ribbonTabItemOutput.Enabled = false;
-            ribbonTabItemSettings.Enabled = false;
-
             bool isExcel2003 = InteropClasses.ExcelHelper.Is2003;
             buttonItemScheduleOutputPDF.Enabled = !isExcel2003;
             buttonItemSearchOutputPDF.Enabled = !isExcel2003;
@@ -95,6 +92,9 @@ namespace ProgramManager.Client
 
             this.TabSearch = new TabPages.TabSearch();
             comboBoxEditSearchStation.EditValueChanged += new EventHandler(this.TabSearch.comboBoxEditSearchStation_EditValueChanged);
+            comboBoxEditSearchPrograms.KeyDown += new KeyEventHandler(this.TabSearch.comboBoxEditSearchPrograms_KeyDown);
+            dateEditSearchDateStart.EditValueChanged += new EventHandler(this.TabSearch.dateEditSearchDate_EditValueChanged);
+            dateEditSearchDateEnd.EditValueChanged += new EventHandler(this.TabSearch.dateEditSearchDate_EditValueChanged);
             buttonItemSearchRun.Click += new EventHandler(this.TabSearch.buttonItemSearchRun_Click);
             buttonItemSearchOutputExcel.Click += new EventHandler(this.TabSearch.buttonItemSearchOutputExcel_Click);
             buttonItemSearchOutputPDF.Click += new EventHandler(this.TabSearch.buttonItemSearchOutputPDF_Click);
@@ -145,6 +145,7 @@ namespace ProgramManager.Client
             if (!pnMain.Controls.Contains(_currentControl))
                 pnMain.Controls.Add(_currentControl);
             _currentControl.BringToFront();
+            _currentControl.Focus();
         }
 
         private void labelItemLogo_Click(object sender, EventArgs e)

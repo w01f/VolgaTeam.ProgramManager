@@ -26,7 +26,7 @@ namespace ProgramManager.Service
                     DirectoryInfo rootFolder = new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.StationsRootPath);
                     foreach (DirectoryInfo stationFolder in rootFolder.GetDirectories())
                     {
-                        CoreObjects.Station station = new CoreObjects.Station(stationFolder.Name);
+                        CoreObjects.Station station = new CoreObjects.Station(stationFolder);
                         station.LoadExistedDays(DateTime.MinValue, DateTime.MaxValue);
                         _stations.Add(station);
                     }

@@ -49,8 +49,6 @@
             this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.simpleButtonAddWeek = new DevExpress.XtraEditors.SimpleButton();
             this.groupBoxOrientation = new System.Windows.Forms.GroupBox();
-            this.checkButtonPortrait = new DevExpress.XtraEditors.CheckButton();
-            this.checkButtonLandscape = new DevExpress.XtraEditors.CheckButton();
             this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageSchedule = new DevExpress.XtraTab.XtraTabPage();
             this.pnSchedule = new System.Windows.Forms.Panel();
@@ -70,6 +68,8 @@
             this.comboBoxEditFooterFont = new DevExpress.XtraEditors.ComboBoxEdit();
             this.laHeaderFont = new System.Windows.Forms.Label();
             this.comboBoxEditHeaderFont = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.buttonXPortrait = new DevComponents.DotNetBar.ButtonX();
+            this.buttonXLandscape = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditWeekStart.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditWeekStart.Properties)).BeginInit();
@@ -314,38 +314,14 @@
             // 
             // groupBoxOrientation
             // 
-            this.groupBoxOrientation.Controls.Add(this.checkButtonPortrait);
-            this.groupBoxOrientation.Controls.Add(this.checkButtonLandscape);
+            this.groupBoxOrientation.Controls.Add(this.buttonXPortrait);
+            this.groupBoxOrientation.Controls.Add(this.buttonXLandscape);
             this.groupBoxOrientation.Location = new System.Drawing.Point(7, 320);
             this.groupBoxOrientation.Name = "groupBoxOrientation";
             this.groupBoxOrientation.Size = new System.Drawing.Size(317, 69);
             this.groupBoxOrientation.TabIndex = 11;
             this.groupBoxOrientation.TabStop = false;
             this.groupBoxOrientation.Text = "Orientation";
-            // 
-            // checkButtonPortrait
-            // 
-            this.checkButtonPortrait.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkButtonPortrait.Appearance.Options.UseFont = true;
-            this.checkButtonPortrait.GroupIndex = 1;
-            this.checkButtonPortrait.Location = new System.Drawing.Point(200, 23);
-            this.checkButtonPortrait.Name = "checkButtonPortrait";
-            this.checkButtonPortrait.Size = new System.Drawing.Size(109, 33);
-            this.checkButtonPortrait.TabIndex = 1;
-            this.checkButtonPortrait.TabStop = false;
-            this.checkButtonPortrait.Text = "Portrait";
-            // 
-            // checkButtonLandscape
-            // 
-            this.checkButtonLandscape.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkButtonLandscape.Appearance.Options.UseFont = true;
-            this.checkButtonLandscape.Checked = true;
-            this.checkButtonLandscape.GroupIndex = 1;
-            this.checkButtonLandscape.Location = new System.Drawing.Point(9, 23);
-            this.checkButtonLandscape.Name = "checkButtonLandscape";
-            this.checkButtonLandscape.Size = new System.Drawing.Size(109, 33);
-            this.checkButtonLandscape.TabIndex = 0;
-            this.checkButtonLandscape.Text = "Landscape";
             // 
             // xtraTabControl
             // 
@@ -595,6 +571,33 @@
             this.comboBoxEditHeaderFont.TabIndex = 0;
             this.comboBoxEditHeaderFont.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditHeaderFont_SelectedIndexChanged);
             // 
+            // buttonXPortrait
+            // 
+            this.buttonXPortrait.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonXPortrait.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonXPortrait.Location = new System.Drawing.Point(197, 24);
+            this.buttonXPortrait.Name = "buttonXPortrait";
+            this.buttonXPortrait.Size = new System.Drawing.Size(111, 33);
+            this.buttonXPortrait.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonXPortrait.TabIndex = 3;
+            this.buttonXPortrait.Text = "Portrait";
+            this.buttonXPortrait.TextColor = System.Drawing.Color.Black;
+            this.buttonXPortrait.Click += new System.EventHandler(this.buttonXOrientation_Click);
+            // 
+            // buttonXLandscape
+            // 
+            this.buttonXLandscape.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonXLandscape.Checked = true;
+            this.buttonXLandscape.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonXLandscape.Location = new System.Drawing.Point(9, 24);
+            this.buttonXLandscape.Name = "buttonXLandscape";
+            this.buttonXLandscape.Size = new System.Drawing.Size(111, 33);
+            this.buttonXLandscape.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonXLandscape.TabIndex = 2;
+            this.buttonXLandscape.Text = "Landscape";
+            this.buttonXLandscape.TextColor = System.Drawing.Color.Black;
+            this.buttonXLandscape.Click += new System.EventHandler(this.buttonXOrientation_Click);
+            // 
             // FormOutputParameters
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -612,7 +615,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Output";
+            this.Text = "Output to Excel";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormOutputParameters_FormClosed);
             this.Load += new System.EventHandler(this.FormOutputParameters_Load);
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -666,8 +669,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnWeek;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit;
         private System.Windows.Forms.GroupBox groupBoxOrientation;
-        private DevExpress.XtraEditors.CheckButton checkButtonPortrait;
-        private DevExpress.XtraEditors.CheckButton checkButtonLandscape;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageSchedule;
         private System.Windows.Forms.Panel pnSchedule;
@@ -687,5 +688,7 @@
         private System.Windows.Forms.Label laSundayPrimeTime;
         private DevExpress.XtraEditors.TimeEdit timeEditWeekPrimeTimeEnd;
         private DevExpress.XtraEditors.TimeEdit timeEditWeekPrimeTimeStart;
+        private DevComponents.DotNetBar.ButtonX buttonXPortrait;
+        private DevComponents.DotNetBar.ButtonX buttonXLandscape;
     }
 }

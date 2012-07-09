@@ -30,7 +30,7 @@ namespace ProgramManager.Client.ToolForms
         {
             get
             {
-                return checkButtonLandscape.Checked;
+                return buttonXLandscape.Checked;
             }
         }
 
@@ -159,6 +159,17 @@ namespace ProgramManager.Client.ToolForms
         {
             _weeks.Remove(_weeks[gridViewWeeks.GetDataSourceRowIndex(gridViewWeeks.FocusedRowHandle)]);
             gridControlWeeks.RefreshDataSource();
+        }
+
+        private void buttonXOrientation_Click(object sender, EventArgs e)
+        {
+            DevComponents.DotNetBar.ButtonX button = sender as DevComponents.DotNetBar.ButtonX;
+            if (!button.Checked)
+            {
+                buttonXLandscape.Checked = false;
+                buttonXPortrait.Checked = false;
+            }
+            button.Checked = true;
         }
         #endregion
 

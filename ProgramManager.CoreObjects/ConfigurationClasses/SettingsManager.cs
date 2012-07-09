@@ -11,7 +11,6 @@ namespace ProgramManager.CoreObjects.ConfigurationClasses
 
         #region Path Section
         public string ApplicationRootsPath { get; private set; }
-        public string StationsRootPath { get; set; }
         #endregion
 
         public static SettingsManager Instance
@@ -26,7 +25,6 @@ namespace ProgramManager.CoreObjects.ConfigurationClasses
         {
             #region Path Section
             this.ApplicationRootsPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
-            this.StationsRootPath = Path.Combine(this.ApplicationRootsPath, "Stations");
             #endregion
         }
     }

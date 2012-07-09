@@ -83,6 +83,7 @@ namespace ProgramManager.Client.TabPages
                 gridControlPrograms.DataSource = new BindingList<CoreObjects.ProgramActivity>(Controllers.StationManager.Instance.SelectedDay.ProgramActivities);
             else
                 gridControlPrograms.DataSource = null;
+            gridControlPrograms.Focus();
             _allowToSave = true;
         }
 
@@ -257,6 +258,7 @@ namespace ProgramManager.Client.TabPages
                 ConfigurationClasses.SettingsManager.Instance.SaveApplicationSettings();
 
                 gridViewPrograms.OptionsView.ShowPreview = ConfigurationClasses.SettingsManager.Instance.ShowInfo;
+                gridControlPrograms.Focus();
             }
         }
 
@@ -288,6 +290,7 @@ namespace ProgramManager.Client.TabPages
         {
             using (ToolForms.FormOutputParameters form = new ToolForms.FormOutputParameters())
             {
+                form.Text = "Output to Excel";
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     Controllers.StationManager.Instance.ReportWeekSchedule(form.Station, form.Weeks, false, form.Landscape);
@@ -299,6 +302,7 @@ namespace ProgramManager.Client.TabPages
         {
             using (ToolForms.FormOutputParameters form = new ToolForms.FormOutputParameters())
             {
+                form.Text = "Output to PDF";
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     Controllers.StationManager.Instance.ReportWeekSchedule(form.Station, form.Weeks, true, form.Landscape);
