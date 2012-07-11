@@ -54,7 +54,7 @@ namespace ProgramManager.Client.ConfigurationClasses
             this.DataRootsPath = this.ApplicationRootsPath;
             _applicationSettingsFile = Path.Combine(this.ApplicationRootsPath, "LocalSettings.xml");
             _manifestFile = Path.Combine(this.ApplicationRootsPath, "manifest.xml");
-            this.LogFilePath = Path.Combine(this.ApplicationRootsPath, "ApplicatonLog.xml");
+            this.LogFilePath = Path.Combine(this.ApplicationRootsPath, "ApplicationLog.xml");
             this.IconFilePath = Path.Combine(this.ApplicationRootsPath, "icon.ico");
             this.OutputCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
 

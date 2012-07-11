@@ -324,7 +324,7 @@ namespace ProgramManager.CoreObjects
             if (this.NoEndRecurence)
                 lastTime = new DateTime(endDate.Year, endDate.Month, endDate.Day, 5, 0, 0).AddDays(1);
             else if (this.LimitedByEndDate)
-                lastTime = new DateTime(this.EndDate.Year, this.EndDate.Month, endDate.Day, 5, 0, 0).AddDays(1);
+                lastTime = new DateTime(this.EndDate.Year, this.EndDate.Month, this.EndDate.Day, 5, 0, 0).AddDays(1);
             else if (this.LimitedByRecurenceNumber)
                 lastTime = DateTime.MaxValue;
 
