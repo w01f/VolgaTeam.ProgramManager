@@ -62,6 +62,15 @@ namespace ProgramManager.CoreObjects
             }
         }
 
+        public string ProgramExtended
+        {
+            get
+            {
+                return this.Program + (!string.IsNullOrEmpty(this.MovieTitle) ? (" (" + this.MovieTitle + ")") : string.Empty);
+            }
+        }
+
+
         public string Episode
         {
             get

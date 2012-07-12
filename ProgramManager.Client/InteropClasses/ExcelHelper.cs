@@ -162,7 +162,7 @@ namespace ProgramManager.Client.InteropClasses
                         {
                             List<object> cells = new List<object>();
                             for (int i = 0; i < 7; i++)
-                                values[j, i] = weekDays[i].ProgramActivities[j].Program;
+                                values[j, i] = weekDays[i].ProgramActivities[j].ProgramExtended;
                         }
                         workSheet.Range["Data"].Value2 = values;
 
@@ -318,7 +318,7 @@ namespace ProgramManager.Client.InteropClasses
                         cells.Add(activity.Date.ToString("MM/dd/yyyy"));
                         cells.Add(activity.Date.ToString("ddd"));
                         cells.Add(activity.Time.ToString("hh:mmtt"));
-                        cells.Add(activity.Program);
+                        cells.Add(activity.ProgramExtended);
                         cells.Add(activity.HouseNumber);
                         cells.Add(activity.Episode);
                         cells.Add(activity.Type);
