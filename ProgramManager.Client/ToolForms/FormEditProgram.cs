@@ -24,16 +24,22 @@ namespace ProgramManager.Client.ToolForms
                 _program.Distributor = textEditDistributor.EditValue != null ? textEditDistributor.EditValue.ToString() : string.Empty;
                 _program.ContractLength = textEditContractLength.EditValue != null ? textEditContractLength.EditValue.ToString() : string.Empty;
                 _program.CustomNote = memoEditCustomNote.EditValue != null ? memoEditCustomNote.EditValue.ToString() : string.Empty;
-                _program.StartTime = timeEditStart.Time;
+
+                DateTime temp = _program.Date;
+                if (timeEditStart.Time.Hour >= 0 && timeEditStart.Time.Hour <= 4)
+                    temp = temp.AddDays(1);
+                _program.StartTime = new DateTime(temp.Year, temp.Month, temp.Day, timeEditStart.Time.Hour, timeEditStart.Time.Minute, timeEditStart.Time.Second);
                 while (_program.StartTime.Minute != 0 && _program.StartTime.Minute != 30)
                     _program.StartTime = _program.StartTime.AddMinutes(-1);
                 while (_program.StartTime.Second != 0)
                     _program.StartTime = _program.StartTime.AddSeconds(-1);
-                _program.EndTime = timeEditEnd.Time;
+
+                _program.EndTime = new DateTime(temp.Year, temp.Month, temp.Day, timeEditEnd.Time.Hour, timeEditEnd.Time.Minute, timeEditEnd.Time.Second);
                 while (_program.EndTime.Minute != 0 && _program.EndTime.Minute != 30)
                     _program.EndTime = _program.EndTime.AddMinutes(1);
                 while (_program.EndTime.Second != 0)
                     _program.EndTime = _program.EndTime.AddSeconds(-1);
+
                 _program.RecureEveryWeek = (int)spinEditWeeksNumber.Value;
                 _program.RecureOnMonday = checkEditMonday.Checked;
                 _program.RecureOnTuesday = checkEditTuesday.Checked;

@@ -331,6 +331,7 @@ namespace ProgramManager.CoreObjects
 
             int occurenceCount = 1;
             DateTime startTime = this.StartTime;
+            DateTime programDate = this.Date;
             DateTime endTime = this.EndTime;
             int weeksCount = 1;
             do
@@ -338,7 +339,7 @@ namespace ProgramManager.CoreObjects
                 bool stop = false;
                 while (!stop)
                 {
-                    switch (startTime.DayOfWeek)
+                    switch (programDate.DayOfWeek)
                     {
                         case DayOfWeek.Monday:
                             stop = this.RecureOnMonday;
@@ -365,7 +366,8 @@ namespace ProgramManager.CoreObjects
                     if (!stop)
                     {
                         startTime = startTime.AddDays(1);
-                        if (startTime.DayOfWeek == DayOfWeek.Monday)
+                        programDate = programDate.AddDays(1);
+                        if (programDate.DayOfWeek == DayOfWeek.Monday)
                             weeksCount++;
                         if (weeksCount > this.RecureEveryWeek || this.RecureEveryWeek == 0)
                             weeksCount = 1;
@@ -385,7 +387,9 @@ namespace ProgramManager.CoreObjects
                 }
 
                 startTime = startTime.AddDays(1);
-                if (startTime.DayOfWeek == DayOfWeek.Monday)
+                endTime = endTime.AddDays(1);
+                programDate = programDate.AddDays(1);
+                if (programDate.DayOfWeek == DayOfWeek.Monday)
                     weeksCount++;
                 if (weeksCount > this.RecureEveryWeek || this.RecureEveryWeek == 0)
                     weeksCount = 1;
