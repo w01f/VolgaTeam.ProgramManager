@@ -95,6 +95,7 @@ namespace ProgramManager.Client.InteropClasses
                         workSheet.PageSetup.CenterHeader = string.Format("&\"{0}{2}\"&{1}", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Size.ToString(), ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Bold ? ",bold" : string.Empty }) + title + (char)13 + dateRange;
 
                         workSheet.PageSetup.CenterFooter = string.Format("&\"{0}{2}\"&{1}", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Size.ToString(), ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Bold ? ",bold" : string.Empty }) + "Schedule Generated" + (char)13 + sheduleGenrated.ToString("MM/dd/yy h:mm tt");
+                        workSheet.PageSetup.RightFooter = string.Format("&\"{0}{1}\"", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Size.ToString()}) + workSheet.PageSetup.RightFooter;
 
                         Excel.Range range = workSheet.Range["Data"];
                         range.Font.Name = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Name;
@@ -237,29 +238,34 @@ namespace ProgramManager.Client.InteropClasses
                         dataRange.Rows.AutoFit();
 
                         //set correct page breaks
-                        int fisrtColumnNumber = workSheet.Range["day1"].Column;
-                        int lastColumnNumber = workSheet.Range["day7"].Column;
-                        Excel.HPageBreaks pageBreaks = workSheet.HPageBreaks;
-                        for (int i = 1; i <= pageBreaks.Count; i++)
+                        try
                         {
-                            int currentBreakRow = pageBreaks[i].Location.Row;
-                            int newBreakRow = currentBreakRow;
-                            Excel.Range beforeRange = pageBreaks[i].Location;
-                            for (int j = fisrtColumnNumber; j <= lastColumnNumber; j++)
+                            int fisrtColumnNumber = workSheet.Range["day1"].Column;
+                            int lastColumnNumber = workSheet.Range["day7"].Column;
+                            Excel.HPageBreaks pageBreaks = workSheet.HPageBreaks;
+                            for (int i = 1; i <= pageBreaks.Count; i++)
                             {
-                                Excel.Range cellRange = workSheet.Cells[currentBreakRow, j];
-                                if (cellRange.MergeCells)
+                                int currentBreakRow = pageBreaks[i].Location.Row;
+                                int newBreakRow = currentBreakRow;
+                                Excel.Range beforeRange = pageBreaks[i].Location;
+                                for (int j = fisrtColumnNumber; j <= lastColumnNumber; j++)
                                 {
-                                    if (beforeRange.Row > cellRange.MergeArea.Row)
+                                    Excel.Range cellRange = workSheet.Cells[currentBreakRow, j];
+                                    if (cellRange.MergeCells)
                                     {
-                                        beforeRange = cellRange.MergeArea;
-                                        newBreakRow = beforeRange.Row;
+                                        if (beforeRange.Row > cellRange.MergeArea.Row)
+                                        {
+                                            beforeRange = cellRange.MergeArea;
+                                            newBreakRow = beforeRange.Row;
+                                        }
                                     }
                                 }
+                                if (newBreakRow != currentBreakRow)
+                                    workSheet.HPageBreaks.Add(Before: beforeRange);
                             }
-                            if (newBreakRow != currentBreakRow)
-                                workSheet.HPageBreaks.Add(Before: beforeRange);
                         }
+                        catch
+                        { }
 
                         workSheet.Copy(After: destinationWorkBook.Worksheets[worksheetIndex]);
                         worksheetIndex++;
