@@ -95,7 +95,7 @@ namespace ProgramManager.Client.InteropClasses
                         workSheet.PageSetup.CenterHeader = string.Format("&\"{0}{2}\"&{1}", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Size.ToString(), ConfigurationClasses.SettingsManager.Instance.OutputSettings.HeaderFont.Bold ? ",bold" : string.Empty }) + title + (char)13 + dateRange;
 
                         workSheet.PageSetup.CenterFooter = string.Format("&\"{0}{2}\"&{1}", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Size.ToString(), ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Bold ? ",bold" : string.Empty }) + "Schedule Generated" + (char)13 + sheduleGenrated.ToString("MM/dd/yy h:mm tt");
-                        workSheet.PageSetup.RightFooter = string.Format("&\"{0}{1}\"", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Size.ToString()}) + workSheet.PageSetup.RightFooter;
+                        workSheet.PageSetup.RightFooter = string.Format("&\"{0}{1}\"", new string[] { ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Name, ConfigurationClasses.SettingsManager.Instance.OutputSettings.FooterFont.Size.ToString() }) + workSheet.PageSetup.RightFooter;
 
                         Excel.Range range = workSheet.Range["Data"];
                         range.Font.Name = ConfigurationClasses.SettingsManager.Instance.OutputSettings.BodyFont.Name;
@@ -163,7 +163,7 @@ namespace ProgramManager.Client.InteropClasses
                         {
                             List<object> cells = new List<object>();
                             for (int i = 0; i < 7; i++)
-                                values[j, i] = weekDays[i].ProgramActivities[j].ProgramExtended;
+                                values[j, i] = weekDays[i].ProgramActivities[j].ProgramExtended + (ConfigurationClasses.SettingsManager.Instance.OutputSettings.ShowHouseNumber && !string.IsNullOrEmpty(weekDays[i].ProgramActivities[j].HouseNumber) ? (" (" + weekDays[i].ProgramActivities[j].HouseNumber + ")") : string.Empty);
                         }
                         workSheet.Range["Data"].Value2 = values;
 

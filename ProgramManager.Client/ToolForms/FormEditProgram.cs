@@ -34,6 +34,9 @@ namespace ProgramManager.Client.ToolForms
                 while (_program.StartTime.Second != 0)
                     _program.StartTime = _program.StartTime.AddSeconds(-1);
 
+                temp = _program.Date;
+                if (timeEditEnd.Time.Hour >= 0 && timeEditEnd.Time.Hour <= 4)
+                    temp = temp.AddDays(1);
                 _program.EndTime = new DateTime(temp.Year, temp.Month, temp.Day, timeEditEnd.Time.Hour, timeEditEnd.Time.Minute, timeEditEnd.Time.Second);
                 while (_program.EndTime.Minute != 0 && _program.EndTime.Minute != 30)
                     _program.EndTime = _program.EndTime.AddMinutes(1);

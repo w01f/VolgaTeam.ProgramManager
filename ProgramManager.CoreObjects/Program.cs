@@ -366,6 +366,7 @@ namespace ProgramManager.CoreObjects
                     if (!stop)
                     {
                         startTime = startTime.AddDays(1);
+                        endTime = endTime.AddDays(1);
                         programDate = programDate.AddDays(1);
                         if (programDate.DayOfWeek == DayOfWeek.Monday)
                             weeksCount++;
@@ -373,7 +374,6 @@ namespace ProgramManager.CoreObjects
                             weeksCount = 1;
                     }
                 }
-                endTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, endTime.Hour, endTime.Minute, 0);
 
                 if (weeksCount == 1 || this.RecureEveryWeek == 0)
                 {

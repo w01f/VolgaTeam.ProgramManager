@@ -82,6 +82,7 @@ namespace ProgramManager.Client.ToolForms
             timeEditWeekPrimeTimeEnd.Time = ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeEnd;
             timeEditSundayPrimeTimeStart.Time = ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeStart;
             timeEditSundayPrimeTimeEnd.Time = ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeEnd;
+            checkEditHouseNumber.Checked = ConfigurationClasses.SettingsManager.Instance.OutputSettings.ShowHouseNumber;
             #endregion
         }
 
@@ -98,6 +99,7 @@ namespace ProgramManager.Client.ToolForms
                 ConfigurationClasses.SettingsManager.Instance.OutputSettings.WeekPrimeTimeEnd = timeEditWeekPrimeTimeEnd.Time;
                 ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeStart = timeEditSundayPrimeTimeStart.Time;
                 ConfigurationClasses.SettingsManager.Instance.OutputSettings.SundayPrimeTimeEnd = timeEditSundayPrimeTimeEnd.Time;
+                ConfigurationClasses.SettingsManager.Instance.OutputSettings.ShowHouseNumber = checkEditHouseNumber.Checked;
                 ConfigurationClasses.SettingsManager.Instance.SaveApplicationSettings();
                 #endregion
             }

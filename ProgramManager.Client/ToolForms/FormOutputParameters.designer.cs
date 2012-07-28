@@ -49,6 +49,8 @@
             this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.simpleButtonAddWeek = new DevExpress.XtraEditors.SimpleButton();
             this.groupBoxOrientation = new System.Windows.Forms.GroupBox();
+            this.buttonXPortrait = new DevComponents.DotNetBar.ButtonX();
+            this.buttonXLandscape = new DevComponents.DotNetBar.ButtonX();
             this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageSchedule = new DevExpress.XtraTab.XtraTabPage();
             this.pnSchedule = new System.Windows.Forms.Panel();
@@ -68,8 +70,7 @@
             this.comboBoxEditFooterFont = new DevExpress.XtraEditors.ComboBoxEdit();
             this.laHeaderFont = new System.Windows.Forms.Label();
             this.comboBoxEditHeaderFont = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.buttonXPortrait = new DevComponents.DotNetBar.ButtonX();
-            this.buttonXLandscape = new DevComponents.DotNetBar.ButtonX();
+            this.checkEditHouseNumber = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditWeekStart.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditWeekStart.Properties)).BeginInit();
@@ -94,6 +95,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditBodyFont.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditFooterFont.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditHeaderFont.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditHouseNumber.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // styleManager
@@ -323,6 +325,33 @@
             this.groupBoxOrientation.TabStop = false;
             this.groupBoxOrientation.Text = "Orientation";
             // 
+            // buttonXPortrait
+            // 
+            this.buttonXPortrait.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonXPortrait.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonXPortrait.Location = new System.Drawing.Point(197, 24);
+            this.buttonXPortrait.Name = "buttonXPortrait";
+            this.buttonXPortrait.Size = new System.Drawing.Size(111, 33);
+            this.buttonXPortrait.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonXPortrait.TabIndex = 3;
+            this.buttonXPortrait.Text = "Portrait";
+            this.buttonXPortrait.TextColor = System.Drawing.Color.Black;
+            this.buttonXPortrait.Click += new System.EventHandler(this.buttonXOrientation_Click);
+            // 
+            // buttonXLandscape
+            // 
+            this.buttonXLandscape.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonXLandscape.Checked = true;
+            this.buttonXLandscape.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonXLandscape.Location = new System.Drawing.Point(9, 24);
+            this.buttonXLandscape.Name = "buttonXLandscape";
+            this.buttonXLandscape.Size = new System.Drawing.Size(111, 33);
+            this.buttonXLandscape.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonXLandscape.TabIndex = 2;
+            this.buttonXLandscape.Text = "Landscape";
+            this.buttonXLandscape.TextColor = System.Drawing.Color.Black;
+            this.buttonXLandscape.Click += new System.EventHandler(this.buttonXOrientation_Click);
+            // 
             // xtraTabControl
             // 
             this.xtraTabControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F);
@@ -377,6 +406,7 @@
             // pnTextSettings
             // 
             this.pnTextSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.pnTextSettings.Controls.Add(this.checkEditHouseNumber);
             this.pnTextSettings.Controls.Add(this.groupBoxSpecialFont);
             this.pnTextSettings.Controls.Add(this.laBodyFont);
             this.pnTextSettings.Controls.Add(this.comboBoxEditBodyFont);
@@ -571,32 +601,15 @@
             this.comboBoxEditHeaderFont.TabIndex = 0;
             this.comboBoxEditHeaderFont.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditHeaderFont_SelectedIndexChanged);
             // 
-            // buttonXPortrait
+            // checkEditHouseNumber
             // 
-            this.buttonXPortrait.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonXPortrait.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonXPortrait.Location = new System.Drawing.Point(197, 24);
-            this.buttonXPortrait.Name = "buttonXPortrait";
-            this.buttonXPortrait.Size = new System.Drawing.Size(111, 33);
-            this.buttonXPortrait.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonXPortrait.TabIndex = 3;
-            this.buttonXPortrait.Text = "Portrait";
-            this.buttonXPortrait.TextColor = System.Drawing.Color.Black;
-            this.buttonXPortrait.Click += new System.EventHandler(this.buttonXOrientation_Click);
-            // 
-            // buttonXLandscape
-            // 
-            this.buttonXLandscape.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonXLandscape.Checked = true;
-            this.buttonXLandscape.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonXLandscape.Location = new System.Drawing.Point(9, 24);
-            this.buttonXLandscape.Name = "buttonXLandscape";
-            this.buttonXLandscape.Size = new System.Drawing.Size(111, 33);
-            this.buttonXLandscape.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonXLandscape.TabIndex = 2;
-            this.buttonXLandscape.Text = "Landscape";
-            this.buttonXLandscape.TextColor = System.Drawing.Color.Black;
-            this.buttonXLandscape.Click += new System.EventHandler(this.buttonXOrientation_Click);
+            this.checkEditHouseNumber.Location = new System.Drawing.Point(4, 261);
+            this.checkEditHouseNumber.Name = "checkEditHouseNumber";
+            this.checkEditHouseNumber.Properties.AutoWidth = true;
+            this.checkEditHouseNumber.Properties.Caption = "Output House#";
+            this.checkEditHouseNumber.Size = new System.Drawing.Size(109, 21);
+            this.checkEditHouseNumber.StyleController = this.styleController;
+            this.checkEditHouseNumber.TabIndex = 9;
             // 
             // FormOutputParameters
             // 
@@ -646,6 +659,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditBodyFont.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditFooterFont.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditHeaderFont.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditHouseNumber.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -690,5 +704,6 @@
         private DevExpress.XtraEditors.TimeEdit timeEditWeekPrimeTimeStart;
         private DevComponents.DotNetBar.ButtonX buttonXPortrait;
         private DevComponents.DotNetBar.ButtonX buttonXLandscape;
+        private DevExpress.XtraEditors.CheckEdit checkEditHouseNumber;
     }
 }

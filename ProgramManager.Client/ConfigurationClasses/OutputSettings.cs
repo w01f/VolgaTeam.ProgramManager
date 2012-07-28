@@ -15,6 +15,7 @@ namespace ProgramManager.Client.ConfigurationClasses
         public DateTime WeekPrimeTimeEnd { get; set; }
         public DateTime SundayPrimeTimeStart { get; set; }
         public DateTime SundayPrimeTimeEnd { get; set; }
+        public bool ShowHouseNumber { get; set; }
 
         public OutputSettings()
         {
@@ -27,6 +28,7 @@ namespace ProgramManager.Client.ConfigurationClasses
             this.WeekPrimeTimeEnd = new DateTime(1, 1, 1, 23, 0, 0);
             this.SundayPrimeTimeStart = new DateTime(1, 1, 1, 20, 0, 0);
             this.SundayPrimeTimeEnd = new DateTime(1, 1, 1, 23, 0, 0);
+            this.ShowHouseNumber = false;
         }
 
         public string Serialize()
@@ -42,6 +44,7 @@ namespace ProgramManager.Client.ConfigurationClasses
             result.AppendLine(@"<WeekPrimeTimeEnd>" + this.WeekPrimeTimeEnd.ToString() + @"</WeekPrimeTimeEnd>");
             result.AppendLine(@"<SundayPrimeTimeStart>" + this.SundayPrimeTimeStart.ToString() + @"</SundayPrimeTimeStart>");
             result.AppendLine(@"<SundayPrimeTimeEnd>" + this.SundayPrimeTimeEnd.ToString() + @"</SundayPrimeTimeEnd>");
+            result.AppendLine(@"<ShowHouseNumber>" + this.ShowHouseNumber.ToString() + @"</ShowHouseNumber>");
             return result.ToString();
         }
 
@@ -87,6 +90,10 @@ namespace ProgramManager.Client.ConfigurationClasses
                     case "SundayPrimeTimeEnd":
                         if (DateTime.TryParse(childNode.InnerText, out tempDate))
                             this.SundayPrimeTimeEnd = tempDate;
+                        break;
+                    case "ShowHouseNumber":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.ShowHouseNumber = tempBool;
                         break;
                 }
             }
